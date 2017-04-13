@@ -1,0 +1,47 @@
+.index {
+    margin-top: 10px;
+}
+.left-sidebar-card {
+    background: #0BCBD6;
+    color: #fff;
+    position: fixed;
+    width: 250px;
+}
+.right-sidebar {
+    position: fixed;
+    width: 300px;
+}
+
+.trigger-sharing-text {
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.griddify {
+    margin-right: 10px;
+}
+
+.timeline {
+    margin-top: 10px;
+}
+
+.reactions {
+    text-align: left;
+    padding: 5px;
+    font-size: 22px;
+}
+
+.reaction {
+    margin-right: 10px;
+}
+
+.profile-banner {
+    padding: 50px;
+}
+
+.profile-banner-pic {
+    border-radius: 100%;
+    height: 80px;
+    width: 80px;
+}
