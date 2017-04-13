@@ -1,0 +1,13 @@
+.card {
+  padding:10px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#sidebar {
+  margin-right: 20px;
+}
+
+figure.image > img{
+  border-radius: 64px;
+}

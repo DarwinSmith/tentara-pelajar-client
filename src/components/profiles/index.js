@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './profile.css'
+
 class Profile extends Component {
   render() {
 
@@ -8,7 +10,7 @@ class Profile extends Component {
         <div className="column is-three-quarters">
           <div className="card">
             <div className="card-image">
-              <figure className="image is-48x48">
+              <figure className="image is-128x128 is-centered">
                   <img src="http://bulma.io/images/placeholders/128x128.png" alt="photos"/>
               </figure>
             </div>
@@ -72,7 +74,7 @@ class Profile extends Component {
 
 
           <div className="column">
-            <div className="card" style={{padding: '10px'}}>
+            <div className="card" id="sidebar">
               <article className="media">
                 <div className="media-content">
                   <div className="content">
@@ -85,7 +87,7 @@ class Profile extends Component {
               </article>
             </div>
 
-            <div className="card" style={{padding: '10px'}}>
+            <div className="card" id="sidebar">
               <article className="media">
                 <div className="media-content">
                   <div className="content">
