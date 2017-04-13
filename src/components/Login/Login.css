@@ -1,0 +1,26 @@
+.box{
+  background-color: #1ABC9C;
+  border-radius: 0px;
+}
+
+.login{
+  padding: 5px;
+}
+
+.email{
+  padding-top: 10px ;
+  color: white;
+}
+
+.password{
+  padding-top: 10px ;
+  color: white;
+}
+
+.button-login{
+ margin-top: 6px;
+}
+
+.margin{
+  margin: 5px;
+}
