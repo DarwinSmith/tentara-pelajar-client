@@ -1,0 +1,12 @@
+.register{
+  margin: 30px;
+  border-right: groove ;
+  border-right-color: #2ECC71;
+  border-right-width: thin;
+  height: 75vh;
+}
+
+.summary{
+  margin-top: 30px;
+  height: 75vh;
+}
