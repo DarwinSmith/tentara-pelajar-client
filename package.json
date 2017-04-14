@@ -5,7 +5,8 @@
   "dependencies": {
     "jest": "^19.0.2",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-transition-group": "^1.1.1"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

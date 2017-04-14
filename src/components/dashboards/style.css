@@ -1,21 +1,50 @@
 .index {
     margin-top: 10px;
 }
-.left-sidebar-card {
-    background: #0BCBD6;
-    color: #fff;
-    position: fixed;
-    width: 250px;
+
+.left-sidebar-container {
+  position: relative;
 }
+
+.left-sidebar-card {
+  background: #204270;
+  color: #fff;
+}
+
+.postLeave {
+  outline: none;
+  background: #fff;
+  border: none;
+  width: 100%;
+  color: #ccc;
+}
+
+.postAppear {
+  outline: none;
+  background: #fff;
+  border: none;
+  width: 100%;
+  height: 200px;
+  transition: width 2s, height 2s;
+  resize: none;
+}
+
+.post-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+
 .right-sidebar {
-    position: fixed;
-    width: 300px;
+  background: #0BCBD6;
+  color: #fff;
 }
 
 .trigger-sharing-text {
-    padding: 15px;
-    text-align: left;
-    font-size: 14px;
+  padding: 15px;
+  text-align: left;
+  font-size: 14px;
+  cursor: default;
 }
 
 .griddify {
@@ -28,12 +57,11 @@
 
 .reactions {
     text-align: left;
-    padding: 5px;
-    font-size: 22px;
+    font-size: 28px;
 }
 
 .reaction {
-    margin-right: 10px;
+  padding: 20px;
 }
 
 .profile-banner {
@@ -44,4 +72,61 @@
     border-radius: 100%;
     height: 80px;
     width: 80px;
+}
+
+.dashboards-enter {
+  /*opacity: 0.01;*/
+  width: 0px;
+  height: 0px;
+}
+
+.dashboards-enter.dashboards-enter-active {
+  /*opacity: 1;*/
+  /*transition: opacity 500ms ease-in;*/
+  width: 100%;
+  height: 200px;
+  transition: width 500ms ease-in, height 500ms ease-in;
+}
+
+.dashboards-leave {
+  opacity: 1;
+}
+
+.dashboards-leave.dashboards-leave-active {
+  /*opacity: 0.01;*/
+  /*transition: opacity 300ms ease-out;*/
+  width: 0px;
+  height: 0px;
+  transition: width 500ms ease-in, height 500ms ease-out;
+}
+.dashboards-appear {
+  margin-top: -21px;
+  opacity: 0.01;
+}
+
+.dashboards-appear.dashboards-appear-active {
+  opacity: 1;
+  margin-top: 0px;
+  transition: margin-top .5s ease-in, opacity .5s ease-in;
+}
+
+@media screen and (min-width: 780px){
+  .left-sidebar-card {
+    position: fixed;
+    width: 22.8%;
+    background: #204270;
+    color: #fff;
+  }
+
+  .right-sidebar {
+    position: fixed;
+    width: 22.8%;
+    background: #204270;
+    color: #fff;
+  }
+
+}
+
+.round-image {
+  border-radius:100%;
 }
