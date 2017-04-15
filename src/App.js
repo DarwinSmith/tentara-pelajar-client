@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import Login from './components/Login/Index.js'
+import Search from './components/Search/Index'
+import Navigation from './components/Navigation'
 import './App.css'
 
 class App extends Component {
   render() {
     return (
-      <Login />
+      <div className="App">
+        <Navigation />
+        <Search />
+      </div>
     );
   }
 }

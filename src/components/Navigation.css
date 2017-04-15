@@ -1,0 +1,21 @@
+.navigation{
+  background-color: #0BCBD6;
+}
+
+#search {
+   background-color: #0BCBD6;
+   border-color: #0BCBD6;
+   width: 50%;
+   -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input#search:focus {
+    width: 100%;
+    background-color: white;
+    border-radius: 0px;
+}
+
+.progress.is-small {
+    height: 3px;
+}
