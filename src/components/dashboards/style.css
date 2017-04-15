@@ -106,15 +106,13 @@
 
 .dashboards-appear.dashboards-appear-active {
   opacity: 1;
-  margin-top: 0px;
-  transition: margin-top .5s ease-in, opacity .5s ease-in;
+  margin-top: -1px;
+  transition: margin-top 1s ease-in, opacity 1s ease-in;
 }
 
 @media screen and (min-width: 780px){
   .left-sidebar-card {
     position: fixed;
-    width: 22.8%;
-    background: #204270;
     color: #fff;
   }
 

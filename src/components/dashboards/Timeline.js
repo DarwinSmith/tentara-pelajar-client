@@ -23,12 +23,7 @@ class Timeline extends Component {
 
   handleScroll(event) {
     let scrollTop = event.srcElement.body.scrollTop
-    let itemTranslate = Math.min(0, scrollTop/3 - 60)
-    this.setState({
-      transform: itemTranslate
-    })
 
-    console.log(this.state.transform)
   }
 
   render() {

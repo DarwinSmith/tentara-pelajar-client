@@ -15,7 +15,7 @@ class index extends Component {
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}
-          transitionAppearTimeout={500}
+          transitionAppearTimeout={1000}
           transitionEnter={false}
           transitionLeave={false}
         >
