@@ -25,3 +25,11 @@ input#search:focus {
 .progress.is-small {
     height: 3px;
 }
+
+i:hover{
+  color: white;
+}
+
+a:hover{
+  border-bottom: solid dotted #ff0000;
+}
