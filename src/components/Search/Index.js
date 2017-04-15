@@ -6,8 +6,8 @@ class Index extends Component {
   render() {
     return (
       <div className="Index columns">
-        <List />
-        <Recomendation />
+        {/*<List />*/}
+        {/*<Recomendation />*/}
       </div>
     );
   }
