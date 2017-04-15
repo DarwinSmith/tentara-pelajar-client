@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import firebase from 'firebase'
 
 import Login from './components/Login/Index.js'
+import Navigation from './components/Navigation'
 import Dashboard from './components/dashboards'
 import './App.css'
 
