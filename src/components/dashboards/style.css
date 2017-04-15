@@ -1,5 +1,5 @@
 .index {
-    margin-top: 10px;
+    margin-top: 60px;
 }
 
 .left-sidebar-container {
@@ -7,8 +7,8 @@
 }
 
 .left-sidebar-card {
-  background: #204270;
-  color: #fff;
+  /*background: #204270;*/
+  color: #000;
 }
 
 .postLeave {
@@ -17,9 +17,12 @@
   border: none;
   width: 100%;
   color: #ccc;
+  resize: none;
+  font-size: 14px;
 }
 
 .postAppear {
+  font-size: 16px;
   outline: none;
   background: #fff;
   border: none;
@@ -43,7 +46,6 @@
 .trigger-sharing-text {
   padding: 15px;
   text-align: left;
-  font-size: 14px;
   cursor: default;
 }
 
@@ -113,7 +115,7 @@
 @media screen and (min-width: 780px){
   .left-sidebar-card {
     position: fixed;
-    color: #fff;
+    color: #000;
   }
 
   .right-sidebar {

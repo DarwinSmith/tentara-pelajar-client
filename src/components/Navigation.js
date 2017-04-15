@@ -11,13 +11,11 @@ class Navigation extends Component {
               <a className="nav-item">
                 <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo" />
               </a>
-              <a className="nav-item search">
-                <div className="field is-horizontal has-addons">
-                  <p className="control">
-                    <input className="input" id="search" type="text" placeholder="Find something" />
-                  </p>
-                </div>
-              </a>
+              <div className="nav-item search">
+                <p className="control">
+                  <input className="input" id="search" type="text" placeholder="Find something" />
+                </p>
+              </div>
             </div>
             <div className="nav-right nav-menu">
               <a className="nav-item is-tab is-hidden-mobile is-active" style={{color:"black"}}>Home</a>

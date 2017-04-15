@@ -1,17 +1,23 @@
 .navigation{
-  background-color: #0BCBD6;
+  /*background-color: #0BCBD6;*/
+  position: fixed;
+  width: 100%;
 }
 
 #search {
-   background-color: #0BCBD6;
+   background-color: #fdffff;
    border-color: #0BCBD6;
-   width: 50%;
+    width: 500px;
    -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
 
+input#search {
+  width: 200px;
+}
+
 input#search:focus {
-    width: 100%;
+    width: 500px;
     background-color: white;
     border-radius: 0px;
 }
