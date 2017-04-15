@@ -25,7 +25,13 @@ class Navigation extends Component {
                 </figure>
                 Didit Suryadi
               </a>
-              <a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>
+              <a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>Gallery</a>
+              <a className="nav-item is-tab is-hidden-mobile level-item" style={{color:"black"}}>
+                <span className="icon">
+                  <i className="fa fa-bell"></i>
+                </span>
+              </a>
+              <a className="nav-item is-tab is-hidden-mobile level-item" style={{color:"black"}}>
                 <span className="icon">
                   <i className="fa fa-gear"></i>
                 </span>
