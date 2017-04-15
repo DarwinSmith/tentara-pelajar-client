@@ -2,6 +2,7 @@
  * Created by lightmitch on 4/13/17.
  */
 import React, {Component} from 'react'
+import './style.css'
 
 class RightSidebar extends Component {
   render() {

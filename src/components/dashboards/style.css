@@ -1,14 +1,16 @@
 .index {
-    margin-top: 60px;
+  margin-top: 60px;
 }
 
 .left-sidebar-container {
   position: relative;
+  text-align: center;
 }
 
 .left-sidebar-card {
   /*background: #204270;*/
   color: #000;
+  text-align: center;
 }
 
 .postLeave {
@@ -41,6 +43,7 @@
 .right-sidebar {
   background: #0BCBD6;
   color: #fff;
+  text-align: center;
 }
 
 .trigger-sharing-text {

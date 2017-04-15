@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import firebase from 'firebase'
 
 import Login from './components/Login/Index.js'
-import Search from './components/Search/Index'
-import Navigation from './components/Navigation'
 import Dashboard from './components/dashboards'
 import './App.css'
 
@@ -43,7 +41,7 @@ class App extends Component {
           {
             this.state.redirectLogin ? <Redirect to={{pathname: '/login'}} /> : ''
           }
-          <Route path='/' />
+          <Route path='/' component={Dashboard} />
           <Route path='/login' component={Login} />
         </div>
       </Router>
