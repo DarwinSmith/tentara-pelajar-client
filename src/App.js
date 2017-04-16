@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Login from './components/Login/Index.js'
 import Navigation from './components/Navigation'
 import Dashboard from './components/dashboards'
+import Profile from './components/profiles'
 import './App.css'
 
 const checkAuth = () => {
@@ -51,6 +52,7 @@ class App extends Component {
         <div>
           <Route exact path='/' component={checkAuth() ? Dashboard : Login} />
           <Route path='/login' component={Login} />
+          <Route path='/profile' component={Profile} />
           <PrivateRoute path='/dash' component={Dashboard} />
         </div>
       </Router>
