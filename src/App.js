@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './components/Search/Index'
 import Navigation from './components/Navigation'
+import Setting from './components/setting'
 import './App.css'
 
 class App extends Component {
@@ -8,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Search />
+        <Setting />
       </div>
     );
   }
