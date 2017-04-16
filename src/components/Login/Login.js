@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import firebase from 'firebase'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { loginFirebaseAPI } from '../../actions'
 import './Login.css'
 
 class Login extends Component {
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       email: '',
       password: ''
@@ -26,18 +29,7 @@ class Login extends Component {
 
   handleClickLogin () {
     const { email, password } = this.state
-
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(user => {
-      user.getToken().then(token => {
-        localStorage.setItem('token', token)
-        localStorage.setItem('userDetail', JSON.stringify(user))
-        return {user, token}
-      })
-    })
-    .catch(err => {
-      return err
-    })
+    this.props.loginFirebaseAPI(email, password)
   }
 
   render () {
@@ -81,4 +73,8 @@ class Login extends Component {
   }
 }
 
-export default Login
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ loginFirebaseAPI }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Login)

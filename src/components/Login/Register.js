@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import firebase from 'firebase'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { registerFirebaseAPI } from '../../actions'
 import './Register.css'
 
 class Register extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       email: '',
       password: '',
@@ -33,24 +36,12 @@ class Register extends Component {
 
   handleClickRegister () {
     const { email, password } = this.state
-
     if (this.state.confirmPassword !== password) {
       return this.setState({
         localError: 'Password and Confirm Password not same'
       })
     }
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(user => {
-      user.getToken().then(token => {
-        localStorage.setItem('token', token)
-        localStorage.setItem('userDetail', JSON.stringify(user))
-        return {user, token}
-      })
-    })
-    .catch(err => {
-      return err
-    })
+    this.props.registerFirebaseAPI (email, password)
   }
 
   render () {
@@ -93,4 +84,8 @@ class Register extends Component {
   }
 }
 
-export default Register
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ registerFirebaseAPI })
+}
+
+export default connect(null, mapDispatchToProps)(Register)
