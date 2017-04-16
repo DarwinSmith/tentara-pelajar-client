@@ -31,7 +31,7 @@ class Index extends Component {
 
   render() {
     if (this.state.redirectLogin) {
-      return <Redirect to='/dash' />
+      return <Redirect to='/' />
     } else {
       return (
         <div className="Index">
