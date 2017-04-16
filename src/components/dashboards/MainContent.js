@@ -23,8 +23,8 @@ class MainContent extends Component {
     return (
       <div className="column is-6">
         <Posting/>
-        {dummies.map(dummy => {
-          return <Timeline dummy={dummy}/>
+        {dummies.map((dummy, index) => {
+          return <Timeline key={index} dummy={dummy}/>
         })}
       </div>
     )

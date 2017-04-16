@@ -7,8 +7,7 @@ export function loginFirebaseAPI (email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
       user.getToken().then(token => {
-        localStorage.setItem('token', token)
-        localStorage.setItem('userDetail', JSON.stringify(user))
+        console.log('fired');
         dispatch({
           type: ActionTypes.LOGIN_SUCCESS,
           payload: { token, user }
@@ -26,8 +25,8 @@ export function registerFirebaseAPI (email, password) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(user => {
       user.getToken().then(token => {
-        localStorage.setItem('token', token)
-        localStorage.setItem('userDetail', JSON.stringify(user))
+        window.localStorage.setItem('token', token)
+        window.localStorage.setItem('userDetail', JSON.stringify(user))
         dispatch({
           type: ActionTypes.REGISTER_SUCCESS,
           payload: { token, user }

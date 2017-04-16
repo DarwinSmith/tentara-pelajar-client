@@ -53,7 +53,7 @@ class Login extends Component {
                     <i className='fa fa-key' />
                   </span>
                 </p>
-                <a className='button is-primary button-login'>Login</a>
+                <button onClick={this.handleClickLogin.bind(this)} className='button is-primary button-login'>Login</button>
               </div>
             </div>
             <span className='nav-toggle'>

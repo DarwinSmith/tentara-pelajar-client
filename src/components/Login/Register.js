@@ -85,7 +85,7 @@ class Register extends Component {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ registerFirebaseAPI })
+  return bindActionCreators({ registerFirebaseAPI }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(Register)
