@@ -7,7 +7,6 @@ export function loginFirebaseAPI (email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
       user.getToken().then(token => {
-        console.log('fired');
         dispatch({
           type: ActionTypes.LOGIN_SUCCESS,
           payload: { token, user }

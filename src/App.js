@@ -8,7 +8,7 @@ import Profile from './components/profiles'
 import './App.css'
 
 const checkAuth = () => {
-  if (localStorage.getItem('token') !== null && localStorage.getItem('userDetail') !== null) {
+  if (window.localStorage.getItem('token') !== null && window.localStorage.getItem('userDetail') !== null) {
     // let tokenData = jwt.decode(localStorage.getItem('token'))
     // if (tokenData.alg !== 'RS256' && tokenData.iss !== 'https://securetoken.google.com/hacktiv8-tentarapelajar' && tokenData.aud !== 'hacktiv8-tentarapelajar' && tokenData === null) {
     //   return false
