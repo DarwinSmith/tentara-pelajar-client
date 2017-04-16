@@ -1,0 +1,46 @@
+.card {
+  padding:10px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#sidebar {
+  margin-right: 20px;
+}
+
+figure.image > img{
+  border-radius: 64px;
+}
+
+.chip {
+  display:inline-flex;
+  height:32px;
+  font-size:13px;
+  font-weight:500;
+  /*color:rgba(0,0,0,0.6);*/
+  line-height:32px;
+  padding:0 12px;
+  border-radius:16px;
+  background-color:#e4e4e4;
+  margin-bottom:10px;
+  margin-right:20px;
+}
+
+.chip p {
+  /*float:right;*/
+  padding-left: 12px;
+}
+
+.chip img {
+  float:left;
+  margin:0 0 0 -18px;
+  height:32px;
+  width:32px;
+  border-radius:50%
+}
+
+.chip span {
+  padding:6px;
+  display: inline-block;
+
+}
