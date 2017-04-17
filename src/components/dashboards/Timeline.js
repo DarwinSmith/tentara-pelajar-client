@@ -3,6 +3,7 @@
  */
 
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import './style.css'
 
 class Timeline extends Component {
@@ -77,5 +78,10 @@ class Timeline extends Component {
   }
 }
 
-export default Timeline
+const mapDispatchToProps = dispatch => ({
+  
+})
+
+
+export default connect(null, null)(Timeline)
 
