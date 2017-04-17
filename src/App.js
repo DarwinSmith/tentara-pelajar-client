@@ -36,17 +36,12 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 )
 
 class App extends Component {
-
   constructor () {
     super()
     this.state = {
       redirectLogin: false
     }
-  } else {
-    return false
   }
-}
-
   render () {
     return (
       <Router>

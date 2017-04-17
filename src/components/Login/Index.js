@@ -14,8 +14,9 @@ class Index extends Component {
 
   componentDidUpdate (prevProps) {
     if (prevProps.loggedIn.token === '' && prevProps.loggedIn.user === '') {
-      window.localStorage.setItem('token', this.props.loggedIn.token);
-      window.localStorage.setItem('userDetail', JSON.stringify(this.props.loggedIn.user));
+      window.localStorage.setItem('token', this.props.loggedIn.token)
+      window.localStorage.setItem('userDetail', JSON.stringify(this.props.loggedIn.user))
+      window.localStorage.setItem('userProfile', JSON.stringify(this.props.loggedIn.data))
       this.setState({
         redirectLogin: true
       })
