@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import { refreshLoggedInData } from './actions'
 import Login from './components/Login/Index.js'
 import Dashboard from './components/dashboards'
 import Profile from './components/profiles'
 import Gallery from './components/Gallery/Index.js'
 import Navigation from './components/Navigation'
-import Setting from './components/setting'
+// import Setting from './components/setting'
 import './App.css'
 
 const checkAuth = () => {
@@ -37,17 +39,22 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 )
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       redirectLogin: false
     }
+  }
+  componentDidMount () {
+    // if (!(window.localStorage.getItem('token') !== null || window.localStorage.getItem('token') !== '')) {
+    //   this.props.refreshLoggedInData()
+    //   console.log(this.props.loggedIn)
+    // }
   }
   render () {
     return (
       <Router>
         <div>
-          <PrivateRoute path='/' component={Navigation} />
           <Route exact path='/' component={Dashboard} />
           <Route path='/login' component={Login} />
           <Route path='/profile' component={Profile} />
@@ -60,10 +67,14 @@ class App extends Component {
   }
 }
 
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ refreshLoggedInData }, dispatch)
+}
+
 function mapStateToProps (state) {
   return {
     loggedIn: state.loggedIn
   }
 }
 
-export default connect(mapStateToProps, null)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

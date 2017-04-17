@@ -14,7 +14,7 @@ class index extends Component {
     return(
       <div>
         <Navigation/>
-        <div className="container index">
+        <div className="container index-dashboard">
           <CSSTransitionGroup
             transitionName="dashboards"
             transitionAppear={true}

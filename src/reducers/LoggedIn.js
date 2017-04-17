@@ -12,6 +12,11 @@ export default (state = initState, action) => {
       return action.payload
     case ActionTypes.REGISTER_SUCCESS:
       return action.payload
+    case ActionTypes.REFRESH_LOGGEDIN:
+      let data = JSON.parse(window.localStorage.getItem('userData'))
+      let user = JSON.parse(window.localStorage.getItem('userDetail'))
+      let token = window.localStorage.getItem('token')
+      return {data, user, token}
     default:
       return state
   }

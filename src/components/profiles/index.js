@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import axios from 'axios'
+axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
+const URL = 'http://localhost:3001/api'
 import './profile.css'
 
 class Profile extends Component {
-  render() {
+  constructor () {
+    super()
+    this.state = {
+      skill: '',
+      personalities: ''
+    }
+  }
+  componentDidMount () {
+    let profileData = JSON.parse(window.localStorage.getItem('userProfile'))
+    axios.get(`${URL}/profiles/${profileData.id}/skills`)
+    .then(skill => {
+      this.setState({skill: skill.data})
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    axios.get(`${URL}/profiles/${profileData.id}/personalities`)
+    .then(personalities => {
+      this.setState({personalities: personalities.data})
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  render () {
     return (
       <CSSTransitionGroup
         transitionName="dashboards"
@@ -21,9 +48,9 @@ class Profile extends Component {
                     <h5 style={{"text-align":"center"}}>
                       Tentang Saya
                     </h5>
-                    <div className="card-image">
-                      <figure className="image is-128x128">
-                        <img src="https://unsplash.it/128/128/?random" alt="photos"/>
+                    <div className='card-image'>
+                      <figure className='image is-128x128'>
+                        <img src='https://unsplash.it/128/128/?random' alt='photos'/>
                       </figure>
                     </div>
 
@@ -35,77 +62,80 @@ class Profile extends Component {
                   </div>
                 </div>
                 <a>
-                <span className="icon">
-                  <i className="fa fa-angle-down" aria-hidden="true"></i>
+                <span className='icon'>
+                  <i className='fa fa-angle-down' aria-hidden='true'></i>
                 </span>
                 </a>
               </div>
 
             </div>
 
-            <div className="card">
-              <div className="card-content">
-                <div className="media-content">
-                  <div className="content">
+            <div className='card'>
+              <div className='card-content'>
+                <div className='media-content'>
+                  <div className='content'>
                     <h5>
                       Personalities
                     </h5>
-
-                    <div className="columns">
-                      <div className="column is-4">
-                        <div className="card ">
-                          <article className="media">
-                            <div className="media-content">
-                              <div className="content">
-                                <h5>
-                                  Penghargaan
-                                </h5>
-                                <ul>
-                                  <li>Juara 1 Lomba Matematika</li>
-                                  <li>Juara 1 Lomba Fisika</li>
-                                </ul>
-                              </div>
+                    {
+                      this.state.personalities === '' ?
+                      <p>Fetching Data</p> :
+                        <div className="columns">
+                          <div className="column is-4">
+                            <div className="card ">
+                              <article className="media">
+                                <div className="media-content">
+                                  <div className="content">
+                                    <h5>
+                                      Penghargaan
+                                    </h5>
+                                    <ul>
+                                      <li>Juara 1 Lomba Matematika</li>
+                                      <li>Juara 1 Lomba Fisika</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </article>
                             </div>
-                          </article>
-                        </div>
-                      </div>
+                          </div>
 
-                      <div className="column is-4">
-                        <div className="card ">
-                          <article className="media">
-                            <div className="media-content">
-                              <div className="content">
-                                <h5>
-                                  Penghargaan
-                                </h5>
-                                <ul>
-                                  <li>Juara 1 Lomba Matematika</li>
-                                  <li>Juara 1 Lomba Fisika</li>
-                                </ul>
-                              </div>
+                          <div className="column is-4">
+                            <div className="card ">
+                              <article className="media">
+                                <div className="media-content">
+                                  <div className="content">
+                                    <h5>
+                                      Penghargaan
+                                    </h5>
+                                    <ul>
+                                      <li>Juara 1 Lomba Matematika</li>
+                                      <li>Juara 1 Lomba Fisika</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </article>
                             </div>
-                          </article>
-                        </div>
-                      </div>
+                          </div>
 
-                      <div className="column is-4">
-                        <div className="card ">
-                          <article className="media">
-                            <div className="media-content">
-                              <div className="content">
-                                <h5>
-                                  Penghargaan
-                                </h5>
-                                <ul>
-                                  <li>Juara 1 Lomba Matematika</li>
-                                  <li>Juara 1 Lomba Fisika</li>
-                                </ul>
-                              </div>
+                          <div className="column is-4">
+                            <div className="card ">
+                              <article className="media">
+                                <div className="media-content">
+                                  <div className="content">
+                                    <h5>
+                                      Penghargaan
+                                    </h5>
+                                    <ul>
+                                      <li>Juara 1 Lomba Matematika</li>
+                                      <li>Juara 1 Lomba Fisika</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </article>
                             </div>
-                          </article>
+                          </div>
                         </div>
-                      </div>
-                    </div>
+                    }
 
 
                     <a>
@@ -125,27 +155,34 @@ class Profile extends Component {
                     <h5>
                       Skills
                     </h5>
-                    <div className="chip">
-                      <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                      <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                      <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                      <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                    {
+                      this.state.skill === '' ?
+                      <p>Fetching Data</p> :
+                        <div>
+                          <div className="chip">
+                            <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                            <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                            <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                            <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
 
-                      <p>MakanKerupuk</p>
-                      <span className="icon">
-                      <i className="fa fa-plus-circle"></i>
-                    </span>
-                    </div>
+                            <p>MakanKerupuk</p>
+                            <span className="icon">
+                            <i className="fa fa-plus-circle"></i>
+                          </span>
+                          </div>
 
-                    <div className="chip">
-                      <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                      <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                          <div className="chip">
+                            <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                            <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
 
-                      <p>Panjat Pinang</p>
-                      <span className="icon">
-                      <i className="fa fa-plus-circle"></i>
-                    </span>
-                    </div>
+                            <p>Panjat Pinang</p>
+                            <span className="icon">
+                            <i className="fa fa-plus-circle"></i>
+                          </span>
+                          </div>
+                        </div>
+                    }
+
 
                   </div>
                 </div>

@@ -3,15 +3,21 @@
  */
 import React, { Component } from 'react'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import axios from 'axios'
+import {createPost} from '../../actions'
+import {connect} from 'react-redux'
 import './style.css'
 
 class Posting extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showInput: false
+      showInput: false,
+      postTextContent: ''
     }
+    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
   }
+
 
   _postEvent(event) {
 
@@ -26,6 +32,19 @@ class Posting extends Component {
     })
   }
 
+  _createPost(event) {
+    if (this.state.postTextContent !== '') {
+      this.props.createPost(this.userProfile.id, this.state.postTextContent)
+    }
+  }
+
+  _setPostingTextContent(event) {
+    let postingValue = event.target.value
+    this.setState({
+      postTextContent: postingValue
+    })
+  }
+
 
   render() {
     let postInput
@@ -33,11 +52,11 @@ class Posting extends Component {
       postInput =
         <div>
           <div>
-            <textarea className="postAppear"></textarea>
+            <textarea className="postAppear" onChange={e => this._setPostingTextContent(e)}></textarea>
           </div>
           <div className="post-options">
             <a onClick={this._postLeave.bind(this)} href="#" className="button is-danger">Cancel</a>
-            <a href="#" className="button is-info">Post</a>
+            <a href="#" className="button is-info" onClick={e => this._createPost(e)}>Post</a>
           </div>
         </div>
     } else {
@@ -86,4 +105,8 @@ class Posting extends Component {
   }
 }
 
-export default Posting
+const mapDispatchToProps = dispatch => ({
+  createPost: (profileId, contents) => dispatch(createPost(profileId, contents))
+})
+
+export default connect(null, mapDispatchToProps)(Posting)
