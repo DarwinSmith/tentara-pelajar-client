@@ -15,7 +15,7 @@ class Profile extends Component {
     }
   }
   componentDidMount () {
-    let profileData = JSON.parse(window.localStorage.getItem('userProfile')).data
+    let profileData = JSON.parse(window.localStorage.getItem('userProfile'))
     axios.get(`${URL}/profiles/${profileData.id}/skills`)
     .then(skill => {
       this.setState({skill: skill.data})

@@ -3,7 +3,6 @@ import firebase from 'firebase'
 import axios from 'axios'
 import { getPhotos, getPhoto, deletePhoto, postPhoto } from './galleryActionCreator'
 export { getPhotos, getPhoto, deletePhoto, postPhoto }
-axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
 const URL = 'http://localhost:3001/api'
 
@@ -19,7 +18,7 @@ export function loginFirebaseAPI (email, password) {
         .then(data => {
           dispatch({
             type: ActionTypes.LOGIN_SUCCESS,
-            payload: { token, user, data, isLogin: true }
+            payload: { token, user, data: data.data, isLogin: true }
           })
         })
         .catch(error => {
@@ -40,15 +39,15 @@ export function registerFirebaseAPI (email, password, fullname) {
       user.getToken().then(token => {
         window.localStorage.setItem('token', token)
         window.localStorage.setItem('userDetail', JSON.stringify(user))
-        console.log(user)
         axios.post(`${URL}/profiles`, {
           userId: user.uid,
           fullname: fullname
         })
         .then(data => {
+          console.log(data);
           dispatch({
             type: ActionTypes.REGISTER_SUCCESS,
-            payload: { token, user, data, isLogin: true }
+            payload: { token, user, data: data.data, isLogin: true }
           })
         })
         .catch(error => {
@@ -59,5 +58,11 @@ export function registerFirebaseAPI (email, password, fullname) {
     .catch(err => {
       return err
     })
+  }
+}
+
+export function refreshLoggedInData () {
+  return {
+    type: ActionTypes.REFRESH_LOGGEDIN
   }
 }
