@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.1",
+    "bricks.js": "^1.8.0",
     "firebase": "^3.7.6",
     "jest": "^19.0.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-infinite-scroller": "^1.0.7",
+    "react-masonry-infinite": "^1.1.0",
     "react-masonry-layout": "^0.2.3",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",

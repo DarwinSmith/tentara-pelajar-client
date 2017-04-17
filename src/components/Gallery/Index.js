@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Navigation from '../Navigation'
 import MasonryLayout from 'react-masonry-layout'
 import './Index.css'
@@ -45,24 +46,24 @@ class Index extends React.Component {
             id="items"
             infiniteScroll={this.getItems}
             infiniteScrollLoading={this.state.isLoading} >
-            {this.state.items.map((v, i) => <div
+            {this.props.gallery.map((v, i) => <div
               key={i}
               style={{
                 width: '15%',
+                margin: '1%',
                 display: 'block'
               }}
             >
               <div className="card">
                 <div className="card-image">
                   <figure className="image is-4by3">
-                    <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Thumbnail" />
+                    <img src={v.url} alt="Thumbnail" />
                   </figure>
                 </div>
                 <div className="card-content">
                   <div className="media">
                     <div className="media-content">
-                      <p className="title is-4">John Smith</p>
-                      <p className="subtitle is-6">@johnsmith</p>
+                      <p className="title is-4">{v.title}</p>
                     </div>
                   </div>
 
@@ -84,4 +85,10 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+const mapStateToProps = state => {
+  return{
+    gallery : state.gallery
+  }
+}
+
+export default connect(mapStateToProps, null)(Index);

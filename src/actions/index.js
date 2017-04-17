@@ -1,6 +1,8 @@
 import * as ActionTypes from '../constants'
 import firebase from 'firebase'
 import axios from 'axios'
+import { getPhotos, getPhoto, deletePhoto, postPhoto } from './galleryActionCreator'
+export { getPhotos, getPhoto, deletePhoto, postPhoto }
 
 export function loginFirebaseAPI (email, password) {
   return dispatch => {
