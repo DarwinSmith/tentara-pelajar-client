@@ -71,8 +71,8 @@ class Navigation extends Component {
                     <i className='fa fa-gear'></i>
                   </span>
                 </a>
-                <div className='dropdown-content'>
-                  <a href='#'>Update Profile</a>
+                <div className="dropdown-content">
+                  <Link to={'/setting'} >Update Profile</Link>
                   <Link to={'/logout'}>Logout</Link>
                 </div>
               </div>

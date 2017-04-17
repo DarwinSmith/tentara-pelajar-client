@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import axios from 'axios'
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
 const URL = 'http://localhost:3001/api'
-
 import './profile.css'
-import Navigation from '../Navigation'
 
 class Profile extends Component {
   constructor () {
@@ -33,14 +32,19 @@ class Profile extends Component {
   }
   render () {
     return (
-      <div>
-        <Navigation/>
-        <div className='columns'>
-          <div className='column is-three-quarters'>
-            <div className='card'>
-              <div className='card-content'>
-                <div className='media-content'>
-                  <div className='content'>
+      <CSSTransitionGroup
+        transitionName="dashboards"
+        transitionAppear={true}
+        transitionAppearTimeout={1000}
+        transitionEnter={false}
+        transitionLeave={false} >
+      <div style={{marginTop:"3%"}}>
+        <div className="columns">
+          <div className="column is-three-quarters">
+            <div className="card">
+              <div className="card-content">
+                <div className="media-content">
+                  <div className="content">
                     <h5 style={{"text-align":"center"}}>
                       Tentang Saya
                     </h5>
@@ -246,6 +250,7 @@ class Profile extends Component {
 
         </div>
       </div>
+    </CSSTransitionGroup>
     );
   }
 }
