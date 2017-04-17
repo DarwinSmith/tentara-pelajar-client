@@ -9,6 +9,7 @@ class Register extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      fullname: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -16,32 +17,30 @@ class Register extends Component {
     }
   }
 
+  handleChangeFullname (event) {
+    this.setState({fullname: event.target.value})
+  }
+
   handleChangeEmail (event) {
-    this.setState({
-      email: event.target.value
-    })
+    this.setState({email: event.target.value})
   }
 
   handleChangePassword (event) {
-    this.setState({
-      password: event.target.value
-    })
+    this.setState({password: event.target.value})
   }
 
   handleChangeConfirmPassword (event) {
-    this.setState({
-      confirmPassword: event.target.value
-    })
+    this.setState({confirmPassword: event.target.value})
   }
 
   handleClickRegister () {
-    const { email, password } = this.state
+    const { email, password, fullname } = this.state
     if (this.state.confirmPassword !== password) {
       return this.setState({
         localError: 'Password and Confirm Password not same'
       })
     }
-    this.props.registerFirebaseAPI (email, password)
+    this.props.registerFirebaseAPI(email, password, fullname)
   }
 
   render () {
@@ -50,6 +49,12 @@ class Register extends Component {
         <div className='columns'>
           <div className='column is-6 register'>
             <h1 className='title is-1'>Register Now</h1>
+            <div className='field'>
+              <label className='label'>Full Name</label>
+              <p className='control '>
+                <input onChange={this.handleChangeFullname.bind(this)} value={this.state.fullname} className='input' type='text' placeholder='Full Name' />
+              </p>
+            </div>
             <div className='field'>
               <label className='label'>Email</label>
               <p className='control '>
