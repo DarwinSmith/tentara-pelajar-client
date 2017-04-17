@@ -10,7 +10,6 @@
     "react": "^15.5.4",
     "react-apollo": "^1.0.1",
     "react-dom": "^15.5.4",
-    "react-fine-uploader": "^1.0.0",
     "react-masonry-layout": "^0.2.3",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",

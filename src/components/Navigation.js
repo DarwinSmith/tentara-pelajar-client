@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import './Navigation.css'
+import { Link } from 'react-router-dom'
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <div className="Navigation">
@@ -18,14 +23,21 @@ class Navigation extends Component {
               </div>
             </div>
             <div className="nav-right nav-menu">
-              <a className="nav-item is-tab is-hidden-mobile is-active" style={{color:"black"}}>Home</a>
-              <a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>
+
+              <Link to={'/'} className="nav-item is-tab is-hidden-mobile is-active" style={{color:"black"}}>Home</Link>
+              
+              <Link className="nav-item is-tab is-hidden-mobile" to={'/profile'}>
                 <figure className="image is-16x16" >
                   <img src="http://bulma.io/images/jgthms.png" alt="profilepicture"/>
                 </figure>
                 Didit Suryadi
-              </a>
-              <a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>Gallery</a>
+              </Link>
+
+              {/*<a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>*/}
+              {/*</a>*/}
+              <Link className="nav-item is-tab is-hidden-mobile" to="/gallery">
+                Gallery
+              </Link>
               <a className="nav-item is-tab is-hidden-mobile level-item" style={{color:"black"}}>
                 <span className="icon">
                   <i className="fa fa-bell"></i>

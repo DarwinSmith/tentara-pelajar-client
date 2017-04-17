@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import jwt from 'jsonwebtoken'
 
 import Login from './components/Login/Index.js'
-import Navigation from './components/Navigation'
 import Dashboard from './components/dashboards'
+import Profile from './components/profiles'
+import Gallery from './components/Gallery/Index'
+import Navigation from './components/Navigation'
 import './App.css'
 
 const checkAuth = () => {
-  if (localStorage.getItem('token') !== null && localStorage.getItem('userData') !== null) {
-    let tokenData = jwt.decode(localStorage.getItem('token'))
-    if (tokenData.alg !== 'RS256' && tokenData.iss !== 'https://securetoken.google.com/hacktiv8-tentarapelajar' && tokenData.aud !== 'hacktiv8-tentarapelajar' && tokenData === null) {
-      return false
-    } else {
-      return true
-    }
+  if (window.localStorage.getItem('token') !== null && window.localStorage.getItem('userDetail') !== null) {
+    // let tokenData = jwt.decode(localStorage.getItem('token'))
+    // if (tokenData.alg !== 'RS256' && tokenData.iss !== 'https://securetoken.google.com/hacktiv8-tentarapelajar' && tokenData.aud !== 'hacktiv8-tentarapelajar' && tokenData === null) {
+    //   return false
+    // } else {
+    //   return true
+    // }
+    return true
   } else {
     return false
   }
@@ -34,22 +36,27 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 )
 
 class App extends Component {
-  componentDidUpdate (prevProps) {
-    if (prevProps.loggedIn.token === '' && prevProps.loggedIn.user === '') {
-      <Redirect to={{pathname: '/'}} />
-    } else if (prevProps.loggedIn.isLogin === true) {
-      <Redirect to={{pathname: '/'}} />
-    } else {
-      return 0
+
+  constructor () {
+    super()
+    this.state = {
+      redirectLogin: false
     }
+  } else {
+    return false
   }
+}
+
   render () {
     return (
       <Router>
         <div>
+          <PrivateRoute path='/' component={Navigation} />
           <Route exact path='/' component={Dashboard} />
           <Route path='/login' component={Login} />
-          <PrivateRoute path='/dash' component={Dashboard} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/gallery' component={Gallery} />
+          {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
       </Router>
     )

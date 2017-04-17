@@ -17,7 +17,7 @@ input#search {
 }
 
 input#search:focus {
-    width: 500px;
+    width: 400px;
     background-color: white;
     border-radius: 0px;
 }
@@ -26,10 +26,10 @@ input#search:focus {
     height: 3px;
 }
 
-i:hover{
+.Navigation i:hover{
   color: white;
 }
 
-a:hover{
+.Navigation a:hover{
   border-bottom: solid dotted #ff0000;
 }
