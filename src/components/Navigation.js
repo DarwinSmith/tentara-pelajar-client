@@ -25,7 +25,7 @@ class Navigation extends Component {
             <div className="nav-right nav-menu">
 
               <Link to={'/'} className="nav-item is-tab is-hidden-mobile is-active" style={{color:"black"}}>Home</Link>
-              
+
               <Link className="nav-item is-tab is-hidden-mobile" to={'/profile'}>
                 <figure className="image is-16x16" >
                   <img src="http://bulma.io/images/jgthms.png" alt="profilepicture"/>
@@ -43,15 +43,21 @@ class Navigation extends Component {
                   <i className="fa fa-bell"></i>
                 </span>
               </a>
-              <a className="nav-item is-tab is-hidden-mobile level-item" style={{color:"black"}}>
-                <span className="icon">
-                  <i className="fa fa-gear"></i>
-                </span>
-              </a>
+              <div className="dropdown">
+                <a className="nav-item is-tab is-hidden-mobile level-item dropbtn" style={{color:"black"}}>
+                  <span className="icon">
+                    <i className="fa fa-gear"></i>
+                  </span>
+                </a>
+                <div className="dropdown-content">
+                  <a href="#">Update Profile</a>
+                  <a href="#">Log Out</a>
+                </div>
+              </div>
             </div>
           </div>
         </nav>
-        <progress className="progress is-small is-success" value="15" max="100">100%</progress>
+        <progress className="progress is-small is-success" value="100" max="100">100%</progress>
       </div>
     );
   }
