@@ -9,7 +9,7 @@ import Dashboard from './components/dashboards'
 import Profile from './components/profiles'
 import Gallery from './components/Gallery/Index.js'
 import Logout from './components/Logout'
-// import Setting from './components/setting'
+import Setting from './components/setting'
 import './App.css'
 
 const checkAuth = () => {
