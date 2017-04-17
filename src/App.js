@@ -8,7 +8,7 @@ import Login from './components/Login/Index.js'
 import Dashboard from './components/dashboards'
 import Profile from './components/profiles'
 import Gallery from './components/Gallery/Index.js'
-import Navigation from './components/Navigation'
+import Logout from './components/Logout'
 // import Setting from './components/setting'
 import './App.css'
 
@@ -59,6 +59,7 @@ class App extends Component {
           <Route path='/login' component={Login} />
           <Route path='/profile' component={Profile} />
           <Route path='/gallery' component={Gallery} />
+          <Route path='/logout' component={Logout} />
           {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
       </Router>

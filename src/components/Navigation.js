@@ -72,7 +72,7 @@ class Navigation extends Component {
                 </a>
                 <div className='dropdown-content'>
                   <a href='#'>Update Profile</a>
-                  <a href='#'>Log Out</a>
+                  <Link to={'/logout'}>Logout</Link>
                 </div>
               </div>
             </div>
