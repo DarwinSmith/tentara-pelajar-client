@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import './profile.css'
-import Navigation from '../Navigation'
 
 class Profile extends Component {
   render() {
     return (
-      <div>
+      <CSSTransitionGroup
+        transitionName="dashboards"
+        transitionAppear={true}
+        transitionAppearTimeout={1000}
+        transitionEnter={false}
+        transitionLeave={false} >
+      <div style={{marginTop:"3%"}}>
         <div className="columns">
           <div className="column is-three-quarters">
             <div className="card">
@@ -208,6 +213,7 @@ class Profile extends Component {
 
         </div>
       </div>
+    </CSSTransitionGroup>
     );
   }
 }

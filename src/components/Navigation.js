@@ -50,7 +50,7 @@ class Navigation extends Component {
                   </span>
                 </a>
                 <div className="dropdown-content">
-                  <a href="#">Update Profile</a>
+                  <Link to={'/setting'} >Update Profile</Link>
                   <a href="#">Log Out</a>
                 </div>
               </div>
