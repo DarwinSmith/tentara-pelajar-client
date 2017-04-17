@@ -59,7 +59,6 @@ class App extends Component {
           <Route path='/login' component={Login} />
           <Route path='/profile' component={Profile} />
           <Route path='/gallery' component={Gallery} />
-          <Route path='/setting' component={Setting} />
           <Route path='/logout' component={Logout} />
           {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
