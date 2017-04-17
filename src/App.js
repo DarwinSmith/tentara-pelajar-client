@@ -9,7 +9,7 @@ import Dashboard from './components/dashboards'
 import Profile from './components/profiles'
 import Gallery from './components/Gallery/Index.js'
 import Logout from './components/Logout'
-// import Setting from './components/setting'
+import Setting from './components/setting'
 import './App.css'
 
 const checkAuth = () => {
@@ -60,6 +60,7 @@ class App extends Component {
           <Route path='/profile' component={Profile} />
           <Route path='/gallery' component={Gallery} />
           <Route path='/logout' component={Logout} />
+          <Route path='/setting' component={Setting} />
           {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
       </Router>

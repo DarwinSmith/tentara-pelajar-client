@@ -28,7 +28,7 @@ export const getProfile = data => {
 export const patchProfile = (data) => {
   console.log(data);
   return (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem('userProfile')).data.id
+    const userId = JSON.parse(localStorage.getItem('userProfile')).id
     console.log(userId);
       axios.patch(`${URL}/profiles/${userId}`, data)
     .then(result => {

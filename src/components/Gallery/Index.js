@@ -2,27 +2,31 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './Index.css'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import Navigation from '../Navigation'
 
 class Index extends React.Component {
   render() {
     return(
-      <CSSTransitionGroup
-        transitionName="dashboards"
-        transitionAppear={true}
-        transitionAppearTimeout={1000}
-        transitionEnter={false}
-        transitionLeave={false}
-      >
-        <div className="gallery is-12">
-          <div className="masonry">
-            {this.props.gallery.map((v,i)=>(
-              <div className="item">
-                <img src={v.url} alt="Masonry" />
-              </div>
-            ))}
+      <div className="">
+        <Navigation />
+        <CSSTransitionGroup
+          transitionName="dashboards"
+          transitionAppear={true}
+          transitionAppearTimeout={1000}
+          transitionEnter={false}
+          transitionLeave={false}
+        >
+          <div className="gallery is-12">
+            <div className="masonry">
+              {this.props.gallery.map((v,i)=>(
+                <div className="item">
+                  <img src={v.url} alt="Masonry" />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </CSSTransitionGroup>
+        </CSSTransitionGroup>
+      </div>
     )
   }
 }
