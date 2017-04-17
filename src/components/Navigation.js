@@ -53,7 +53,6 @@ class Navigation extends Component {
                 <figure className='image is-16x16' >
                   <img src='http://bulma.io/images/jgthms.png' alt='profilepicture' />
                 </figure>
-                {this.userProfile.fullname}
               </Link>
 
               {/*<a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>*/}
@@ -74,7 +73,7 @@ class Navigation extends Component {
                 </a>
                 <div className="dropdown-content">
                   <Link to={'/setting'} >Update Profile</Link>
-                  <a href="#">Log Out</a>
+                  <Link to={'/logout'}>Logout</Link>
                 </div>
               </div>
             </div>

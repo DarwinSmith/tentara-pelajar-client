@@ -13,8 +13,6 @@ export function loginFirebaseAPI (email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
       user.getToken().then(token => {
-        window.localStorage.setItem('token', token)
-        window.localStorage.setItem('userDetail', JSON.stringify(user))
         axios.get(`${URL}/profiles/findOne?filter[where][userId]=${user.uid}`)
         .then(data => {
           dispatch({
@@ -28,7 +26,10 @@ export function loginFirebaseAPI (email, password) {
       })
     })
     .catch(err => {
-      return err
+      dispatch({
+        type: ActionTypes.LOGIN_ERROR,
+        payload: { error: err }
+      })
     })
   }
 }
@@ -38,14 +39,11 @@ export function registerFirebaseAPI (email, password, fullname) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(user => {
       user.getToken().then(token => {
-        window.localStorage.setItem('token', token)
-        window.localStorage.setItem('userDetail', JSON.stringify(user))
         axios.post(`${URL}/profiles`, {
           userId: user.uid,
           fullname: fullname
         })
         .then(data => {
-          console.log(data);
           dispatch({
             type: ActionTypes.REGISTER_SUCCESS,
             payload: { token, user, data: data.data, isLogin: true }
@@ -57,7 +55,10 @@ export function registerFirebaseAPI (email, password, fullname) {
       })
     })
     .catch(err => {
-      return err
+      dispatch({
+        type: ActionTypes.LOGIN_ERROR,
+        payload: { error: err }
+      })
     })
   }
 }

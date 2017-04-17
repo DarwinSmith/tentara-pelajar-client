@@ -8,23 +8,25 @@ class Index extends Component {
   constructor () {
     super()
     this.state = {
-      redirectLogin: false
+      redirectLogin: false,
+      errorLogin: ''
     }
   }
 
-  componentDidUpdate (prevProps) {
-    if (prevProps.loggedIn.token === '' && prevProps.loggedIn.user === '') {
+  componentWillReceiveProps (nextProps) {
+    console.log(nextProps.loggedIn);
+    if ((nextProps.loggedIn.token !== '' || nextProps.loggedIn.token !== null) && (nextProps.loggedIn.user !== '' || nextProps.loggedIn.user !== null)) {
+      console.log('firedRedirectLogin');
       window.localStorage.setItem('token', this.props.loggedIn.token)
       window.localStorage.setItem('userDetail', JSON.stringify(this.props.loggedIn.user))
       window.localStorage.setItem('userProfile', JSON.stringify(this.props.loggedIn.data))
       this.setState({
         redirectLogin: true
       })
-    } else if (prevProps.loggedIn.isLogin === true) {
-      // <Route exact path="/" render={() => {
-      //       return <Redirect to={{pathname: '/'}} />
-      //   }}/>
-      return <Redirect to={{pathname: '/'}} />
+    } else if (nextProps.loggedIn.error !== '') {
+      this.setState({
+        errorLogin: nextProps.loggedIn.error
+      })
     } else {
       return 0
     }
@@ -37,7 +39,7 @@ class Index extends Component {
       return (
         <div className="Index">
           <Login />
-          <Register />
+          <Register displayError={this.state.errorLogin} />
         </div>
       );
     }
