@@ -2,7 +2,10 @@ import * as ActionTypes from '../constants'
 import firebase from 'firebase'
 import axios from 'axios'
 import { getPhotos, getPhoto, deletePhoto, postPhoto } from './galleryActionCreator'
-export { getPhotos, getPhoto, deletePhoto, postPhoto }
+import { getTimelines, createPost } from './dashboardsActionCreator'
+
+export { getTimelines, createPost, getPhotos, getPhoto, deletePhoto, postPhoto }
+
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
 const URL = 'http://localhost:3001/api'
 

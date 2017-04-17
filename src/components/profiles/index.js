@@ -34,6 +34,7 @@ class Profile extends Component {
   render () {
     return (
       <div>
+        <Navigation/>
         <div className='columns'>
           <div className='column is-three-quarters'>
             <div className='card'>

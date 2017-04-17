@@ -2,33 +2,42 @@
  * Created by lightmitch on 4/13/17.
  */
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Timeline from './Timeline'
+import {getTimelines} from '../../actions'
 import Posting from './Posting'
 import './style.css'
 
+
 class MainContent extends Component {
+  constructor(props) {
+    super(props)
+    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
+  }
+
+  componentDidMount() {
+    this.props.getTimelines(this.userProfile.id)
+  }
+
   render() {
-    let dummies = []
-
-    for(let i=0;i<100;i++) {
-     dummies.push(
-       {
-         name: 'Danang Aji Tamtomo',
-         description: 'Seorang pelajar yang namanya pasaran',
-         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. @bulmaio.#css #responsive'
-       }
-     )
-    }
-
+    console.log(this.props)
     return (
       <div className="column is-6">
         <Posting/>
-        {dummies.map((dummy, index) => {
-          return <Timeline key={index} dummy={dummy}/>
-        })}
+        { this.props.timelines.map(timeline => <Timeline key={timeline.id} timeline={timeline}/>) }
       </div>
     )
   }
 }
 
-export default MainContent
+
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn,
+  timelines: state.dashboards.timelines
+})
+
+const dispatchStateToProps = dispatch => ({
+  getTimelines: profileId => dispatch(getTimelines(profileId))
+})
+
+export default connect(mapStateToProps, dispatchStateToProps)(MainContent)
