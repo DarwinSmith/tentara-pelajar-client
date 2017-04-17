@@ -1,7 +1,8 @@
 import * as ActionTypes from '../constants'
 import firebase from 'firebase'
 import axios from 'axios'
-const URL = 'http://localhost:3000/api'
+axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
+const URL = 'http://localhost:3001/api'
 
 export function loginFirebaseAPI (email, password) {
   return dispatch => {
@@ -10,7 +11,7 @@ export function loginFirebaseAPI (email, password) {
       user.getToken().then(token => {
         window.localStorage.setItem('token', token)
         window.localStorage.setItem('userDetail', JSON.stringify(user))
-        axios.get(`${URL}/profiles/findOne?filter[where][userId]=${user.UID}`)
+        axios.get(`${URL}/profiles/findOne?filter[where][userId]=${user.uid}`)
         .then(data => {
           dispatch({
             type: ActionTypes.LOGIN_SUCCESS,
@@ -35,9 +36,10 @@ export function registerFirebaseAPI (email, password, fullname) {
       user.getToken().then(token => {
         window.localStorage.setItem('token', token)
         window.localStorage.setItem('userDetail', JSON.stringify(user))
+        console.log(user)
         axios.post(`${URL}/profiles`, {
-          fullname: fullname,
-          userId: user.UID
+          userId: user.uid,
+          fullname: fullname
         })
         .then(data => {
           dispatch({
