@@ -2,9 +2,15 @@
  * Created by lightmitch on 4/13/17.
  */
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import './style.css'
 
 class LeftSidebar extends Component {
+  constructor(props) {
+    super(props)
+    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
+  }
+
   render() {
     return (
       <div className="column is-3 left-sidebar-container">
@@ -13,7 +19,7 @@ class LeftSidebar extends Component {
             <img className="profile-banner-pic" src="https://unsplash.it/200/300/?random" alt=""/>
           </div>
           <div className="card-content sma-color">
-            Danang Aji Tamtomo
+            {this.userProfile.fullname}
           </div>
           <hr/>
           <div className="card-content sma-color">
@@ -25,4 +31,8 @@ class LeftSidebar extends Component {
   }
 }
 
-export default LeftSidebar
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+})
+
+export default connect(mapStateToProps, null)(LeftSidebar)

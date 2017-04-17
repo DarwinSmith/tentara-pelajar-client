@@ -3,6 +3,7 @@
  */
 
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import './style.css'
 
 class Timeline extends Component {
@@ -44,18 +45,20 @@ class Timeline extends Component {
             </div>
 
             <div className="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-              <a>#css</a> <a>#responsive</a>
+              {this.props.timeline.content}
               <br/>
-              <small>11:09 PM - 1 Jan 2016</small>
+              <small>{this.props.timeline.createdAt}</small>
             </div>
           </div>
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src="http://bulma.io/images/placeholders/1280x960.png" alt="placeholder"/>
-            </figure>
-          </div>
+          {
+            this.props.timeline.images
+            ? <div className="card-image">
+                <figure className="image is-4by3">
+                  <img src="http://bulma.io/images/placeholders/1280x960.png" alt="placeholder"/>
+                </figure>
+              </div>
+            : ''
+          }
           <hr/>
             <div className="reactions">
               <span className="reaction">
@@ -77,5 +80,10 @@ class Timeline extends Component {
   }
 }
 
-export default Timeline
+const mapDispatchToProps = dispatch => ({
+
+})
+
+
+export default connect(null, null)(Timeline)
 

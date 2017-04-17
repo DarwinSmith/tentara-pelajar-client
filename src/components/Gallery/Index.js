@@ -41,6 +41,7 @@ class Index extends React.Component {
   render() {
     return(
       <div>
+        <Navigation/>
         <div className="index is-12">
           <MasonryLayout
             id="items"

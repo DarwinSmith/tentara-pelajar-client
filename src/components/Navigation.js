@@ -14,6 +14,7 @@ class Navigation extends Component {
     this.state = {
       notificationCount: 0
     }
+    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
   }
 
   componentDidMount () {
@@ -52,6 +53,7 @@ class Navigation extends Component {
                 <figure className='image is-16x16' >
                   <img src='http://bulma.io/images/jgthms.png' alt='profilepicture' />
                 </figure>
+                {this.userProfile.fullname}
               </Link>
 
               {/*<a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>*/}
