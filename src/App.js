@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import Login from './components/Login/Index.js'
 import Dashboard from './components/dashboards'
 import Profile from './components/profiles'
-import Gallery from './components/Gallery/Index'
+import Gallery from './components/Gallery/index.js'
 import Navigation from './components/Navigation'
+import Setting from './components/setting'
 import './App.css'
 
 const checkAuth = () => {

@@ -1,8 +1,12 @@
 import * as ActionTypes from '../constants'
 import firebase from 'firebase'
 import axios from 'axios'
+import { getPhotos, getPhoto, deletePhoto, postPhoto } from './galleryActionCreator'
+export { getPhotos, getPhoto, deletePhoto, postPhoto }
+axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
 const URL = 'http://localhost:3001/api'
+
 
 export function loginFirebaseAPI (email, password) {
   return dispatch => {
