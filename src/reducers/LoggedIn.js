@@ -3,12 +3,15 @@ const initState = {
   token: '',
   user: '',
   data: '',
+  error: '',
   isLogin: false
 }
 
 export default (state = initState, action) => {
   switch (action.type) {
     case ActionTypes.LOGIN_SUCCESS:
+      return action.payload
+    case ActionTypes.LOGIN_ERROR:
       return action.payload
     case ActionTypes.REGISTER_SUCCESS:
       return action.payload

@@ -36,6 +36,7 @@ class Posting extends Component {
     if (this.state.postTextContent !== '') {
       this.props.createPost(this.userProfile.id, this.state.postTextContent)
     }
+    this._postLeave()
   }
 
   _setPostingTextContent(event) {

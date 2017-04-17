@@ -28,7 +28,10 @@ export function loginFirebaseAPI (email, password) {
       })
     })
     .catch(err => {
-      return err
+      dispatch({
+        type: ActionTypes.LOGIN_ERROR,
+        payload: { error: err }
+      })
     })
   }
 }
@@ -43,7 +46,6 @@ export function registerFirebaseAPI (email, password, fullname) {
           fullname: fullname
         })
         .then(data => {
-          console.log(data);
           dispatch({
             type: ActionTypes.REGISTER_SUCCESS,
             payload: { token, user, data: data.data, isLogin: true }
@@ -55,7 +57,10 @@ export function registerFirebaseAPI (email, password, fullname) {
       })
     })
     .catch(err => {
-      return err
+      dispatch({
+        type: ActionTypes.LOGIN_ERROR,
+        payload: { error: err }
+      })
     })
   }
 }
