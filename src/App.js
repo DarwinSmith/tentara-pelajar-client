@@ -11,6 +11,7 @@ import Gallery from './components/Gallery/Index.js'
 import Logout from './components/Logout'
 import Setting from './components/setting'
 import Chat from './components/Chat'
+import Upload from './components/Upload'
 import './App.css'
 
 const checkAuth = () => {
@@ -63,6 +64,7 @@ class App extends Component {
           <Route path='/gallery' component={Gallery} />
           <Route path='/logout' component={Logout} />
           <Route path='/setting' component={Setting} />
+          <Route path='/upload' component={Upload} />
           {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
       </Router>

@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 class PostCommentItem extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     return (

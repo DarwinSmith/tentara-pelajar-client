@@ -3,6 +3,13 @@ import axios from 'axios'
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
 const URL = 'http://localhost:3001/api'
 
+export const getProfile = data => {
+  return {
+    type: ActionTypes.GET_PROFILE,
+    payload: data
+  }
+}
+
 export const fetchProfile = () => {
   return (dispatch) => {
     const userId = JSON.parse(localStorage.getItem('userDetail')).uid
@@ -18,9 +25,9 @@ export const fetchProfile = () => {
   }
 }
 
-export const getProfile = data => {
+export const updateProfile = data => {
   return {
-    type: ActionTypes.GET_PROFILE,
+    type: ActionTypes.PATCH_PROFILE,
     payload: data
   }
 }
@@ -37,12 +44,5 @@ export const patchProfile = (data) => {
     .catch(error => {
       console.log(error)
     })
-  }
-}
-
-export const updateProfile = data => {
-  return {
-    type: ActionTypes.PATCH_PROFILE,
-    payload: data
   }
 }

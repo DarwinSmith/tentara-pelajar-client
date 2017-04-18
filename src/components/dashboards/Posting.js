@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-import axios from 'axios'
 import {createPost} from '../../actions'
 import {connect} from 'react-redux'
 import './style.css'
