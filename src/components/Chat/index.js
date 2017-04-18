@@ -1,6 +1,8 @@
 import React from 'react'
 import firebase from 'firebase'
 import axios from 'axios'
+import Navigation from '../Navigation'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const URL = 'http://localhost:3001/api'
 const profile = JSON.parse(window.localStorage.getItem('userProfile'))
@@ -71,6 +73,14 @@ class Chat extends React.Component {
 
   render () {
     return (
+      <div className="">
+        <Navigation />
+        <CSSTransitionGroup
+          transitionName="dashboards"
+          transitionAppear={true}
+          transitionAppearTimeout={1000}
+          transitionEnter={false}
+          transitionLeave={false} >
       <div>
         <h2>Chat ..</h2>
         <h2>Fren List</h2>
@@ -109,6 +119,8 @@ class Chat extends React.Component {
         </ul>
 
       </div>
+    </CSSTransitionGroup>
+    </div>
     )
   }
 }
