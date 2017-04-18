@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { connect } from 'react-redux';
-import axios from 'axios';
-axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
-const URL = 'http://localhost:3001/api';
+import { fetchSkills, endorseSkills, fetchPersonalities, endorsePersonalities } from '../../actions'
 import './profile.css';
 import Navigation from '../Navigation';
 
@@ -14,24 +12,11 @@ class Profile extends Component {
       skill: '',
       personalities: ''
     }
+    this.userId = JSON.parse(localStorage.getItem('userProfile')).id
   }
   componentDidMount () {
-    console.log(this.props);
-    // let profileData = JSON.parse(window.localStorage.getItem('userProfile'))
-    // axios.get(`${URL}/profiles/${profileData.id}/skills`)
-    // .then(skill => {
-    //   this.setState({skill: skill.data})
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
-    // axios.get(`${URL}/profiles/${profileData.id}/personalities`)
-    // .then(personalities => {
-    //   this.setState({personalities: personalities.data})
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
+    this.props.fetchSkills(this.props.match.params.id)
+    this.props.fetchPersonalities(this.props.match.params.id)
   }
   render () {
     return (
@@ -50,7 +35,7 @@ class Profile extends Component {
                 <div className="card-content">
                   <div className="media-content">
                     <div className="content">
-                      <h5 style={{"text-align":"center"}}>
+                      <h5 style={{"textAlign":"center"}}>
                         Tentang Saya
                       </h5>
                       <div className='card-image'>
@@ -58,7 +43,7 @@ class Profile extends Component {
                           <img style={{borderRadius: 100, widht: 128, height: 128}} src='https://unsplash.it/128/128/?random' alt='photos'/>
                         </figure>
                       </div>
-
+                    <hr style={{height:2}}/>
                       <ul>
                         <li>Nama Lengkap : {this.props.profile.fullname} </li>
                         <li>Sekolah      : {this.props.profile.school}</li>
@@ -83,76 +68,35 @@ class Profile extends Component {
                         Personalities
                       </h5>
                       {
-                        this.state.personalities === '' ?
-                        <p>Fetching Data</p> :
-                          <div className="columns">
-                            <div className="column is-4">
-                              <div className="card ">
-                                <article className="media">
-                                  <div className="media-content">
-                                    <div className="content">
-                                      <h5>
-                                        Penghargaan
-                                      </h5>
-                                      <ul>
-                                        <li>{this.props.profile.experience}</li>
-                                        <li>{this.props.profile.experience}</li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </article>
+                        this.props.personalities.length === 0 ?
+                        <img style={{width:"3%"}} src={require("../../assets/image/loading.gif")} alt="Loading" /> :
+                        <div>
+                          {
+                            this.props.personalities.map((value, index) => (
+                              <div className="chip" key={index}>
+                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                <p>{value.content}</p>
+                                {
+                                  this.props.match.params.id == this.userId ?
+                                  <span></span>:
+                                  <a href="#" onClick={() => this.props.endorsePersonalities(value.id)}>
+                                    <span className="icon">
+                                      <i className="fa fa-plus-circle"></i>
+                                    </span>
+                                  </a>
+                                }
                               </div>
-                            </div>
-
-                            <div className="column is-4">
-                              <div className="card ">
-                                <article className="media">
-                                  <div className="media-content">
-                                    <div className="content">
-                                      <h5>
-                                        Penghargaan
-                                      </h5>
-                                      <ul>
-                                        <li>{this.props.profile.experience}</li>
-                                        <li>{this.props.profile.experience}</li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </article>
-                              </div>
-                            </div>
-
-                            <div className="column is-4">
-                              <div className="card ">
-                                <article className="media">
-                                  <div className="media-content">
-                                    <div className="content">
-                                      <h5>
-                                        Penghargaan
-                                      </h5>
-                                      <ul>
-                                        <li>Juara 1 Lomba Matematika</li>
-                                        <li>Juara 1 Lomba Fisika</li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </article>
-                              </div>
-                            </div>
-                          </div>
+                            ))
+                          }
+                        </div>
                       }
-
-
-                      <a>
-                      <span className="icon">
-                        <i className="fa fa-angle-down" aria-hidden="true"></i>
-                      </span>
-                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div className="card">
                 <div className="card-content">
                   <div className="media-content">
@@ -161,39 +105,38 @@ class Profile extends Component {
                         Skills
                       </h5>
                       {
-                        this.state.skill === '' ?
-                        <p>Fetching Data</p> :
+                        this.props.skills.length === 0 ?
+                        <img style={{width:"3%"}} src={require("../../assets/image/loading.gif")} alt="Loading" /> :
                           <div>
-                            <div className="chip">
-                              <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                              <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                              <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                              <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-
-                              <p>MakanKerupuk</p>
-                              <span className="icon">
-                              <i className="fa fa-plus-circle"></i>
-                            </span>
-                            </div>
-
-                            <div className="chip">
-                              <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                              <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-
-                              <p>Panjat Pinang</p>
-                              <span className="icon">
-                              <i className="fa fa-plus-circle"></i>
-                            </span>
-                            </div>
+                            {
+                              this.props.skills.map((value, index) => (
+                                <div className="chip" key={index}>
+                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
+                                  <p>{value.name}</p>
+                                  <span className="icon">
+                                    <i className={value.icon}></i>
+                                  </span>
+                                  {
+                                    this.props.match.params.id == this.userId ?
+                                    <span></span>:
+                                    <a href="#" onClick={() => this.props.endorseSkills(value.id)}>
+                                      <span className="icon">
+                                        <i className="fa fa-plus-circle"></i>
+                                      </span>
+                                    </a>
+                                  }
+                                </div>
+                              ))
+                            }
                           </div>
                       }
-
-
                     </div>
                   </div>
                 </div>
               </div>
-
               <div className="card">
                 <div className="card-content">
                   <div className="media-content">
@@ -201,22 +144,16 @@ class Profile extends Component {
                       <h5>
                         Posting
                       </h5>
-
                       <a>
                       <span className="icon">
                         <i className="fa fa-angle-down" aria-hidden="true"></i>
                       </span>
                       </a>
-
                     </div>
                   </div>
                 </div>
               </div>
-
-
             </div>
-
-
             <div className="column">
               <div className="card" id="sidebar">
                 <article className="media">
@@ -227,13 +164,11 @@ class Profile extends Component {
                       </h5>
                       <ul>
                         <li>{this.props.profile.experience}</li>
-                        <li>{this.props.profile.experience}</li>
                       </ul>
                     </div>
                   </div>
                 </article>
               </div>
-
               <div className="card" id="sidebar">
                 <article className="media">
                   <div className="media-content">
@@ -243,14 +178,11 @@ class Profile extends Component {
                       </h5>
                       <ul>
                         <li>{this.props.profile.activity}</li>
-                        <li>{this.props.profile.activity}</li>
                       </ul>
                     </div>
                   </div>
                 </article>
               </div>
-
-
             </div>
 
           </div>
@@ -264,7 +196,18 @@ class Profile extends Component {
 const mapStateToProps = (state) => {
   return{
     profile: state.profile,
+    skills: state.skills,
+    personalities: state.personalities
   }
 }
 
-export default connect(mapStateToProps, null)(Profile);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    fetchSkills: () => dispatch(fetchSkills()),
+    endorseSkills: (skillId) => dispatch(endorseSkills(skillId)),
+    fetchPersonalities: () => dispatch(fetchPersonalities()),
+    endorsePersonalities: (personalitiesId) => dispatch(endorsePersonalities(personalitiesId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

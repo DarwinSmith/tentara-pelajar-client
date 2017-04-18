@@ -16,25 +16,26 @@ class Navigation extends Component {
       isLoading: 0
     }
     this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
+    this.userId = JSON.parse(localStorage.getItem('userProfile')).id
   }
 
   componentDidMount () {
-    const id = this.props.loggedIn.data.id
-    axios.get(`${URL}/profiles/${id}/notifications/count`)
-    .then(data => {
-      this.setState({
-        notificationCount: data.data.count
-      })
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-    for(const i=0; i<1000; i++){
-      this.setState({
-        isLoading: i
-      })
-    }
+    // const id = this.props.loggedIn.data.id
+    // axios.get(`${URL}/profiles/${id}/notifications/count`)
+    // .then(data => {
+    //   this.setState({
+    //     notificationCount: data.data.count
+    //   })
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
+    //
+    // for(const i=0; i<1000; i++){
+    //   this.setState({
+    //     isLoading: i
+    //   })
+    // }
   }
 
   render () {
@@ -56,7 +57,7 @@ class Navigation extends Component {
 
               <Link to={'/'} className='nav-item is-tab is-hidden-mobile is-active' style={{color: 'black'}}>Home</Link>
 
-              <Link className='nav-item is-tab is-hidden-mobile' to={'/profile'}>
+              <Link className='nav-item is-tab is-hidden-mobile' to={'/profile/'+this.userId}>
                 <figure className='image is-16x16' >
                   <img src='http://bulma.io/images/jgthms.png' alt='profilepicture' />
                 </figure>

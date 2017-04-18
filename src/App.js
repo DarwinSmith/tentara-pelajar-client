@@ -59,7 +59,7 @@ class App extends Component {
         <div>
           <Route exact path='/' component={Dashboard} />
           <Route path='/login' component={Login} />
-          <Route path='/profile' component={Profile} />
+          <Route path='/profile/:id' component={Profile} />
           <Route path='/gallery' component={Gallery} />
           <Route path='/logout' component={Logout} />
           <Route path='/setting' component={Setting} />
