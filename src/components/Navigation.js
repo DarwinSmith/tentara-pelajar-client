@@ -12,13 +12,14 @@ class Navigation extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      notificationCount: 0
+      notificationCount: 0,
+      searchInput: '',
+      userProfile: JSON.parse(window.localStorage.getItem('userProfile'))
     }
-    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
   }
 
   componentDidMount () {
-    const id = this.props.loggedIn.data.id
+    const id = this.state.userProfile.id
     axios.get(`${URL}/profiles/${id}/notifications/count`)
     .then(data => {
       this.setState({
@@ -28,6 +29,32 @@ class Navigation extends Component {
     .catch(err => {
       console.log(err)
     })
+  }
+
+  autoComplete () {
+    axios.get(`${URL}/profiles/search-friend/${this.state.searchInput}`)
+    .then(data => {
+      let res = data.data.friendSearch
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  searchInputChange (e) {
+    this.setState({searchInput: e.target.value})
+    if (this.state.searchInput.length >= 2) {
+      this.autoComplete()
+    }
+  }
+
+  searchInputEnter (e) {
+    if (e.key === 'Enter') {
+      // Do other things.
+      // Redirect to search page.
+      console.log('enter fired')
+    }
   }
 
   render () {
@@ -41,7 +68,13 @@ class Navigation extends Component {
               </a>
               <div className='nav-item search'>
                 <p className='control'>
-                  <input className='input' id='search' type='text' placeholder='Find something' />
+                  <input
+                    onChange={this.searchInputChange.bind(this)}
+                    onKeyPress={this.searchInputEnter.bind(this)}
+                    className='input'
+                    id='search'
+                    type='text'
+                    placeholder='Find something' />
                 </p>
               </div>
             </div>
