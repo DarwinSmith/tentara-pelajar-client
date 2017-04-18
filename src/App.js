@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { refreshLoggedInData } from './actions'
+import { refreshLoggedInData, fetchProfile } from './actions'
 import Login from './components/Login/Index.js'
 import Dashboard from './components/dashboards'
 import Profile from './components/profiles'
@@ -50,6 +50,8 @@ class App extends Component {
     //   this.props.refreshLoggedInData()
     //   console.log(this.props.loggedIn)
     // }
+    this.props.fetchProfile()
+
   }
   render () {
     return (
@@ -57,7 +59,7 @@ class App extends Component {
         <div>
           <Route exact path='/' component={Dashboard} />
           <Route path='/login' component={Login} />
-          <Route path='/profile' component={Profile} />
+          <Route path='/profile/:id' component={Profile} />
           <Route path='/gallery' component={Gallery} />
           <Route path='/logout' component={Logout} />
           <Route path='/setting' component={Setting} />
@@ -69,7 +71,7 @@ class App extends Component {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ refreshLoggedInData }, dispatch)
+  return bindActionCreators({ refreshLoggedInData, fetchProfile }, dispatch)
 }
 
 function mapStateToProps (state) {
