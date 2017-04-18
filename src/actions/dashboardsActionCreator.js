@@ -8,7 +8,7 @@ export const getTimelines = profileId => dispatch => {
         timelines: response.data.timelines
       })
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err.message))
 }
 
 export const createPost = (profileId, contents) => dispatch => {
@@ -28,5 +28,5 @@ export const createPost = (profileId, contents) => dispatch => {
         })
         .catch(err => console.error(err.message))
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err.message))
 }

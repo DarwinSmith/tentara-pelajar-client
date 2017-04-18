@@ -1,6 +1,3 @@
-/**
- * Created by lightmitch on 4/13/17.
- */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Timeline from './Timeline'
