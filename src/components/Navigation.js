@@ -82,7 +82,7 @@ class Navigation extends Component {
 
               <Link to={'/'} className='nav-item is-tab is-hidden-mobile is-active' style={{color: 'black'}}>Home</Link>
 
-              <Link className='nav-item is-tab is-hidden-mobile' to={'/profile'}>
+              <Link className='nav-item is-tab is-hidden-mobile' to={'/profile/'+this.userId}>
                 <figure className='image is-16x16' >
                   <img src='http://bulma.io/images/jgthms.png' alt='profilepicture' />
                 </figure>
@@ -113,7 +113,7 @@ class Navigation extends Component {
             </div>
           </div>
         </nav>
-        <progress className='progress is-small is-success' value='100' max='100'>100%</progress>
+        <progress className='progress is-small is-warning' value={this.state.isLoading} max='1000'>{this.state.isLoading}</progress>
       </div>
     )
   }
