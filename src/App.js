@@ -65,7 +65,6 @@ class App extends Component {
           <Route path='/gallery' component={Gallery} />
           <Route path='/logout' component={Logout} />
           <Route path='/setting' component={Setting} />
-          <Route path='/chat' component={Chat} />
           {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
       </Router>

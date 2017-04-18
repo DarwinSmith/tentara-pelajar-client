@@ -94,7 +94,7 @@ class Navigation extends Component {
               <Link className='nav-item is-tab is-hidden-mobile' to='/gallery'>
                 Gallery
               </Link>
-              <Link className='nav-item is-tab is-hidden-mobile' to='/gallery'>
+              <Link className='nav-item is-tab is-hidden-mobile' to='/chat'>
                 <span className='icon' style={{color: 'black'}}>
                   <i className='fa fa-comments-o'></i>
                 </span>
