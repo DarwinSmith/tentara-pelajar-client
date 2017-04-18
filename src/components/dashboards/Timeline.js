@@ -8,6 +8,7 @@ import axios from 'axios'
 import './style.css'
 import moment from 'moment'
 import PostComments from './PostComments'
+import Reaction from './Reaction'
 
 class Timeline extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Timeline extends Component {
       displayComments: false,
       commentsCount: 0
     }
+    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
     this.handleScroll = this.handleScroll.bind(this)
   }
   componentDidMount() {
@@ -46,7 +48,15 @@ class Timeline extends Component {
     })
   }
 
+
   render() {
+    let emoji = [
+      'like',
+      'love',
+      'smile',
+      'sad'
+    ]
+
     return (
       <div className="timeline" onScroll={(e) => this.handleScroll(e)}>
         <div className="card">
@@ -78,35 +88,21 @@ class Timeline extends Component {
             : ''
           }
           <hr/>
+          <div className="post-options">
             <div className="reactions">
-              <span className="reaction">
-                <a><i className="fa fa-thumbs-up"></i></a>
-              </span>
-              <span className="reaction">
-                <a><i className="fa fa-heart"></i></a>
-              </span>
-              <span className="reaction">
-                <a><i className="fa fa-smile-o"></i></a>
-              </span>
-              <span className="reaction">
-                <a><i className="fa fa-frown-o"></i></a>
-              </span>
-              <span className="is-pulled-right commentPostButton">
-                <a onClick={this._displayComments.bind(this)}>({this.state.commentsCount})Comments</a>
-              </span>
+              {emoji.map(emo => <Reaction postId={this.props.timeline.id} emoji={emo}/>)}
             </div>
+            <span className="is-pulled-right commentPostButton">
+             <a className="button is-link" onClick={this._displayComments.bind(this)}>Balasan</a>
+            </span>
+          </div>
             {
               this.state.displayComments
                 ? <div className="card-content">
-                    {
-                      this.state.commentsCount
-                        ?
-                          <div>
-                            <PostComments postId={this.props.timeline.id}/>
-                          </div>
-                        : <small>Maaf kamu belum mempunyai komen sama sekali :( </small>
-                    }
-                    <input className="input is-primary" type="text"/>
+                    <PostComments
+                      postId={this.props.timeline.id}
+                      profileId={this.props.timeline.profile.id}
+                    />
                   </div>
                 : ''
             }

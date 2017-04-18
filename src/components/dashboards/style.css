@@ -18,7 +18,9 @@
 
 .commentItem {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  background: #dad7d6;
 }
 
 .small-text {
@@ -101,6 +103,10 @@
     margin-top: 10px;
 }
 
+.post-options {
+  display: flex;
+}
+
 .reaction {
   padding: 5px;
 }
@@ -150,14 +156,12 @@
   transition: width 500ms ease-in, height 500ms ease-out;
 }
 .dashboards-appear {
-  margin-top: -21px;
   opacity: 0.01;
 }
 
 .dashboards-appear.dashboards-appear-active {
   opacity: 1;
-  margin-top: -1px;
-  transition: margin-top 1s ease-in, opacity 1s ease-in;
+  transition: opacity 1s ease-in;
 }
 
 @media screen and (min-width: 780px){
