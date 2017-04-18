@@ -12,9 +12,9 @@ export const getProfile = data => {
 
 export const fetchProfile = () => {
   return (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem('userDetail')).uid
     const email = JSON.parse(localStorage.getItem('userDetail')).email
-    axios.get(`${URL}/profiles/findOne?filter[where][userId]=${userId}`)
+    const userId = JSON.parse(localStorage.getItem('userProfile')).id
+    axios.get(`${URL}/profiles/${userId}`)
     .then(result => {
       const data = Object.assign({}, result.data, {email:email})
       dispatch(getProfile(data))

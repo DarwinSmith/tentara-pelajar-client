@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
-import { fetchProfile, patchProfile } from '../../actions'
+import { fetchProfile, patchProfile, fetchSkills, removeSkills, postSkills, fetchPersonalities, removePersonalities, postPersonalities } from '../../actions'
 import Navigation from '../Navigation'
 import './setting.css'
 
@@ -16,7 +16,6 @@ class Setting extends Component {
         name: false,
         phone: false,
         school: false,
-        personalities: false,
         activities: false,
         achievement: false,
         email: false,
@@ -27,6 +26,8 @@ class Setting extends Component {
 
   componentDidMount() {
     this.props.fetchProfile()
+    this.props.fetchSkills()
+    this.props.fetchPersonalities()
 
   }
   componentWillReceiveProps(nextProps) {
@@ -42,7 +43,9 @@ class Setting extends Component {
       },
       account: {
         password: "********"
-      }
+      },
+      skills: '',
+      personalities: ''
     })
   }
 
@@ -80,7 +83,7 @@ class Setting extends Component {
         transitionAppearTimeout={1000}
         transitionEnter={false}
         transitionLeave={false} >
-        <div style={{marginTop:"3%"}}>
+        <div>
           <div className="columns">
             <div className="column is-12">
               <div className="card">
@@ -168,28 +171,6 @@ class Setting extends Component {
                         : this.state.profile.school
                         }
                         <hr/>
-
-                        <label className="label">Personalities</label>
-                        {
-                          this.state.isEdit.personalities
-                          ? <a href="#" onClick={e => this._saveEdit(e, 'personalities')}>
-                              <span className="icon">
-                                <i className="fa fa-save"></i>
-                              </span>
-                            </a>
-                          : <a href="#" onClick={e => this._editTrigger(e, 'personalities')}>
-                              <span className="icon">
-                                <i className="fa fa-edit"></i>
-                              </span>
-                            </a>
-                        }
-                        {
-                          this.state.isEdit.personalities
-                          ? <input className="input" type="text" placeholder={this.state.profile.personalities} onChange={(event)=> this.setState({editProfile:{personalities:event.target.value}})} />
-                        : this.state.profile.personalities
-                        }
-                        <hr/>
-
                         <label className="label">Aktivitas</label>
                         {
                           this.state.isEdit.activities
@@ -235,7 +216,75 @@ class Setting extends Component {
                   </div>
                 </article>
               </div>
-
+              <div className="card">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
+                      <h4>
+                        Endorsement
+                      </h4>
+                      <div className="field">
+                        <label className="label">Personalities</label>
+                          <input className="input" type="text" onChange={(event)=> this.setState({personalities:event.target.value})} />
+                          <a href="#" onClick={e => this.props.postPersonalities(this.state.personalities)}>
+                            <span className="icon">
+                              <i className="fa fa-save"></i>
+                            </span>
+                          </a>
+                          <br />
+                            {
+                              this.props.personalities.length === 0 ?
+                              <img style={{width:"3%"}} src={require("../../assets/image/loading.gif")} alt="Loading" /> :
+                                <div>
+                                  {
+                                    this.props.personalities.map((value, index) => (
+                                      <div className="chip" key={index}>
+                                        <p>{value.content}</p>
+                                        <a href="#" onClick={e => this.props.removePersonalities(value.id)}>
+                                          <span className="icon">
+                                            <i className="fa fa-remove"></i>
+                                          </span>
+                                        </a>
+                                      </div>
+                                    ))
+                                  }
+                                </div>
+                            }
+                        <hr/>
+                        <label className="label">Skills</label>
+                          <input className="input" type="text" onChange={(event)=> this.setState({skills:event.target.value})} />
+                          <a href="#" onClick={() => this.props.postSkills(this.state.skills)}>
+                            <span className="icon">
+                              <i className="fa fa-save"></i>
+                            </span>
+                          </a>
+                        <br />
+                          {
+                            this.props.skills.length === 0 ?
+                            <img style={{width:"3%"}} src={require("../../assets/image/loading.gif")} alt="Loading" /> :
+                              <div>
+                                {
+                                  this.props.skills.map((value, index) => (
+                                    <div className="chip" key={index}>
+                                      <p>{value.name}</p>
+                                      <span className="icon">
+                                        <i className={value.icon}></i>
+                                      </span>
+                                      <a href="#" onClick={() => this.props.removeSkills(value.id)}>
+                                        <span className="icon">
+                                          <i className="fa fa-remove"></i>
+                                        </span>
+                                      </a>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
               <div className="card">
                 <article className="media">
                   <div className="media-content">
@@ -276,14 +325,22 @@ class Setting extends Component {
 const mapStateToProps = (state) => {
   return{
     loggedIn : state.loggedIn,
-    profile : state.profile
+    profile : state.profile,
+    skills: state.skills,
+    personalities: state.personalities
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return{
     fetchProfile : () => dispatch(fetchProfile()),
-    patchProfile : (data) => dispatch(patchProfile(data))
+    patchProfile : (data) => dispatch(patchProfile(data)),
+    fetchSkills : () => dispatch(fetchSkills()),
+    removeSkills: (skillId) => dispatch(removeSkills(skillId)),
+    postSkills: (skill) => dispatch(postSkills(skill)),
+    fetchPersonalities : () => dispatch(fetchPersonalities()),
+    removePersonalities: (personalitiesId) => dispatch(removePersonalities(personalitiesId)),
+    postPersonalities: (personalities) => dispatch(postPersonalities(personalities))
   }
 }
 

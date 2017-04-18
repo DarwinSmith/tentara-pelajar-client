@@ -2,9 +2,11 @@ import * as ActionTypes from '../constants'
 import firebase from 'firebase'
 import axios from 'axios'
 import { getPhotos, getPhoto, deletePhoto, postPhoto } from './galleryActionCreator'
-import { patchProfile, fetchProfile } from './profileActionCreator'
+import { fetchSkills, endorseSkills, postSkills, removeSkills } from './skillsActionCreator'
+import { fetchPersonalities, endorsePersonalities, postPersonalities, removePersonalities } from './personalitiesActionCreator'
+import { patchProfile, fetchProfile } from './updateActionCreator'
 import { createPost, getTimelines } from './dashboardsActionCreator'
-export { createPost, getTimelines, getPhotos, getPhoto, deletePhoto, postPhoto, patchProfile, fetchProfile }
+export { fetchPersonalities, endorsePersonalities, postPersonalities, removePersonalities, fetchSkills, endorseSkills, postSkills, removeSkills, createPost, getTimelines, getPhotos, getPhoto, deletePhoto, postPhoto, patchProfile, fetchProfile }
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
 const URL = 'http://localhost:3001/api'
 
