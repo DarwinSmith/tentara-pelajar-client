@@ -41,9 +41,9 @@ class Timeline extends Component {
               </div>
               <div className="media-content">
                 <p className="title is-4">{this.props.timeline.profile.fullname}</p>
-                <p className="subtitle is-6">Seorang pelajar yang namanya pasaran</p>
+                <p className="subtitle is-6"><small>{moment(this.props.timeline.createdAt).fromNow()}</small></p>
               </div>
-              <small>{moment(this.props.timeline.createdAt).fromNow()}</small>
+
             </div>
 
             <div className="content">
