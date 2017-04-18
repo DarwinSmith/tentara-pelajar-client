@@ -14,24 +14,43 @@ class Reaction extends Component {
   }
 
   componentDidMount() {
-
+    this._countAppreciator()
   }
 
   _getAppreciator() {
-
+    axios.get(`http://localhost:3001/api/reactions/count?where[profileId]=4&where[postId]=36`)
   }
 
   _countAppreciator() {
-    axios.get()
+    axios.get(`http://localhost:3001/api/reactions/count?where[emoji]=${this.props.emoji}&where[postId]=${this.props.postId}`)
+      .then(res => {
+        this.setState({
+          appreciatorCount: res.data.count
+        })
+      })
+      .catch(err => console.error(err))
   }
 
   _reactTo() {
-    axios.post(`http://localhost:3001/api/posts/${this.props.postId}/reactions`, {
-      profileId: this.userProfile.id,
-      emoji: this.props.emoji
-    })
-      .then(response => {
+    axios.get(`http://localhost:3001/api/reactions/count?where[profileId]=${this.userProfile.id}&where[postId]=${this.props.postId}`)
+      .then(res => {
+        if (res.data.count == 0) {
+          axios.post(`http://localhost:3001/api/posts/${this.props.postId}/reactions`, {
+            profileId: this.userProfile.id,
+            emoji: this.props.emoji
+          })
+            .then(response => {
+              this.setState({
+                appreciatorCount: this.state.appreciatorCount + 1
+              })
 
+            })
+            .catch(err => console.error(err))
+        } else if (res.data.count == 1) {
+          axios.delete(`http://localhost:3001/api/http`)
+        } else {
+          alert('You cannot react')
+        }
       })
       .catch(err => console.error(err))
   }
@@ -40,16 +59,16 @@ class Reaction extends Component {
     let emoji
     switch (this.props.emoji) {
       case 'like':
-        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-thumbs-up"></i></a>
+        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-thumbs-up"></i>{this.state.appreciatorCount == 0 ? '' : this.state.appreciatorCount}</a>
         break
       case 'love':
-        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-heart"></i></a>
+        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-heart"></i>{this.state.appreciatorCount == 0 ? '' : this.state.appreciatorCount}</a>
         break
       case 'smile':
-        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-smile-o"></i></a>
+        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-smile-o"></i>{this.state.appreciatorCount == 0 ? '' : this.state.appreciatorCount}</a>
         break
       case 'sad':
-        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-frown-o"></i></a>
+        emoji = <a onClick={this._reactTo.bind(this)}><i className="fa fa-frown-o"></i>{this.state.appreciatorCount == 0 ? '' : this.state.appreciatorCount}</a>
         break
     }
     return (
