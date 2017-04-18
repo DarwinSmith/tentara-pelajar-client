@@ -118,4 +118,3 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default connect(null, null)(Timeline)
-

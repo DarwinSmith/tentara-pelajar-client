@@ -10,6 +10,7 @@ import Profile from './components/profiles'
 import Gallery from './components/Gallery/Index.js'
 import Logout from './components/Logout'
 import Setting from './components/setting'
+import Chat from './components/Chat'
 import './App.css'
 
 const checkAuth = () => {
@@ -58,6 +59,7 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path='/' component={Dashboard} />
+          <Route path='/chat' component={Chat} />
           <Route path='/login' component={Login} />
           <Route path='/profile/:id' component={Profile} />
           <Route path='/gallery' component={Gallery} />
