@@ -80,7 +80,7 @@ class Setting extends Component {
         transitionAppearTimeout={1000}
         transitionEnter={false}
         transitionLeave={false} >
-        <div style={{marginTop:"3%"}}>
+        <div>
           <div className="columns">
             <div className="column is-12">
               <div className="card">

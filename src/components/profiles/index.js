@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-import axios from 'axios'
-axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
-const URL = 'http://localhost:3001/api'
-import './profile.css'
-import Navigation from '../Navigation'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { connect } from 'react-redux';
+import axios from 'axios';
+axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
+const URL = 'http://localhost:3001/api';
+import './profile.css';
+import Navigation from '../Navigation';
 
 class Profile extends Component {
   constructor () {
@@ -15,21 +16,22 @@ class Profile extends Component {
     }
   }
   componentDidMount () {
-    let profileData = JSON.parse(window.localStorage.getItem('userProfile'))
-    axios.get(`${URL}/profiles/${profileData.id}/skills`)
-    .then(skill => {
-      this.setState({skill: skill.data})
-    })
-    .catch(err => {
-      console.log(err)
-    })
-    axios.get(`${URL}/profiles/${profileData.id}/personalities`)
-    .then(personalities => {
-      this.setState({personalities: personalities.data})
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    console.log(this.props);
+    // let profileData = JSON.parse(window.localStorage.getItem('userProfile'))
+    // axios.get(`${URL}/profiles/${profileData.id}/skills`)
+    // .then(skill => {
+    //   this.setState({skill: skill.data})
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
+    // axios.get(`${URL}/profiles/${profileData.id}/personalities`)
+    // .then(personalities => {
+    //   this.setState({personalities: personalities.data})
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   }
   render () {
     return (
@@ -41,7 +43,7 @@ class Profile extends Component {
           transitionAppearTimeout={1000}
           transitionEnter={false}
           transitionLeave={false} >
-        <div style={{marginTop:"3%"}}>
+        <div>
           <div className="columns">
             <div className="column is-three-quarters">
               <div className="card">
@@ -52,15 +54,15 @@ class Profile extends Component {
                         Tentang Saya
                       </h5>
                       <div className='card-image'>
-                        <figure className='image is-128x128'>
-                          <img src='https://unsplash.it/128/128/?random' alt='photos'/>
+                        <figure style={{display: 'block', margin: 'auto'}} className='image is-128x128'>
+                          <img style={{borderRadius: 100, widht: 128, height: 128}} src='https://unsplash.it/128/128/?random' alt='photos'/>
                         </figure>
                       </div>
 
                       <ul>
-                        <li>Nama Lengkap: </li>
-                        <li>Sekolah: </li>
-                        <li>Telepon: </li>
+                        <li>Nama Lengkap : {this.props.profile.fullname} </li>
+                        <li>Sekolah      : {this.props.profile.school}</li>
+                        <li>Telepon      : {this.props.profile.phone}</li>
                       </ul>
                     </div>
                   </div>
@@ -93,8 +95,8 @@ class Profile extends Component {
                                         Penghargaan
                                       </h5>
                                       <ul>
-                                        <li>Juara 1 Lomba Matematika</li>
-                                        <li>Juara 1 Lomba Fisika</li>
+                                        <li>{this.props.profile.experience}</li>
+                                        <li>{this.props.profile.experience}</li>
                                       </ul>
                                     </div>
                                   </div>
@@ -111,8 +113,8 @@ class Profile extends Component {
                                         Penghargaan
                                       </h5>
                                       <ul>
-                                        <li>Juara 1 Lomba Matematika</li>
-                                        <li>Juara 1 Lomba Fisika</li>
+                                        <li>{this.props.profile.experience}</li>
+                                        <li>{this.props.profile.experience}</li>
                                       </ul>
                                     </div>
                                   </div>
@@ -224,8 +226,8 @@ class Profile extends Component {
                         Penghargaan
                       </h5>
                       <ul>
-                        <li>Juara 1 Lomba Matematika</li>
-                        <li>Juara 1 Lomba Fisika</li>
+                        <li>{this.props.profile.experience}</li>
+                        <li>{this.props.profile.experience}</li>
                       </ul>
                     </div>
                   </div>
@@ -240,8 +242,8 @@ class Profile extends Component {
                         Aktivitas
                       </h5>
                       <ul>
-                        <li>Ketua OSIS</li>
-                        <li>Ekskul Rohis</li>
+                        <li>{this.props.profile.activity}</li>
+                        <li>{this.props.profile.activity}</li>
                       </ul>
                     </div>
                   </div>
@@ -259,4 +261,10 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return{
+    profile: state.profile,
+  }
+}
+
+export default connect(mapStateToProps, null)(Profile);

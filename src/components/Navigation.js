@@ -12,7 +12,8 @@ class Navigation extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      notificationCount: 0
+      notificationCount: 0,
+      isLoading: 0
     }
     this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
   }
@@ -28,6 +29,12 @@ class Navigation extends Component {
     .catch(err => {
       console.log(err)
     })
+
+    for(const i=0; i<1000; i++){
+      this.setState({
+        isLoading: i
+      })
+    }
   }
 
   render () {
@@ -80,7 +87,7 @@ class Navigation extends Component {
             </div>
           </div>
         </nav>
-        <progress className='progress is-small is-success' value='100' max='100'>100%</progress>
+        <progress className='progress is-small is-warning' value={this.state.isLoading} max='1000'>{this.state.isLoading}</progress>
       </div>
     )
   }
