@@ -4,18 +4,31 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import axios from 'axios'
 import './style.css'
+import moment from 'moment'
+import PostComments from './PostComments'
 
 class Timeline extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      transform: 'nama'
+      transform: 'nama',
+      displayComments: false,
+      commentsCount: 0
     }
     this.handleScroll = this.handleScroll.bind(this)
   }
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll)
+
+    axios.get(`http://localhost:3001/api/posts/${this.props.timeline.id}/comments/count`)
+      .then(response => {
+        this.setState({
+          commentsCount: response.data.count
+        })
+      })
+      .catch(err => console.error(err))
   }
 
   componentWillUnmount() {
@@ -25,6 +38,12 @@ class Timeline extends Component {
   handleScroll(event) {
     let scrollTop = event.srcElement.body.scrollTop
 
+  }
+
+  _displayComments() {
+    this.setState({
+      displayComments: !this.state.displayComments
+    })
   }
 
   render() {
@@ -39,15 +58,14 @@ class Timeline extends Component {
                 </figure>
               </div>
               <div className="media-content">
-                <p className="title is-4">John Smith</p>
-                <p className="subtitle is-6">Seorang pelajar yang namanya pasaran</p>
+                <p className="title is-4">{this.props.timeline.profile.fullname}</p>
+                <p className="subtitle is-6"><small>{moment(this.props.timeline.createdAt).fromNow()}</small></p>
               </div>
             </div>
 
             <div className="content">
               {this.props.timeline.content}
               <br/>
-              <small>{this.props.timeline.createdAt}</small>
             </div>
           </div>
           {
@@ -73,7 +91,25 @@ class Timeline extends Component {
               <span className="reaction">
                 <a><i className="fa fa-frown-o"></i></a>
               </span>
+              <span className="is-pulled-right commentPostButton">
+                <a onClick={this._displayComments.bind(this)}>({this.state.commentsCount})Comments</a>
+              </span>
             </div>
+            {
+              this.state.displayComments
+                ? <div className="card-content">
+                    {
+                      this.state.commentsCount
+                        ?
+                          <div>
+                            <PostComments postId={this.props.timeline.id}/>
+                          </div>
+                        : <small>Maaf kamu belum mempunyai komen sama sekali :( </small>
+                    }
+                    <input className="input is-primary" type="text"/>
+                  </div>
+                : ''
+            }
         </div>
       </div>
     )

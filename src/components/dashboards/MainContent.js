@@ -1,6 +1,3 @@
-/**
- * Created by lightmitch on 4/13/17.
- */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Timeline from './Timeline'
@@ -20,7 +17,6 @@ class MainContent extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="column is-6">
         <Posting/>

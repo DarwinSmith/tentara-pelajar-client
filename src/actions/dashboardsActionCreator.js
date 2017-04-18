@@ -8,7 +8,7 @@ export const getTimelines = profileId => dispatch => {
         timelines: response.data.timelines
       })
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err.message))
 }
 
 export const createPost = (profileId, contents) => dispatch => {
@@ -18,10 +18,15 @@ export const createPost = (profileId, contents) => dispatch => {
     }
   )
     .then(response => {
-      dispatch({
-        type: 'CREATE_POST',
-        newPost: response.data
-      })
+      let postId = response.data.id
+      axios.get(`http://localhost:3001/api/posts/${postId}?filter[include]=profile`)
+        .then(res => {
+          dispatch({
+            type: 'CREATE_POST',
+            newPost: res.data
+          })
+        })
+        .catch(err => console.error(err.message))
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err.message))
 }
