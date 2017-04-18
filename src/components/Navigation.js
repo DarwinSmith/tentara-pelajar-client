@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-
 import './Navigation.css'
 import { Link } from 'react-router-dom'
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
@@ -16,6 +15,7 @@ class Navigation extends Component {
       searchInput: '',
       userProfile: JSON.parse(window.localStorage.getItem('userProfile'))
     }
+    this.userId = JSON.parse(window.localStorage.getItem('userProfile')).id
   }
 
   componentDidMount () {
@@ -93,6 +93,11 @@ class Navigation extends Component {
               {/*</a>*/}
               <Link className='nav-item is-tab is-hidden-mobile' to='/gallery'>
                 Gallery
+              </Link>
+              <Link className='nav-item is-tab is-hidden-mobile' to='/gallery'>
+                <span className='icon' style={{color: 'black'}}>
+                  <i className='fa fa-comments-o'></i>
+                </span>
               </Link>
               <a className='nav-item is-tab is-hidden-mobile level-item' style={{color: 'black'}}>
                 <span className='icon'>
