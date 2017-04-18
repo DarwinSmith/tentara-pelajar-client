@@ -5,6 +5,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './style.css'
+import moment from 'moment'
 
 class Timeline extends Component {
   constructor(props) {
@@ -39,15 +40,15 @@ class Timeline extends Component {
                 </figure>
               </div>
               <div className="media-content">
-                <p className="title is-4">John Smith</p>
+                <p className="title is-4">{this.props.timeline.profile.fullname}</p>
                 <p className="subtitle is-6">Seorang pelajar yang namanya pasaran</p>
               </div>
+              <small>{moment(this.props.timeline.createdAt).fromNow()}</small>
             </div>
 
             <div className="content">
               {this.props.timeline.content}
               <br/>
-              <small>{this.props.timeline.createdAt}</small>
             </div>
           </div>
           {
