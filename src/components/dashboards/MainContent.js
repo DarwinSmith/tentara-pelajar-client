@@ -20,7 +20,6 @@ class MainContent extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="column is-6">
         <Posting/>

@@ -92,7 +92,11 @@
     margin-top: 10px;
 }
 
-.reactions {
+.reaction {
+  padding: 5px;
+}
+
+.reactions i {
     text-align: left;
     font-size: 28px;
 }
