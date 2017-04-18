@@ -12,6 +12,15 @@
   color: #fff;
 }
 
+.postCommentsContainer {
+  background: #0BCBD6;
+}
+
+.commentItem {
+  display: flex;
+  justify-content: space-between;
+}
+
 .small-text {
   font-size: 12px;
 }
