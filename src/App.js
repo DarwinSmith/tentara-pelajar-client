@@ -48,7 +48,9 @@ class App extends Component {
     this.state = {
       redirectLogin: false
     }
+    this.loggedIn
   }
+
   componentDidMount () {
     // if (!(window.localStorage.getItem('token') !== null || window.localStorage.getItem('token') !== '')) {
     //   this.props.refreshLoggedInData()
@@ -60,9 +62,8 @@ class App extends Component {
   render () {
     return (
       <Router>
-
         <div>
-          <Navigation/>
+          {checkAuth() ? <Navigation/> : ''}
           <Route exact path='/' component={Dashboard} />
           {/*<Route path='/upload' component={Upload} />*/}
           <Route path='/chat' component={Chat} />

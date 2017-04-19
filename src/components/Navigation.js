@@ -27,7 +27,6 @@ class Navigation extends Component {
     let src = new window.EventSource(URLNotification)
     src.addEventListener('data', (msg) => {
       let data = JSON.parse(msg.data).data
-      console.log(data)
       if (data.profileId === id) {
         this.setState({ notificationCount: this.state.notificationCount + 1 })
       }
@@ -35,7 +34,6 @@ class Navigation extends Component {
 
     axios.get(`${URL}/profiles/${id}/notifications/count`)
     .then(data => {
-      console.log('count notifications', data.data.count)
       this.setState({
         notificationCount: data.data.count
       })
