@@ -4,6 +4,11 @@
   /*margin-left: 20px;*/
 /*}*/
 
+.profile-container {
+  width: 800px;
+  background: #ff0000;
+}
+
 #sidebar {
   margin-right: 20px;
 }

@@ -5,7 +5,7 @@ const URL = 'http://localhost:3001/api'
 
 export const fetchPersonalities = () => {
   return (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem('userProfile')).id
+    // const userId = JSON.parse(localStorage.getItem('userProfile')).id
     axios.get(`${URL}/profiles/1/personalities`)
     .then(result => {
       dispatch(getPersonalities(result.data))

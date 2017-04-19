@@ -33,7 +33,7 @@ class PostCommentItem extends Component {
             }
           >
             <img src="" alt=""/>
-            <Link to={'#'} className="button is-link">{this.props.comment.profile.fullname}</Link>
+            <Link to={`/profile/${this.props.comment.profileId}`} className="button is-link">{this.props.comment.profile.fullname}</Link>
           </div>
           <div
             style={

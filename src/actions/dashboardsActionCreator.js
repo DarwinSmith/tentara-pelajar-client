@@ -3,7 +3,6 @@ import axios from 'axios'
 export const getTimelines = profileId => dispatch => {
   axios.get(`http://localhost:3001/api/profiles/${profileId}/timelines`)
     .then(response => {
-      console.log('sds', response.data.timelines);
       dispatch({
         type: 'GET_TIMELINES',
         timelines: response.data.timelines

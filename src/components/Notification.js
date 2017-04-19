@@ -1,5 +1,5 @@
 import React from 'react'
-
+import axios from 'axios'
 import './Notification.css'
 
 class Notification extends React.Component {
@@ -14,6 +14,14 @@ class Notification extends React.Component {
     if (nextProps.showNotif !== this.state.showNotif) {
       this.setState({showNotif: !this.state.showNotif})
     }
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3001/api/profiles/${this.props.profileId}/notifications`)
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(err => console.error(err))
   }
 
   render () {

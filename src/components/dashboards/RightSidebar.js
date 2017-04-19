@@ -14,22 +14,6 @@ class RightSidebar extends Component {
               <h1>Sugesti Teman</h1>
             </div>
           </div>
-          <div className="friend-suggestion-card smp-color">
-            <img className="" src="https://unsplash.it/200/300/?random" alt=""/>
-            <span>
-              <p>Irwin Pratajaya</p>
-              <p className="small-text">SMP serius</p>
-            </span>
-            <a href="#" className="button is-info"><i className="fa fa-user-plus"/></a>
-          </div>
-          <div className="friend-suggestion-card sma-color">
-            <img className="" src="https://unsplash.it/200/300/?random" alt=""/>
-            <span>
-              <p>Irwin Pratajaya</p>
-              <p className="small-text">SMA serius</p>
-            </span>
-            <a href="#" className="button is-info"><i className="fa fa-user-plus"/></a>
-          </div>
           <div className="friend-suggestion-card sd-color">
             <img className="" src="https://unsplash.it/200/300/?random" alt=""/>
             <span>

@@ -45,12 +45,10 @@ export const deleteSkills = data => {
 }
 
 export const postSkills = (data) => {
-  console.log(data);
   return (dispatch) => {
     const userId = JSON.parse(localStorage.getItem('userProfile')).id
     axios.post(`${URL}/profiles/${userId}/skills`, {name: data, icon: "fa fa-star-half-o"})
     .then(result => {
-      console.log('masuk sini');
       dispatch(createSkills(result.data))
     })
     .catch(error => {
@@ -69,7 +67,6 @@ export const createSkills = data => {
 export const endorseSkills = (data) => {
   return (dispatch) => {
     const userId = JSON.parse(localStorage.getItem('userProfile')).id
-    console.log(userId);
       axios.patch(`${URL}/profiles/${userId}`, data)
     .then(result => {
       dispatch(updateSkills(result.data))

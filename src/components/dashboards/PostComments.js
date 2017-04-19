@@ -25,7 +25,8 @@ class PostComments extends Component {
 
   _commentOnPost(event) {
     if (event.key === 'Enter') {
-      axios.post(`http://localhost:3001/api/posts/${this.props.postId}/comments`, {
+      axios.post(`http://localhost:3001/api/comments`, {
+        postId: this.props.postId,
         profileId: this.userProfile.id,
         friendId: this.props.profileId,
         content: event.target.value

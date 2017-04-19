@@ -35,8 +35,9 @@ class Reaction extends Component {
     axios.get(`http://localhost:3001/api/reactions/count?where[profileId]=${this.userProfile.id}&where[postId]=${this.props.postId}`)
       .then(res => {
         if (res.data.count == 0) {
-          axios.post(`http://localhost:3001/api/posts/${this.props.postId}/reactions`, {
+          axios.post(`http://localhost:3001/api/reactions`, {
             profileId: this.userProfile.id,
+            postId: this.props.postId,
             emoji: this.props.emoji
           })
             .then(response => {
