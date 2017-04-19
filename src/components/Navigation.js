@@ -3,6 +3,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import './Navigation.css'
 import { Link } from 'react-router-dom'
+import Notifications from './Notification.js'
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
 const URL = 'http://localhost:3001/api'
 
@@ -12,6 +13,7 @@ class Navigation extends Component {
     super(props)
     this.state = {
       notificationCount: 0,
+      showNotif: true,
       searchInput: '',
       userProfile: JSON.parse(window.localStorage.getItem('userProfile'))
     }
@@ -20,8 +22,19 @@ class Navigation extends Component {
 
   componentDidMount () {
     const id = this.state.userProfile.id
+
+    let URLNotification = `${URL}/notifications/change-stream?_format=event-stream`
+    let src = new window.EventSource(URLNotification)
+    src.addEventListener('data', (msg) => {
+      let data = JSON.parse(msg.data).data
+      if (data.profileId === id) {
+        this.setState({ notificationCount: this.state.notificationCount + 1 })
+      }
+    })
+
     axios.get(`${URL}/profiles/${id}/notifications/count`)
     .then(data => {
+      console.log('count notifications', data.data.count)
       this.setState({
         notificationCount: data.data.count
       })
@@ -55,6 +68,9 @@ class Navigation extends Component {
       // Redirect to search page.
       console.log('enter fired')
     }
+  }
+  handleNotif () {
+    this.setState({showNotif: !this.state.showNotif})
   }
 
   render () {
@@ -99,8 +115,9 @@ class Navigation extends Component {
                   <i className='fa fa-comments-o'></i>
                 </span>
               </Link>
-              <a className='nav-item is-tab is-hidden-mobile level-item' style={{color: 'black'}}>
-                <span className='icon'>
+              <a onClick={this.handleNotif.bind(this)} className='nav-item is-tab is-hidden-mobile level-item' style={{color: 'black'}}>
+                <span className='icon' style={{position: 'relative'}}>
+                  <Notifications showNotif={this.state.showNotif} profileId={this.state.userProfile.id} />
                   <i className='fa fa-bell'></i>
                 </span>
               </a>

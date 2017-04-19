@@ -11,6 +11,8 @@ import Gallery from './components/Gallery/Index.js'
 import Logout from './components/Logout'
 import Setting from './components/setting'
 import Chat from './components/Chat'
+import Upload from './components/Upload2'
+import Notifications from './components/Notification'
 import './App.css'
 
 const checkAuth = () => {
@@ -59,12 +61,14 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path='/' component={Dashboard} />
+          <Route path='/upload' component={Upload} />
           <Route path='/chat' component={Chat} />
           <Route path='/login' component={Login} />
           <Route path='/profile/:id' component={Profile} />
           <Route path='/gallery' component={Gallery} />
           <Route path='/logout' component={Logout} />
           <Route path='/setting' component={Setting} />
+          <Route path='/notifications' component={Notifications} />
           {/*<PrivateRoute path='/' component={Dashboard} />*/}
         </div>
       </Router>
