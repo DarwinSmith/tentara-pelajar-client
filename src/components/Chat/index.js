@@ -1,13 +1,14 @@
 import React from 'react'
-import firebase from 'firebase'
-import axios from 'axios'
 import Navigation from '../Navigation'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-
+import firebase from 'firebase'
+import axios from 'axios'
 const URL = 'http://localhost:3001/api'
 const profile = JSON.parse(window.localStorage.getItem('userProfile'))
+import './styles.css'
 
 class Chat extends React.Component {
+
   constructor () {
     super()
     this.state = {
@@ -73,7 +74,7 @@ class Chat extends React.Component {
 
   render () {
     return (
-      <div className="">
+      <div className="chat-page">
         <Navigation />
         <CSSTransitionGroup
           transitionName="dashboards"
@@ -81,46 +82,75 @@ class Chat extends React.Component {
           transitionAppearTimeout={1000}
           transitionEnter={false}
           transitionLeave={false} >
-      <div>
-        <h2>Chat ..</h2>
-        <h2>Fren List</h2>
-        <ul>
-          {
-            this.state.friendList === ''
-            ? <p>Loading Coegg</p>
-            : this.state.friendList.map(friend => {
-              return <li key={friend.id} onClick={this.handleFriendChat.bind(this, friend)}>{friend.fullname}</li>
-            })
-          }
-        </ul>
-        You are having chat with :
-        {
-          this.state.friendChat === ''
-          ? <p>Please pick your friend from friend list</p>
-          : <p>
-            {this.state.friendChat.fullname}
-            Chat : <input type='text' name='chat' onChange={this.handleChatChange.bind(this)} />
-            <button onClick={this.handleChatData.bind(this)}>Send</button>
-          </p>
-        }
-        <p>Chat Historeee...</p>
-        <ul>
-          {
-            this.state.chatHistory === ''
-            ? <p>Start your chet</p>
-            : this.state.chatHistory.map(chat => {
-              if (profile[chat.userId] === null) {
-                return <li key={chat.date}><strong>Reply from {this.state.friendChat[chat.userId]}{chat.chat}</strong><span>{chat.date}</span></li>
-              } else {
-                return <li key={chat.date}><strong>You Sent {profile[chat.userId]}{chat.chat}</strong><span>{chat.date}</span></li>
-              }
-            })
-          }
-        </ul>
-
+        <div className="wrapper columns">
+          <div className="kotak ">
+              <div className="left">
+                  <div className="top">
+                      <input type="text" />
+                      <a href="javascript:;" className="search"></a>
+                  </div>
+                  <ul className="people">
+                    {
+                      this.state.friendList === ''
+                      ? <img style={{width:"3%"}} src={require("../../assets/image/loading.gif")} alt="Loading" />
+                      : this.state.friendList.map(friend => {
+                        return (
+                          <li key={friend.id} onClick={this.handleFriendChat.bind(this, friend)} className="person" data-chat="person1">
+                              <img src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
+                              <span className="name">{friend.fullname}</span>
+                              <span className="time">2:09 PM</span>
+                              <span className="preview">I was wondering...</span>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
+              </div>
+              <div className="right">
+                  <div className="top"><span>To:
+                  {
+                    this.state.friendChat === ''
+                    ? <span className="name"> Please pick your friend from friend list</span>
+                    : <span className="name">{this.state.friendChat.fullname}</span>
+                  }
+                  </span></div>
+                  <div className="chat" data-chat="person1">
+                      <div className="conversation-start">
+                          <span>Today, 6:48 AM</span>
+                      </div>
+                      {
+                        this.state.chatHistory === ''
+                        ? <p>Start your Chat</p>
+                        : this.state.chatHistory.map(chat => {
+                          if (profile[chat.userId] === null) {
+                            return (
+                              <div key={chat.date} className="bubble you">
+                                  <strong>{this.state.friendChat[chat.userId]}{chat.chat}</strong>
+                                  <span>{chat.date}</span>
+                              </div>
+                            )
+                          } else {
+                            return (
+                              <div key={chat.date} className="bubble me">
+                                  <strong>{profile[chat.userId]}:{chat.chat}</strong>
+                                  <span>{chat.date}</span>
+                              </div>
+                            )
+                          }
+                        })
+                      }
+                  </div>
+                  <div className="write">
+                      <a href="javascript:;" className="write-link attach"></a>
+                      <input type="text" name='chat' onChange={this.handleChatChange.bind(this)} />
+                      <a href="javascript:;" className="write-link smiley"></a>
+                      <a href="javascript:;" className="write-link send" onClick={this.handleChatData.bind(this)}></a>
+                  </div>
+              </div>
+          </div>
       </div>
-    </CSSTransitionGroup>
-    </div>
+      </CSSTransitionGroup>
+      </div>
     )
   }
 }
