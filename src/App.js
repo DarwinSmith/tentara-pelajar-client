@@ -10,6 +10,7 @@ import Profile from './components/profiles'
 import Gallery from './components/Gallery/Index.js'
 import Logout from './components/Logout'
 import Setting from './components/setting'
+import Navigation from './components/Navigation'
 import Chat from './components/Chat'
 // import Upload from './components/Upload2'
 import Notifications from './components/Notification'
@@ -59,7 +60,9 @@ class App extends Component {
   render () {
     return (
       <Router>
+
         <div>
+          <Navigation/>
           <Route exact path='/' component={Dashboard} />
           {/*<Route path='/upload' component={Upload} />*/}
           <Route path='/chat' component={Chat} />

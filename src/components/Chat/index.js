@@ -19,7 +19,6 @@ class Chat extends React.Component {
     }
   }
   handleChatData () {
-    console.log('fired')
     let friendId = this.state.friendChat.userId
     let chatData = {
       userId: profile.userId,
@@ -75,7 +74,6 @@ class Chat extends React.Component {
   render () {
     return (
       <div className="chat-page">
-        <Navigation />
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}

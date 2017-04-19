@@ -2,13 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './Index.css'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-import Navigation from '../Navigation'
 
 class Index extends React.Component {
   render() {
     return(
       <div className="">
-        <Navigation />
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}

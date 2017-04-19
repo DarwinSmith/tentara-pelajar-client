@@ -27,6 +27,7 @@ class Navigation extends Component {
     let src = new window.EventSource(URLNotification)
     src.addEventListener('data', (msg) => {
       let data = JSON.parse(msg.data).data
+      console.log(data)
       if (data.profileId === id) {
         this.setState({ notificationCount: this.state.notificationCount + 1 })
       }
@@ -119,6 +120,7 @@ class Navigation extends Component {
                 <span className='icon' style={{position: 'relative'}}>
                   <Notifications showNotif={this.state.showNotif} profileId={this.state.userProfile.id} />
                   <i className='fa fa-bell'></i>
+                  {this.state.notificationCount}
                 </span>
               </a>
               <div className='dropdown'>

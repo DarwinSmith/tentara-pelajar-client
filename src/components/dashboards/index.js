@@ -5,7 +5,6 @@ import React, {Component} from 'react'
 import MainContent from './MainContent'
 import LeftSidebar from './LeftSidebar'
 import RightSidebar from './RightSidebar'
-import Navigation from  '../Navigation'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import './style.css'
 
@@ -13,7 +12,6 @@ class index extends Component {
   render() {
     return(
       <div>
-        <Navigation/>
         <div style={{margin:"2%"}} className="container index-dashboard">
           <CSSTransitionGroup
             transitionName="dashboards"

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
 import { fetchProfile, patchProfile, fetchSkills, removeSkills, postSkills, fetchPersonalities, removePersonalities, postPersonalities } from '../../actions'
-import Navigation from '../Navigation'
 import './setting.css'
 
 class Setting extends Component {
@@ -76,7 +75,6 @@ class Setting extends Component {
   render() {
     return (
     <div className="">
-      <Navigation />
       <CSSTransitionGroup
         transitionName="dashboards"
         transitionAppear={true}

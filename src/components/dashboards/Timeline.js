@@ -90,7 +90,7 @@ class Timeline extends Component {
           <hr/>
           <div className="post-options">
             <div className="reactions">
-              {emoji.map(emo => <Reaction postId={this.props.timeline.id} emoji={emo}/>)}
+              {emoji.map((emo, index) => <Reaction key={index} postId={this.props.timeline.id} emoji={emo}/>)}
             </div>
             <span className="is-pulled-right commentPostButton">
              <a className="button is-link" onClick={this._displayComments.bind(this)}>Balasan</a>

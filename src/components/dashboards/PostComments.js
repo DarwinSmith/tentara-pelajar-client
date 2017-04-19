@@ -32,6 +32,7 @@ class PostComments extends Component {
         content: event.target.value
       })
         .then(response => {
+
           let oldComments = this.state.comments
           axios.get(`http://localhost:3001/api/comments/${response.data.id}?filter[include]=profile`)
             .then(res => {
@@ -54,7 +55,7 @@ class PostComments extends Component {
         <small>{this.state.commentsCount} jumlah komentar</small>
         <ul className="menu-list">
           <li>
-            {this.state.comments.map(comment => <PostCommentItem comment={comment}/>)}
+            {this.state.comments.map(comment => <PostCommentItem key={comment.id} comment={comment}/>)}
           </li>
         </ul>
         <input onKeyPress={this._commentOnPost.bind(this)} className="input is-primary" type="text"/>
@@ -62,5 +63,6 @@ class PostComments extends Component {
     )
   }
 }
+
 
 export default PostComments

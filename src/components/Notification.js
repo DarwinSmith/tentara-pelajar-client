@@ -6,7 +6,8 @@ class Notification extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      showNotif: true
+      showNotif: true,
+      notifications: []
     }
   }
 
@@ -19,7 +20,9 @@ class Notification extends React.Component {
   componentDidMount() {
     axios.get(`http://localhost:3001/api/profiles/${this.props.profileId}/notifications`)
       .then(response => {
-        console.log(response.data)
+        this.setState({
+          notifications: response.data
+        })
       })
       .catch(err => console.error(err))
   }
@@ -28,7 +31,11 @@ class Notification extends React.Component {
     return (
       <div id='notificationContainer' className={this.state.showNotif ? 'hideNotifContainer' : ''}>
         <div id='notificationTitle'>Notifications</div>
-        <div id='notificationsBody' className='notifications'>hello...</div>
+        <ul>
+          {this.state.notifications.map(notif => {
+            return <li key={notif.id}>{notif.verb}</li>
+          })}
+        </ul>
         <div id='notificationFooter'><a href='#'>See All</a></div>
       </div>
     )
