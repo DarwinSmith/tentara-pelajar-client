@@ -21,12 +21,14 @@ class Setting extends Component {
         password: false
       }
     }
+    this.userId = JSON.parse(localStorage.getItem('userProfile')).id
+    this.email = JSON.parse(localStorage.getItem('userDetail')).email
   }
 
   componentDidMount() {
-    this.props.fetchProfile()
-    this.props.fetchSkills()
-    this.props.fetchPersonalities()
+    this.props.fetchProfile(this.userId)
+    this.props.fetchSkills(this.userId)
+    this.props.fetchPersonalities(this.userId)
 
   }
   componentWillReceiveProps(nextProps) {
@@ -292,19 +294,11 @@ class Setting extends Component {
                       </h4>
                       <div className="field">
                         <label className="label">Email:</label>
-                        {
-                          this.state.isEdit.email
-                          ? <input className="input" type="text" placeholder={this.state.profile.email} onChange={(event)=> {}} />
-                        : this.state.profile.email
-                        }
+                      {  this.email }
                         <hr/>
 
                         <label className="label">Password:</label>
-                        {
-                          this.state.isEdit.password
-                          ? <input className="input" type="password" placeholder={this.state.account.password} onChange={(event)=> {}} />
-                        : this.state.account.password
-                        }
+                        {this.state.account.password}
                       </div>
                     </div>
                   </div>
@@ -331,12 +325,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    fetchProfile : () => dispatch(fetchProfile()),
+    fetchProfile : (id) => dispatch(fetchProfile(id)),
     patchProfile : (data) => dispatch(patchProfile(data)),
-    fetchSkills : () => dispatch(fetchSkills()),
+    fetchSkills : (id) => dispatch(fetchSkills(id)),
     removeSkills: (skillId) => dispatch(removeSkills(skillId)),
     postSkills: (skill) => dispatch(postSkills(skill)),
-    fetchPersonalities : () => dispatch(fetchPersonalities()),
+    fetchPersonalities : (id) => dispatch(fetchPersonalities(id)),
     removePersonalities: (personalitiesId) => dispatch(removePersonalities(personalitiesId)),
     postPersonalities: (personalities) => dispatch(postPersonalities(personalities))
   }
