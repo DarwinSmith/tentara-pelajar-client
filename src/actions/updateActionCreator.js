@@ -10,20 +10,15 @@ export const getProfile = data => {
   }
 }
 
-export const fetchProfile = () => {
+export const fetchProfile = (id) => {
   return (dispatch) => {
-    if (JSON.parse(localStorage.getItem('userDetail'))) {
-      const email = JSON.parse(localStorage.getItem('userDetail')).email
-      const userId = JSON.parse(localStorage.getItem('userProfile')).id
-      axios.get(`${URL}/profiles/${userId}`)
+      axios.get(`${URL}/profiles/${id}`)
         .then(result => {
-          const data = Object.assign({}, result.data, {email:email})
-          dispatch(getProfile(data))
+          dispatch(getProfile(result.data))
         })
         .catch(error => {
           console.log(error)
         })
-    }
   }
 }
 

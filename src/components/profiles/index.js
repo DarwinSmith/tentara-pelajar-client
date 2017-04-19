@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { connect } from 'react-redux';
-import { fetchSkills, endorseSkills, fetchPersonalities, endorsePersonalities } from '../../actions'
+import { fetchSkills, endorseSkills, fetchPersonalities, endorsePersonalities, fetchProfile } from '../../actions'
 import './profile.css';
 
 class Profile extends Component {
@@ -16,6 +16,7 @@ class Profile extends Component {
   componentDidMount () {
     this.props.fetchSkills(this.props.match.params.id)
     this.props.fetchPersonalities(this.props.match.params.id)
+    this.props.fetchProfile(this.props.match.params.id)
   }
   render () {
     return (
@@ -40,6 +41,15 @@ class Profile extends Component {
                         <figure style={{display: 'block', margin: 'auto'}} className='image is-128x128'>
                           <img style={{borderRadius: 100, widht: 128, height: 128}} src='https://unsplash.it/128/128/?random' alt='photos'/>
                         </figure>
+                        {
+                          this.props.match.params.id == this.userId ?
+                          <span></span>:
+                        <div>
+                          <br />
+                          <a style={{display: 'block', marginLeft: '30%', marginRight: '30%'}} href="#" className="button is-info"><i className="fa fa-user-plus">Tambahkan Teman</i></a>
+                        </div>
+                        
+                        }
                       </div>
                     <hr style={{height:2}}/>
                       <ul>
@@ -201,10 +211,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    fetchSkills: () => dispatch(fetchSkills()),
+    fetchSkills: (id) => dispatch(fetchSkills(id)),
     endorseSkills: (skillId) => dispatch(endorseSkills(skillId)),
-    fetchPersonalities: () => dispatch(fetchPersonalities()),
-    endorsePersonalities: (personalitiesId) => dispatch(endorsePersonalities(personalitiesId))
+    fetchPersonalities: (id) => dispatch(fetchPersonalities(id)),
+    endorsePersonalities: (personalitiesId) => dispatch(endorsePersonalities(personalitiesId)),
+    fetchProfile: (id) => dispatch(fetchProfile(id))
   }
 }
 

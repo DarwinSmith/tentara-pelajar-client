@@ -3,10 +3,9 @@ import axios from 'axios'
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
 const URL = 'http://localhost:3001/api'
 
-export const fetchSkills = () => {
+export const fetchSkills = (userId) => {
   return (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem('userProfile')).id
-    axios.get(`${URL}/profiles/1/skills`)
+    axios.get(`${URL}/profiles/${userId}/skills`)
     .then(result => {
       dispatch(getSkills(result.data))
     })
