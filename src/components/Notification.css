@@ -6,6 +6,13 @@
   display: none
 }
 
+
+.notification-item {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
 #notificationContainer
 {
   background-color: #fff;
@@ -14,7 +21,8 @@
   overflow: visible;
   position: absolute;
   top: 40px;
-  margin-left: -170px;
+  margin-left: -168px;
+  margin-top: 20px;
   width: 400px;
   z-index: -1;
 }

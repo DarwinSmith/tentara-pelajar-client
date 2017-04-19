@@ -13,7 +13,7 @@ class Navigation extends Component {
     super(props)
     this.state = {
       notificationCount: 0,
-      showNotif: true,
+      showNotif: false,
       searchInput: '',
       userProfile: JSON.parse(window.localStorage.getItem('userProfile'))
     }
@@ -32,16 +32,17 @@ class Navigation extends Component {
       }
     })
 
-    axios.get(`${URL}/profiles/${id}/notifications/count`)
-    .then(data => {
+    axios.get(`${URL}/profiles/${id}/notifications/count?filter[where][isRead]=false`)
+    .then(response=> {
       this.setState({
-        notificationCount: data.data.count
+        notificationCount: response.data.count
       })
     })
     .catch(err => {
       console.log(err)
     })
   }
+
 
   autoComplete () {
     axios.get(`${URL}/profiles/search-friend/${this.state.searchInput}`)
@@ -68,6 +69,7 @@ class Navigation extends Component {
       console.log('enter fired')
     }
   }
+
   handleNotif () {
     this.setState({showNotif: !this.state.showNotif})
   }
@@ -114,13 +116,23 @@ class Navigation extends Component {
                   <i className='fa fa-comments-o'></i>
                 </span>
               </Link>
+              <div>
               <a onClick={this.handleNotif.bind(this)} className='nav-item is-tab is-hidden-mobile level-item' style={{color: 'black'}}>
                 <span className='icon' style={{position: 'relative'}}>
-                  <Notifications showNotif={this.state.showNotif} profileId={this.state.userProfile.id} />
                   <i className='fa fa-bell'></i>
                   {this.state.notificationCount}
                 </span>
               </a>
+                <div style={{
+                  marginLeft: -180
+                }}>
+                {
+                  this.state.showNotif
+                  ? <Notifications profileId={this.state.userProfile.id} />
+                  : ''
+                }
+                </div>
+              </div>
               <div className='dropdown'>
                 <a className='nav-item is-tab is-hidden-mobile level-item dropbtn' style={{color: 'black'}}>
                   <span className='icon'>

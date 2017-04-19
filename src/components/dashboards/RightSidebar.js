@@ -13,6 +13,7 @@ class RightSidebar extends Component {
     this.state = {
       friendSuggestion: []
     }
+    this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
   }
 
   componentDidMount() {
@@ -20,14 +21,13 @@ class RightSidebar extends Component {
   }
 
   _getFriendSuggestions() {
-    axios.get(`http://localhost:3001/api/profiles?filter[limit]=10&filter[include]=school`)
+    axios.get(`http://localhost:3001/api/profiles/${this.userProfile.id}/friend_suggestions`)
       .then(response => {
         this.setState({
-          friendSuggestion: response.data
+          friendSuggestion: response.data.friend_suggestions
         })
       })
       .catch(err => console.log(err))
-
   }
 
   render() {
