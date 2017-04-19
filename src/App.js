@@ -48,7 +48,6 @@ class App extends Component {
     this.state = {
       redirectLogin: false
     }
-    this.loggedIn
   }
 
   componentDidMount () {
@@ -57,8 +56,14 @@ class App extends Component {
     //   console.log(this.props.loggedIn)
     // }
     this.props.fetchProfile()
-
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.loggedIn !== nextProps.loggedIn) {
+      this.forceUpdate()
+    }
+  }
+
   render () {
     return (
       <Router>
