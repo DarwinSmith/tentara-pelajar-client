@@ -2,9 +2,34 @@
  * Created by lightmitch on 4/13/17.
  */
 import React, {Component} from 'react'
+import axios from 'axios'
+import FriendSuggestion from './FriendSuggestion'
 import './style.css'
 
 class RightSidebar extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      friendSuggestion: []
+    }
+  }
+
+  componentDidMount() {
+    this._getFriendSuggestions()
+  }
+
+  _getFriendSuggestions() {
+    axios.get(`http://localhost:3001/api/profiles?filter[limit]=10&filter[include]=school`)
+      .then(response => {
+        this.setState({
+          friendSuggestion: response.data
+        })
+      })
+      .catch(err => console.log(err))
+
+  }
+
   render() {
     return (
       <div className="column is-3">
@@ -14,14 +39,9 @@ class RightSidebar extends Component {
               <h1>Sugesti Teman</h1>
             </div>
           </div>
-          <div className="friend-suggestion-card sd-color">
-            <img className="" src="https://unsplash.it/200/300/?random" alt=""/>
-            <span>
-              <p>Irwin Pratajaya</p>
-              <p className="small-text">SD serius</p>
-            </span>
-            <a href="#" className="button is-info"><i className="fa fa-user-plus"/></a>
-          </div>
+          {this.state.friendSuggestion.map(suggestion => {
+            return <FriendSuggestion key={suggestion.id} suggestion={suggestion} />
+          })}
         </div>
       </div>
     )
