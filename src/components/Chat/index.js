@@ -1,13 +1,14 @@
 import React from 'react'
-import firebase from 'firebase'
-import axios from 'axios'
 import Navigation from '../Navigation'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-
+import firebase from 'firebase'
+import axios from 'axios'
 const URL = 'http://localhost:3001/api'
 const profile = JSON.parse(window.localStorage.getItem('userProfile'))
+import './styles.css'
 
 class Chat extends React.Component {
+
   constructor () {
     super()
     this.state = {
@@ -73,7 +74,7 @@ class Chat extends React.Component {
 
   render () {
     return (
-      <div className="">
+      <div className="chat-page">
         <Navigation />
         <CSSTransitionGroup
           transitionName="dashboards"
@@ -81,46 +82,80 @@ class Chat extends React.Component {
           transitionAppearTimeout={1000}
           transitionEnter={false}
           transitionLeave={false} >
-      <div>
-        <h2>Chat ..</h2>
-        <h2>Fren List</h2>
-        <ul>
-          {
-            this.state.friendList === ''
-            ? <p>Loading Coegg</p>
-            : this.state.friendList.map(friend => {
-              return <li key={friend.id} onClick={this.handleFriendChat.bind(this, friend)}>{friend.fullname}</li>
-            })
-          }
-        </ul>
-        You are having chat with :
-        {
-          this.state.friendChat === ''
-          ? <p>Please pick your friend from friend list</p>
-          : <p>
-            {this.state.friendChat.fullname}
-            Chat : <input type='text' name='chat' onChange={this.handleChatChange.bind(this)} />
-            <button onClick={this.handleChatData.bind(this)}>Send</button>
-          </p>
-        }
-        <p>Chat Historeee...</p>
-        <ul>
-          {
-            this.state.chatHistory === ''
-            ? <p>Start your chet</p>
-            : this.state.chatHistory.map(chat => {
-              if (profile[chat.userId] === null) {
-                return <li key={chat.date}><strong>Reply from {this.state.friendChat[chat.userId]}{chat.chat}</strong><span>{chat.date}</span></li>
-              } else {
-                return <li key={chat.date}><strong>You Sent {profile[chat.userId]}{chat.chat}</strong><span>{chat.date}</span></li>
-              }
-            })
-          }
-        </ul>
-
+        <div className="wrapper columns">
+          <div className="kotak ">
+              <div className="left">
+                  <div className="top">
+                      <input type="text" />
+                      <a href="javascript:;" className="search"></a>
+                  </div>
+                  <ul className="people">
+                      <li className="person" data-chat="person1">
+                          <img src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
+                          <span className="name">Thomas Bangalter</span>
+                          <span className="time">2:09 PM</span>
+                          <span className="preview">I was wondering...</span>
+                      </li>
+                      <li className="person" data-chat="person2">
+                          <img src="http://s3.postimg.org/yf86x7z1r/img2.jpg" alt="" />
+                          <span className="name">Dog Woofson</span>
+                          <span className="time">1:44 PM</span>
+                          <span className="preview">Ive forgotten how it felt before</span>
+                      </li>
+                      <li className="person" data-chat="person3">
+                          <img src="http://s3.postimg.org/h9q4sm433/img3.jpg" alt="" />
+                          <span className="name">Louis CK</span>
+                          <span className="time">2:09 PM</span>
+                          <span className="preview">But we’re probably gonna need a new carpet.</span>
+                      </li>
+                      <li className="person" data-chat="person4">
+                          <img src="http://s3.postimg.org/quect8isv/img4.jpg" alt="" />
+                          <span className="name">Bo Jackson</span>
+                          <span className="time">2:09 PM</span>
+                          <span className="preview">It’s not that bad...</span>
+                      </li>
+                      <li className="person" data-chat="person5">
+                          <img src="http://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
+                          <span className="name">Michael Jordan</span>
+                          <span className="time">2:09 PM</span>
+                          <span className="preview">Wasup for the third time like is
+      you bling bitch</span>
+                      </li>
+                      <li className="person" data-chat="person6">
+                          <img src="http://s30.postimg.org/kwi7e42rh/img6.jpg" alt="" />
+                          <span className="name">Drake</span>
+                          <span className="time">2:09 PM</span>
+                          <span className="preview">howdoyoudoaspace</span>
+                      </li>
+                  </ul>
+              </div>
+              <div className="right">
+                  <div className="top"><span>To: <span className="name">Dog Woofson</span></span></div>
+                  <div className="chat" data-chat="person1">
+                      <div className="conversation-start">
+                          <span>Today, 6:48 AM</span>
+                      </div>
+                      <div className="bubble you">
+                          Hello,
+                      </div>
+                      <div className="bubble you">
+                          its me.
+                      </div>
+                      <div className="bubble you">
+                          I was wondering...
+                      </div>
+                  </div>
+                  <div className="write">
+                      <a href="javascript:;" className="write-link attach"></a>
+                      <input type="text" />
+                      <a href="javascript:;" className="write-link smiley"></a>
+                      <a href="javascript:;" className="write-link send"></a>
+                  </div>
+              </div>
+          </div>
       </div>
-    </CSSTransitionGroup>
-    </div>
+      </CSSTransitionGroup>
+      </div>
     )
   }
 }
