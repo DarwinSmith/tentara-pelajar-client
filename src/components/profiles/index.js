@@ -38,7 +38,7 @@ class Profile extends Component {
 
   render () {
     return (
-      <div className="">
+      <div className="profile-box">
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}
@@ -47,7 +47,7 @@ class Profile extends Component {
           transitionLeave={false} >
         <div>
           <div className="columns">
-            <div className="column is-three-quarters">
+            <div className="column is-8 is-offset-2">
               <div className="card">
                 <div className="card-content">
                   <div className="media-content">
@@ -163,6 +163,34 @@ class Profile extends Component {
                   </div>
                 </div>
               </div>
+              <div className='card'>
+                <div className='card-content'>
+                  <div className='media-content'>
+                    <div className='content'>
+                      <h5>
+                        Penghargaan
+                      </h5>
+                      <ul>
+                        <li>{this.props.profile.experience}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='card'>
+                <div className='card-content'>
+                  <div className='media-content'>
+                    <div className='content'>
+                      <h5>
+                        Aktivitas
+                      </h5>
+                      <ul>
+                        <li>{this.props.profile.experience}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="card">
                 <div className="card-content">
                   <div className="media-content">
@@ -180,37 +208,6 @@ class Profile extends Component {
                 </div>
               </div>
             </div>
-            <div className="column">
-              <div className="card" id="sidebar">
-                <article className="media">
-                  <div className="media-content">
-                    <div className="content">
-                      <h5>
-                        Penghargaan
-                      </h5>
-                      <ul>
-                        <li>{this.props.profile.experience}</li>
-                      </ul>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div className="card" id="sidebar">
-                <article className="media">
-                  <div className="media-content">
-                    <div className="content">
-                      <h5>
-                        Aktivitas
-                      </h5>
-                      <ul>
-                        <li>{this.props.profile.activity}</li>
-                      </ul>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-
           </div>
         </div>
       </CSSTransitionGroup>

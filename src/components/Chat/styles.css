@@ -1,9 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
-* {
+/** {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
+}*/
 
 .chat-page {
   background-color: #ECF0F1;
@@ -13,6 +13,8 @@
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
   background-size: cover;
+  width: 100%;
+  height:100%;
   /*background-image: url("http://s17.postimg.org/fr01hfe33/image.jpg");
   background-repeat: none;*/
 }
@@ -21,7 +23,7 @@
   position: relative;
   left: 50%;
   width: 1000px;
-  height: 650px;
+  height: 1000px;
   -moz-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   -webkit-transform: translate(-50%, 0);
@@ -194,7 +196,7 @@
   width: 100%;
   height: 47px;
   padding: 15px 29px;
-  background-color: #eceff1;
+  background-color: #ffffff;
 }
 .kotak .right .top span {
   font-size: 15px;
@@ -302,7 +304,7 @@
 .kotak .right .write input {
   font-size: 16px;
   float: left;
-  width: 347px;
+  width: 380px;
   height: 40px;
   padding: 0 10px;
   color: #1a1a1a;
@@ -333,15 +335,8 @@
   background-position: center;
 }
 .kotak .right .write .write-link.send:before {
-  display: inline-block;
-  float: left;
-  width: 20px;
-  height: 42px;
-  margin-left: 11px;
-  content: '';
-  background-image: url("http://s30.postimg.org/nz9dho0pp/send.png");
-  background-repeat: no-repeat;
-  background-position: center;
+  padding: 5px;
+  padding-top: 5px;
 }
 .kotak .right .bubble {
   font-size: 16px;
