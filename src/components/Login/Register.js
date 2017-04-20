@@ -55,18 +55,16 @@ class Register extends Component {
           <div className='column is-6 register'>
             {
               this.props.displayError !== '' && this.state.errorBox === true
-              ?
-              <article className="message is-danger">
+              ? <article className='message is-danger'>
                 <div className='message-header'>
                   <p><strong>Ooopss Something Error</strong></p>
-                  <button className='delete' onClick={this.handleCloseErrorBox.bind(this)}></button>
+                  <button className='delete' onClick={this.handleCloseErrorBox.bind(this)} />
                 </div>
                 <div className='message-body'>
                   {this.props.displayError.message}
                 </div>
               </article>
-              :
-              ''
+              : ''
             }
             <h1 className='title is-1'>Register Now</h1>
             <div className='field'>

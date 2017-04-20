@@ -14,11 +14,10 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps.loggedIn);
-    if ((nextProps.loggedIn.token !== '' || nextProps.loggedIn.token !== null) && (nextProps.loggedIn.user !== '' || nextProps.loggedIn.user !== null)) {
-      window.localStorage.setItem('token', nextProps.loggedIn.token)
-      window.localStorage.setItem('userDetail', JSON.stringify(nextProps.loggedIn.user))
-      window.localStorage.setItem('userProfile', JSON.stringify(nextProps.loggedIn.data))
+    if ((nextProps.loggedIn.token !== '' || nextProps.loggedIn.token !== null) && (nextProps.loggedIn.user !== '' || nextProps.loggedIn.user !== null) && (nextProps.loggedIn.error === undefined)) {
+      window.localStorage.setItem('token', this.props.loggedIn.token)
+      window.localStorage.setItem('userDetail', JSON.stringify(this.props.loggedIn.user))
+      window.localStorage.setItem('userProfile', JSON.stringify(this.props.loggedIn.data))
       this.setState({
         redirectLogin: true
       })
@@ -31,16 +30,16 @@ class Index extends Component {
     }
   }
 
-  render() {
+  render () {
     if (this.state.redirectLogin) {
       return <Redirect to='/' />
     } else {
       return (
-        <div className="Index">
+        <div className='Index'>
           <Login />
           <Register displayError={this.state.errorLogin} />
         </div>
-      );
+      )
     }
   }
 }
@@ -51,4 +50,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, null)(Index);
+export default connect(mapStateToProps, null)(Index)

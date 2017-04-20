@@ -12,6 +12,7 @@ import Logout from './components/Logout'
 import Setting from './components/setting'
 import Navigation from './components/Navigation'
 import Chat from './components/Chat'
+import Upload from './components/Upload2'
 // import Upload from './components/Upload2'
 import Notifications from './components/Notification'
 import './App.css'
@@ -70,7 +71,7 @@ class App extends Component {
         <div>
           {checkAuth() ? <Navigation/> : ''}
           <Route exact path='/' component={Dashboard} />
-          {/*<Route path='/upload' component={Upload} />*/}
+          <Route path='/upload' component={Upload} />
           <Route path='/chat' component={Chat} />
           <Route path='/login' component={Login} />
           <Route path='/profile/:id' component={Profile} />
