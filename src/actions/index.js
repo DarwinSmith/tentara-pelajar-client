@@ -7,7 +7,7 @@ import { fetchPersonalities, endorsePersonalities, postPersonalities, removePers
 import { patchProfile, fetchProfile } from './updateActionCreator'
 import { createPost, getTimelines } from './dashboardsActionCreator'
 export { fetchPersonalities, endorsePersonalities, postPersonalities, removePersonalities, fetchSkills, endorseSkills, postSkills, removeSkills, createPost, getTimelines, getPhotos, getPhoto, deletePhoto, postPhoto, patchProfile, fetchProfile }
-axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken';
+axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
 const URL = 'http://localhost:3001/api'
 
 

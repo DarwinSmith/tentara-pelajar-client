@@ -14,9 +14,7 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps.loggedIn);
     if ((nextProps.loggedIn.token !== '' || nextProps.loggedIn.token !== null) && (nextProps.loggedIn.user !== '' || nextProps.loggedIn.user !== null) && (nextProps.loggedIn.error === undefined)) {
-      console.log('firrrreeee');
       window.localStorage.setItem('token', nextProps.loggedIn.token)
       window.localStorage.setItem('userDetail', JSON.stringify(nextProps.loggedIn.user))
       window.localStorage.setItem('userProfile', JSON.stringify(nextProps.loggedIn.data))
