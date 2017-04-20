@@ -57,7 +57,7 @@ class Notification extends React.Component {
           {this.state.notifications.map(notif => {
             if (notif.object === 'Friend Request') {
               return (
-              <li className="notification-item" key={notif.id} style={{background: this.state.done ? '#93FFAA' : '#FF8777'}}>
+              <li className="notification-item" key={notif.id} style={{background: this.state.done ? '#b7ffe5' : '#ffcdb7'}}>
                 <span>{notif.verb}</span>
                 <span>
                   {

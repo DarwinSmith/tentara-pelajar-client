@@ -12,14 +12,21 @@ class Posting extends Component {
     super(props)
     this.state = {
       showInput: false,
-      postTextContent: ''
+      showImagesDropper: false,
+      postTextContent: '',
+      imagesLink: [
+        'https://unsplash.it/300/200',
+        'https://unsplash.it/300/200',
+        'https://unsplash.it/300/200'
+      ]
     }
     this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
   }
 
   _postEvent() {
     this.setState({
-      showInput: true
+      showInput: true,
+      showImagesDropper: true
     })
 
     setTimeout(()=>this.postTextarea.focus(),100)
@@ -27,7 +34,8 @@ class Posting extends Component {
 
   _postLeave() {
     this.setState({
-      showInput: false
+      showInput: false,
+      showImagesDropper: false
     })
     this.postTextarea.value = ''
   }
@@ -46,6 +54,12 @@ class Posting extends Component {
     })
   }
 
+  _postPictureButtonHandler() {
+    this.setState({
+      showImagesDropper: !this.state.showImagesDropper,
+      showInput: !this.state.showInput
+    })
+  }
 
   render() {
     let postInput =
@@ -54,6 +68,17 @@ class Posting extends Component {
         <div>
           <textarea className="postAppear" ref={input => {this.postTextarea = input}} onChange={e => this._setPostingTextContent(e)}></textarea>
         </div>
+          <hr/>
+          <div className="posting-pictures-container">
+            {
+              this.state.imagesLink.map(link => <img src={link}/>)
+            }
+          </div>
+          <div style={{display: this.state.showImagesDropper ? 'block' : 'none'}}>
+            Image uploader here
+            /*TODO: Taro sini dam*/
+          </div>
+          <hr/>
         <div className="post-options">
           <a onClick={this._postLeave.bind(this)} href="#" className="button is-danger">Cancel</a>
           <a href="#" className="button is-info" onClick={this._createPost.bind(this)}>Post</a>
@@ -62,7 +87,8 @@ class Posting extends Component {
         <div style={{ display: this.state.showInput ? 'none' : 'block' }}>
           <textarea className="postLeave" onClick={this._postEvent.bind(this)} defaultValue={'Berbagi artikel maupun gambar..'}></textarea>
         </div>
-      </div>)
+      </div>
+      )
     return(
       <div className="posting-container">
         <div className="card has-left-text">
@@ -81,23 +107,23 @@ class Posting extends Component {
                   onClick={this._postEvent.bind(this)}
                 >
                 <span>
-                  Tulis artikel
+                  Berbagi Sesuatu
                 </span>
                   <span className="icon">
                   <i className="fa fa-pencil"></i>
                 </span>
                 </a>
               </span>
-              <span className="griddify">
-                <a className="button">
-                <span>
-                Gambar
-                </span>
-                  <span className="icon">
-                  <i className="fa fa-photo"></i>
-                </span>
-                </a>
-              </span>
+              {/*<span className="griddify">*/}
+                {/*<a className="button" onClick={this._postPictureButtonHandler.bind(this)}>*/}
+                {/*<span>*/}
+                {/*Gambar*/}
+                {/*</span>*/}
+                  {/*<span className="icon">*/}
+                  {/*<i className="fa fa-photo"></i>*/}
+                {/*</span>*/}
+                {/*</a>*/}
+              {/*</span>*/}
             </div>
           </div>
         </div>

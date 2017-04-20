@@ -16,6 +16,17 @@
   color: #fff;
 }
 
+.posting-pictures-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow-x: scroll;
+}
+
+.posting-pictures-container img {
+  padding: 5px;
+}
+
 .postCommentsContainer {
   background: #0BCBD6;
 }
