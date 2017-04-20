@@ -1,5 +1,6 @@
 .dashboards-box {
-  /*background-color: #ECF0F1;*/
+  margin-top: 40px;
+  background-color: #ECF0F1;
 }
 
 .sma-color {
@@ -181,8 +182,9 @@
 }
 
 
-@media screen and (min-width: 780px){
+@media screen and (min-width: 500px) and (max-width: 1080px) {
   .left-sidebar-card {
+    width: 10.5em;
     position: fixed;
     color: #000;
   }
@@ -194,7 +196,21 @@
     background: #204270;
     color: #fff;
   }
+}
+  @media screen and (min-width: 1080px){
+    .left-sidebar-card {
+      width: 18.5em;
+      position: fixed;
+      color: #000;
+    }
 
+    .right-sidebar {
+      margin-top: 20px;
+      position: fixed;
+      width: 22.8%;
+      background: #204270;
+      color: #fff;
+    }
 }
 
 .round-image {
