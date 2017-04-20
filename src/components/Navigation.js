@@ -81,7 +81,7 @@ class Navigation extends Component {
           <div className='container'>
             <div className='nav-left search-left'>
               <a className='nav-item'>
-                <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
+                <img style={{height:'100%'}} src={require("../assets/image/banner.png")} alt="Tentara Pelajar" />
               </a>
               <div className='nav-item search'>
                 <p className='control'>
