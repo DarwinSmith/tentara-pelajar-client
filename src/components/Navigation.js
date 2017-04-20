@@ -15,7 +15,10 @@ class Navigation extends Component {
       notificationCount: 0,
       showNotif: false,
       searchInput: '',
-      userProfile: JSON.parse(window.localStorage.getItem('userProfile'))
+      userProfile: JSON.parse(window.localStorage.getItem('userProfile')),
+      resultSearch: [],
+      showSearch: false,
+      active:''
     }
     this.userId = JSON.parse(window.localStorage.getItem('userProfile')).id
   }
@@ -54,7 +57,7 @@ class Navigation extends Component {
     axios.get(`${URL}/profiles/search-friend/${this.state.searchInput}`)
     .then(data => {
       let res = data.data.friendSearch
-      console.log(res)
+      this.setState({resultSearch: res})
     })
     .catch(err => {
       console.log(err)
@@ -63,8 +66,12 @@ class Navigation extends Component {
 
   searchInputChange (e) {
     this.setState({searchInput: e.target.value})
-    if (this.state.searchInput.length >= 2) {
+    if(this.state.searchInput.length < 2){
+      this.setState({showSearch:false, resultSearch:[]})
+    }
+    if (this.state.searchInput.length >= 3) {
       this.autoComplete()
+      this.setState({showSearch:true})
     }
   }
 
@@ -97,15 +104,36 @@ class Navigation extends Component {
                     className='input'
                     id='search'
                     type='text'
-                    placeholder='Find something' />
+                    placeholder='Temukan Teman' />
                 </p>
               </div>
+              {
+                this.state.showSearch ?
+                <div>
+                  {
+                    this.state.resultSearch.length == 0 ?
+                    <div className="dropdown-search">
+                      <p>hasil tidak ditemukan {this.state.resultSearch.length}</p>
+                    </div>:
+                    <div className="dropdown-search">
+                      {this.state.resultSearch.map((v,i)=>(
+                        this.state.userProfile.id !== v.id
+                        ? <Link key={i} className='search-suggestion-card' to={'/friend/'+v.id}>
+                            <img className="" src="https://unsplash.it/200/300/?random" alt=""/>
+                            <p>{v.fullname}</p>
+                          </Link>
+                        : ''
+                      ))}
+                    </div>
+                  }
+                </div>:''
+              }
             </div>
             <div className='nav-right nav-menu'>
 
-              <Link to={'/'} className='nav-item is-tab is-hidden-mobile is-active' style={{color: 'black'}}>Home</Link>
+              <Link to={'/'} className={`nav-item is-tab is-hidden-mobile ${this.state.active == 'Home' ? 'is-active' : ''}`} onClick={()=>this.setState({active:'Home'})} style={{color: 'black'}}>Home</Link>
 
-              <Link className='nav-item is-tab is-hidden-mobile' to={'/profile/'+this.userId}>
+              <Link className={`nav-item is-tab is-hidden-mobile ${this.state.active == 'Profile' ? 'is-active' : ''}`} onClick={()=>this.setState({active:'Profile'})} to={'/profile'}>
                 <figure className='image is-16x16' >
                   <img src='http://bulma.io/images/jgthms.png' alt='profilepicture' />
                 </figure>
@@ -114,7 +142,7 @@ class Navigation extends Component {
 
               {/*<a className="nav-item is-tab is-hidden-mobile" style={{color:"black"}}>*/}
               {/*</a>*/}
-              <Link className='nav-item is-tab is-hidden-mobile' to='/gallery'>
+              <Link className={`nav-item is-tab is-hidden-mobile ${this.state.active == 'Gallery' ? 'is-active' : ''}`} onClick={()=>this.setState({active:'Gallery'})} to='/gallery'>
                 Gallery
               </Link>
               <Link className='nav-item is-tab is-hidden-mobile' to='/chat'>
@@ -140,7 +168,7 @@ class Navigation extends Component {
                 </div>
               </div>
               <div className='dropdown'>
-                <a className='nav-item is-tab is-hidden-mobile level-item dropbtn' style={{color: 'black'}}>
+                <a className={`nav-item is-tab is-hidden-mobile ${this.state.active == 'Setting' ? 'is-active' : ''}`} onClick={()=>this.setState({active:'Setting'})} style={{color: 'black'}}>
                   <span className='icon'>
                     <i className='fa fa-gear'></i>
                   </span>

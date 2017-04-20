@@ -135,12 +135,12 @@ class Setting extends Component {
         transitionEnter={false}
         transitionLeave={false} >
         <div>
-          <div className='columns'>
-            <div className='column is-12'>
-              <div className='card'>
-                <article className='media'>
-                  <div className='media-content'>
-                    <div className='content'>
+          <div className="columns">
+            <div className="column is-8 is-offset-2">
+              <div className="card">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
                       <h1 style={{textAlign: 'center'}}>Account Setting</h1>
                       <img style={{display: 'block', margin: 'auto'}} className='profile-banner-pic' src={this.props.profile.avatar} alt=''/>
                       <h4>Avatar</h4>
