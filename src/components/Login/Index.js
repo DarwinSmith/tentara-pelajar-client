@@ -14,10 +14,12 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    console.log(nextProps.loggedIn);
     if ((nextProps.loggedIn.token !== '' || nextProps.loggedIn.token !== null) && (nextProps.loggedIn.user !== '' || nextProps.loggedIn.user !== null) && (nextProps.loggedIn.error === undefined)) {
-      window.localStorage.setItem('token', this.props.loggedIn.token)
-      window.localStorage.setItem('userDetail', JSON.stringify(this.props.loggedIn.user))
-      window.localStorage.setItem('userProfile', JSON.stringify(this.props.loggedIn.data))
+      console.log('firrrreeee');
+      window.localStorage.setItem('token', nextProps.loggedIn.token)
+      window.localStorage.setItem('userDetail', JSON.stringify(nextProps.loggedIn.user))
+      window.localStorage.setItem('userProfile', JSON.stringify(nextProps.loggedIn.data))
       this.setState({
         redirectLogin: true
       })
