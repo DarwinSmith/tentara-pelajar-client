@@ -16,7 +16,7 @@ class Chat extends React.Component {
       friendChat: '',
       friendList: '',
       chatHistory: [],
-      profie: window.localStorage.getItem('userProfile')
+      profile: window.localStorage.getItem('userProfile')
     }
   }
   handleChatData () {
@@ -39,10 +39,9 @@ class Chat extends React.Component {
   getChatHistory () {
     let friendId = this.state.friendClick
     let chatHistoryDetail = firebase.database().ref(`chats/${profile.userId}/${friendId}`).limitToLast(100)
-    console.log(chatHistoryDetail)
   }
   componentDidMount () {
-    axios.get(`${URL}/profiles/${profile.id}/contacts`)
+    axios.get(`${URL}/profiles/${this.state.profile.id}/contacts`)
     .then(res => {
       this.setState({friendList: res.data.contacts})
     })
