@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react'
 import axios from 'axios'
+import moment from 'moment'
 import '../Notification.css'
 
 class NotificationItem extends Component {
@@ -41,6 +42,7 @@ class NotificationItem extends Component {
       return (
         <li className="notification-item" style={{background: this.state.done ? '#b7ffe5' : '#ffcdb7'}}>
           <span>{this.props.notif.verb}</span>
+          <span>{moment(this.props.notif.createdAt).fromNow()}</span>
           <span>
                   {
                     this.state.done
@@ -59,6 +61,7 @@ class NotificationItem extends Component {
                       <span>
                         {this.props.notif.verb}
                       </span>
+      <span>{moment(this.props.notif.createdAt).fromNow()}</span>
       {
         this.state.done
           ? ''

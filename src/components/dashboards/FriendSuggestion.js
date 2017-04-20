@@ -31,7 +31,7 @@ class FriendSuggestion extends Component {
               <p>{this.props.suggestion.fullname}</p>
               <p className="small-text">{this.props.suggestion.school ? this.props.suggestion.school.name : ''}</p>
             </span>
-        <a href="#" className="button is-info" onClick={this._addFriend.bind(this)}>{this.state.isAdded ? <i className="fa fa-check"/> : <i className="fa fa-user-plus"/>}</a>
+        <a href="#" className="button is-info" onClick={this.state.isAdded ? () => {} : this._addFriend.bind(this)}>{this.state.isAdded ? <i className="fa fa-check"/> : <i className="fa fa-user-plus"/>}</a>
       </div>
     )
   }

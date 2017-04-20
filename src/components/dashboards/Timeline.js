@@ -39,7 +39,6 @@ class Timeline extends Component {
 
   handleScroll(event) {
     let scrollTop = event.srcElement.body.scrollTop
-
   }
 
   _displayComments() {
@@ -79,10 +78,14 @@ class Timeline extends Component {
             </div>
           </div>
           {
-            this.props.timeline.images
+            this.props.timeline.postMedia
             ? <div className="card-image">
                 <figure className="image is-4by3">
-                  <img src="http://bulma.io/images/placeholders/1280x960.png" alt="placeholder"/>
+                  {
+                    this.props.timeline.postMedia.map(image => {
+                      return <img src={image.url} alt="placeholder"/>
+                    })
+                  }
                 </figure>
               </div>
             : ''
