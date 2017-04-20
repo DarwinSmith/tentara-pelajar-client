@@ -6,7 +6,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 class Index extends React.Component {
   render() {
     return(
-      <div className="gallery-box">
+      <div className="gallery-box columns">
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}
@@ -14,7 +14,7 @@ class Index extends React.Component {
           transitionEnter={false}
           transitionLeave={false}
         >
-          <div className="gallery is-12">
+          <div className="gallery column is-8 is-offset-2">
             <div className="masonry">
               {this.props.gallery.map((v,i)=>(
                 <div className="item">

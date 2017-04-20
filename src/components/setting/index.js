@@ -85,7 +85,7 @@ class Setting extends Component {
         transitionLeave={false} >
         <div>
           <div className="columns">
-            <div className="column is-12">
+            <div className="column is-8 is-offset-2">
               <div className="card">
                 <article className="media">
                   <div className="media-content">
