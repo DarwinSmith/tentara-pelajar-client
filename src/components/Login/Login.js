@@ -63,7 +63,6 @@ class Login extends Component {
             </span>
             <div className='nav-right nav-menu'>
               <a className='nav-item'>
-                <img src='http://bulma.io/images/bulma-logo.png' alt='Bulma logo' />
               </a>
             </div>
           </div>

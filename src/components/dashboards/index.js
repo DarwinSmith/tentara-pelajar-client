@@ -11,7 +11,7 @@ import './style.css'
 class index extends Component {
   render() {
     return(
-      <div>
+      <div className="dashboards-box">
         <div style={{margin:"2%"}} className="container index-dashboard">
           <CSSTransitionGroup
             transitionName="dashboards"
