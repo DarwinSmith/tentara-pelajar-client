@@ -6,6 +6,7 @@ class Notification extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      done: false,
       showNotif: true,
       notifications: []
     }
@@ -41,6 +42,9 @@ class Notification extends React.Component {
       isRead: true
     })
       .then(response => {
+        this.setState({
+          done: true
+        })
       })
       .catch(err => console.error(err.message))
   }
@@ -53,34 +57,34 @@ class Notification extends React.Component {
           {this.state.notifications.map(notif => {
             if (notif.object === 'Friend Request') {
               return (
-              <li className="notification-item" key={notif.id}>
+              <li className="notification-item" key={notif.id} style={{background: this.state.done ? '#93FFAA' : '#FF8777'}}>
                 <span>{notif.verb}</span>
                 <span>
                   {
-                    notif.isRead
-                    ?(<a
+                    this.state.done
+                    ? ''
+                    : (<a
                         className="button is-info"
-                      >
-                        <i className="fa fa-check"></i>
+                        onClick={e => this._notificationInteraction('friend request', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
+                        <i className="fa fa-user-plus"></i>
                       </a>)
-                    :(<a 
-                      className="button is-info" 
-                      onClick={e => this._notificationInteraction('friend request', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
-                      <i className="fa fa-user-plus"></i>
-                    </a>)
                   }
                 </span>
               </li>)
             }
-            return (<li className="notification-item" key={notif.id}>
+            return (<li className="notification-item" key={notif.id} style={{background: this.state.done ? '#93FFAA' : '#FF8777'}}>
                       <span>
                         {notif.verb}
                       </span>
-                      <a
-                        className="button is-info"
-                        onClick={e => this._notificationInteraction('default', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
-                        <i className="fa fa-check-square"></i>
-                      </a>
+                      {
+                        this.state.done
+                        ? ''
+                        : <a
+                            className="button is-info"
+                            onClick={e => this._notificationInteraction('default', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
+                            <i className="fa fa-check-square"></i>
+                          </a>
+                      }
                     </li>)
           })}
         </ul>
