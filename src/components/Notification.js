@@ -64,10 +64,11 @@ class Notification extends React.Component {
                     this.state.done
                     ? ''
                     : (<a
-                        className="button is-info"
-                        onClick={e => this._notificationInteraction('friend request', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
-                        <i className="fa fa-user-plus"></i>
-                      </a>)
+                      className="button is-info"
+                      onClick={e => this._notificationInteraction('friend request', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
+                      Terima Pertemanan
+                    </a>)
+
                   }
                 </span>
               </li>)

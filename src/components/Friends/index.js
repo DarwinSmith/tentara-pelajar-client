@@ -6,7 +6,7 @@ import axios from 'axios'
 import Timeline from '../dashboards/Timeline'
 import './profile.css';
 
-class Profile extends Component {
+class Friend extends Component {
   constructor () {
     super()
     this.state = {
@@ -20,15 +20,15 @@ class Profile extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchSkills(this.userId)
-    this.props.fetchPersonalities(this.userId)
-    this.props.fetchProfile(this.userId)
+    this.props.fetchSkills(this.props.match.params.id)
+    this.props.fetchPersonalities(this.props.match.params.id)
+    this.props.fetchProfile(this.props.match.params.id)
   }
 
   _addFriend() {
-    axios.post(`http://localhost:3001/api/friend_requests`, {
+    axios.post(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/friend_requests`, {
       profileId: this.userId,
-      friendId: this.userId
+      friendId: this.props.match.params.id
     })
       .then(response => {
         console.log(response.data);
@@ -41,7 +41,7 @@ class Profile extends Component {
 
   loadPosting(){
     this.setState({clicked: true})
-    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${this.userId}/posts?filter[include]=profile`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${this.props.match.params.id}/posts?filter[include]=profile`)
       .then(response => {
           this.setState({dataPost:response.data})
       })
@@ -76,11 +76,11 @@ class Profile extends Component {
                           <img style={{borderRadius: 100, widht: 128, height: 128}} src='https://unsplash.it/128/128/?random' alt='photos'/>
                         </figure>
                         {
-                          this.userId == this.userId ?
+                          this.props.match.params.id == this.userId ?
                           <span></span>:
                         <div>
                           <br />
-                          <a style={{display: 'block', marginLeft: '40%', marginRight: '40%'}} href="#" className="button is-info" onClick={this._addFriend.bind(this)}>{this.state.isAdded ? <i className="fa fa-check"/> : <i className="fa fa-user-plus">Tambahkan Teman</i>}</a>
+                          <a style={{display: 'block', marginLeft: '35%', marginRight: '35%'}} href="#" className="button is-info" onClick={this._addFriend.bind(this)}>{this.state.isAdded ? <i className="fa fa-check"/> : <i className="fa fa-user-plus">Tambahkan Teman</i>}</a>
                         </div>
 
                         }
@@ -122,7 +122,7 @@ class Profile extends Component {
                                 <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
                                 <p>{value.content}</p>
                                 {
-                                  this.userId == this.userId ?
+                                  this.props.match.params.id == this.userId ?
                                   <span></span>:
                                   <a href="#" onClick={() => this.props.endorsePersonalities(value.id)}>
                                     <span className="icon">
@@ -162,7 +162,7 @@ class Profile extends Component {
                                     <i className={value.icon}></i>
                                   </span>
                                   {
-                                    this.userId == this.userId ?
+                                    this.props.match.params.id == this.userId ?
                                     <span></span>:
                                     <a href="#" onClick={() => this.props.endorseSkills(value.id)}>
                                       <span className="icon">
@@ -277,4 +277,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Friend);
