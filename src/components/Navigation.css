@@ -1,6 +1,6 @@
 .navigation{
   /*background-color: #0BCBD6;*/
-  /*position: fixed;*/
+  position: fixed;
   width: 100%;
   flex: 1;
 }
