@@ -18,10 +18,10 @@ class Notification extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${this.props.profileId}/notifications?filter[where][isRead]=`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${this.props.profileId}/notifications?filter[where][isRead]=false`)
       .then(response => {
         this.setState({
-          notifications: response.data
+          notifications: response.data.reverse()
         })
       })
       .catch(err => console.error(err.message))
@@ -34,15 +34,15 @@ class Notification extends React.Component {
         profileId: profileId,
       })
         .then(response => {
-          axios.patch(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/notifications/${notifId}`, {
-            isRead: true
-          })
-            .then(response => {
-            })
-            .catch(err => console.error(err.message))
         })
         .catch(err => console.error(err.message))
     }
+    axios.patch(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/notifications/${notifId}`, {
+      isRead: true
+    })
+      .then(response => {
+      })
+      .catch(err => console.error(err.message))
   }
 
   render () {
@@ -51,7 +51,6 @@ class Notification extends React.Component {
         <div id='notificationTitle'>Notifikasi</div>
         <ul>
           {this.state.notifications.map(notif => {
-            console.log(notif)
             if (notif.object === 'Friend Request') {
               return (
               <li className="notification-item" key={notif.id}>
@@ -67,7 +66,7 @@ class Notification extends React.Component {
                     :(<a 
                       className="button is-info" 
                       onClick={e => this._notificationInteraction('friend request', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
-                      Terima Pertemanan
+                      <i className="fa fa-user-plus"></i>
                     </a>)
                   }
                 </span>
@@ -77,6 +76,11 @@ class Notification extends React.Component {
                       <span>
                         {notif.verb}
                       </span>
+                      <a
+                        className="button is-info"
+                        onClick={e => this._notificationInteraction('default', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
+                        <i className="fa fa-check-square"></i>
+                      </a>
                     </li>)
           })}
         </ul>
