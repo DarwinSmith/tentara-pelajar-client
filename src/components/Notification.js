@@ -18,7 +18,7 @@ class Notification extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/profiles/${this.props.profileId}/notifications?filter[where][isRead]=`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${this.props.profileId}/notifications?filter[where][isRead]=`)
       .then(response => {
         this.setState({
           notifications: response.data
@@ -29,12 +29,12 @@ class Notification extends React.Component {
 
   _notificationInteraction(type, notifId, profileId, friendId, friendRequestId = '') {
     if (type === 'friend request') {
-      axios.put(`http://localhost:3001/api/friend_requests/${friendRequestId}`, {
+      axios.put(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/friend_requests/${friendRequestId}`, {
         friendId: friendId,
         profileId: profileId,
       })
         .then(response => {
-          axios.patch(`http://localhost:3001/api/notifications/${notifId}`, {
+          axios.patch(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/notifications/${notifId}`, {
             isRead: true
           })
             .then(response => {

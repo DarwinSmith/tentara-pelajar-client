@@ -11,7 +11,7 @@ class FriendSuggestion extends Component {
   }
 
   _addFriend() {
-    axios.post(`http://localhost:3001/api/friend_requests`, {
+    axios.post(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/friend_requests`, {
       profileId: this.userProfile.id,
       friendId: this.props.suggestion.id
     })

@@ -24,7 +24,7 @@ class Timeline extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll)
 
-    axios.get(`http://localhost:3001/api/posts/${this.props.timeline.id}/comments/count`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/posts/${this.props.timeline.id}/comments/count`)
       .then(response => {
         this.setState({
           commentsCount: response.data.count

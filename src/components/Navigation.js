@@ -5,7 +5,7 @@ import './Navigation.css'
 import { Link } from 'react-router-dom'
 import Notifications from './Notification.js'
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
-const URL = 'http://localhost:3001/api'
+const URL = 'http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api'
 
 class Navigation extends Component {
 

@@ -18,11 +18,11 @@ class Reaction extends Component {
   }
 
   _getAppreciator() {
-    axios.get(`http://localhost:3001/api/reactions/count?where[profileId]=4&where[postId]=36`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/reactions/count?where[profileId]=4&where[postId]=36`)
   }
 
   _countAppreciator() {
-    axios.get(`http://localhost:3001/api/reactions/count?where[emoji]=${this.props.emoji}&where[postId]=${this.props.postId}`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/reactions/count?where[emoji]=${this.props.emoji}&where[postId]=${this.props.postId}`)
       .then(res => {
         this.setState({
           appreciatorCount: res.data.count
@@ -32,10 +32,10 @@ class Reaction extends Component {
   }
 
   _reactTo() {
-    axios.get(`http://localhost:3001/api/reactions/count?where[profileId]=${this.userProfile.id}&where[postId]=${this.props.postId}`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/reactions/count?where[profileId]=${this.userProfile.id}&where[postId]=${this.props.postId}`)
       .then(res => {
         if (res.data.count == 0) {
-          axios.post(`http://localhost:3001/api/reactions`, {
+          axios.post(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/reactions`, {
             profileId: this.userProfile.id,
             postId: this.props.postId,
             emoji: this.props.emoji
@@ -48,7 +48,7 @@ class Reaction extends Component {
             })
             .catch(err => console.error(err))
         } else if (res.data.count == 1) {
-          axios.delete(`http://localhost:3001/api/http`)
+          axios.delete(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/http`)
         } else {
           alert('You cannot react')
         }

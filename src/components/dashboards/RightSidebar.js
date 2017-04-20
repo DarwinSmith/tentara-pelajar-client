@@ -21,7 +21,7 @@ class RightSidebar extends Component {
   }
 
   _getFriendSuggestions() {
-    axios.get(`http://localhost:3001/api/profiles/${this.userProfile.id}/friend_suggestions`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${this.userProfile.id}/friend_suggestions`)
       .then(response => {
         this.setState({
           friendSuggestion: response.data.friend_suggestions

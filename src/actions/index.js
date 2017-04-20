@@ -8,7 +8,7 @@ import { patchProfile, fetchProfile } from './updateActionCreator'
 import { createPost, getTimelines } from './dashboardsActionCreator'
 export { fetchPersonalities, endorsePersonalities, postPersonalities, removePersonalities, fetchSkills, endorseSkills, postSkills, removeSkills, createPost, getTimelines, getPhotos, getPhoto, deletePhoto, postPhoto, patchProfile, fetchProfile }
 axios.defaults.headers.common['Authorization'] = 'AnotherTestSecretToken'
-const URL = 'http://localhost:3001/api'
+const URL = 'http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api'
 
 
 export function loginFirebaseAPI (email, password) {

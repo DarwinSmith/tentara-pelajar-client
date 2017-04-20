@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const getTimelines = profileId => dispatch => {
-  axios.get(`http://localhost:3001/api/profiles/${profileId}/timelines`)
+  axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${profileId}/timelines`)
     .then(response => {
       dispatch({
         type: 'GET_TIMELINES',
@@ -12,14 +12,14 @@ export const getTimelines = profileId => dispatch => {
 }
 
 export const createPost = (profileId, contents) => dispatch => {
-  axios.post(`http://localhost:3001/api/profiles/${profileId}/posts`,
+  axios.post(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/profiles/${profileId}/posts`,
     {
       content: contents
     }
   )
     .then(response => {
       let postId = response.data.id
-      axios.get(`http://localhost:3001/api/posts/${postId}?filter[include]=profile`)
+      axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/posts/${postId}?filter[include]=profile`)
         .then(res => {
           dispatch({
             type: 'CREATE_POST',

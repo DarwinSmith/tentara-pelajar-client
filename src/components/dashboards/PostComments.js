@@ -13,7 +13,7 @@ class PostComments extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/posts/${this.props.postId}/comments?filter[include]=profile`)
+    axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/posts/${this.props.postId}/comments?filter[include]=profile`)
       .then(response => {
         this.setState({
           comments: response.data,
@@ -25,7 +25,7 @@ class PostComments extends Component {
 
   _commentOnPost(event) {
     if (event.key === 'Enter') {
-      axios.post(`http://localhost:3001/api/comments`, {
+      axios.post(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/comments`, {
         postId: this.props.postId,
         profileId: this.userProfile.id,
         friendId: this.props.profileId,
@@ -34,7 +34,7 @@ class PostComments extends Component {
         .then(response => {
 
           let oldComments = this.state.comments
-          axios.get(`http://localhost:3001/api/comments/${response.data.id}?filter[include]=profile`)
+          axios.get(`http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api/comments/${response.data.id}?filter[include]=profile`)
             .then(res => {
               this.setState({
                 comments: [...oldComments, res.data],

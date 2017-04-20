@@ -3,7 +3,7 @@ import Navigation from '../Navigation'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import firebase from 'firebase'
 import axios from 'axios'
-const URL = 'http://localhost:3001/api'
+const URL = 'http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api'
 const profile = JSON.parse(window.localStorage.getItem('userProfile'))
 import './styles.css'
 
