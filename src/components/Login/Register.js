@@ -66,40 +66,39 @@ class Register extends Component {
               </article>
               : ''
             }
-            <h1 className='title is-1'>Register Now</h1>
+            <h1 className='title is-1'>Daftar Sekarang</h1>
             <div className='field'>
-              <label className='label'>Full Name</label>
+              <label className='label'>Nama Lengkap</label>
               <p className='control '>
-                <input onChange={this.handleChangeFullname.bind(this)} value={this.state.fullname} className='input' type='text' placeholder='Full Name' />
+                <input onChange={this.handleChangeFullname.bind(this)} value={this.state.fullname} className='input' type='text' placeholder='Nama Lengkap' />
               </p>
             </div>
             <div className='field'>
-              <label className='label'>Email</label>
+              <label className='label'>Surel</label>
               <p className='control '>
-                <input onChange={this.handleChangeEmail.bind(this)} value={this.state.email} className='input' type='text' placeholder='Email' />
+                <input onChange={this.handleChangeEmail.bind(this)} value={this.state.email} className='input' type='text' placeholder='Surel' />
               </p>
             </div>
             <div className='field'>
-              <label className='label'>Password</label>
+              <label className='label'>Sandi</label>
               <p className='control '>
-                <input onChange={this.handleChangePassword.bind(this)} value={this.state.password} className='input' type='password' placeholder='Password' />
+                <input onChange={this.handleChangePassword.bind(this)} value={this.state.password} className='input' type='password' placeholder='Sandi' />
               </p>
             </div>
             <div className='field'>
-              <label className='label'>Confirm Password</label>
+              <label className='label'>Konfirmasi Sandi</label>
               <p className='control '>
-                <input onChange={this.handleChangeConfirmPassword.bind(this)} value={this.state.confirmPassword} className='input' type='password' placeholder='Password' />
+                <input onChange={this.handleChangeConfirmPassword.bind(this)} value={this.state.confirmPassword} className='input' type='password' placeholder='Konfirmasi Sandi' />
               </p>
             </div>
             <div className='field is-grouped'>
               <p className='control'>
-                <button onClick={this.handleClickRegister.bind(this)} className='button is-primary'>Register</button>
+                <button onClick={this.handleClickRegister.bind(this)} className='button is-primary'>Daftar</button>
               </p>
             </div>
           </div>
           <div className='column is-6 summary'>
-            <h1 className='title is-1'>Tentara Pelajar</h1>
-            <p>Sosial Media hasil karya anak bangsa, media generasi muda sekolah.</p>
+            <img style={{width:'60%', marginLeft:'15%'}} src={require("../../assets/image/Tentara-Pelajar.png")} alt="Tentara Pelajar" />
           </div>
         </div>
       </div>

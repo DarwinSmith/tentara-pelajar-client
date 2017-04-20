@@ -6,7 +6,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 class Index extends React.Component {
   render() {
     return(
-      <div className="">
+      <div className="gallery-box">
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}

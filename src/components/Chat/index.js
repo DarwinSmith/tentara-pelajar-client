@@ -81,8 +81,8 @@ class Chat extends React.Component {
           transitionAppearTimeout={1000}
           transitionEnter={false}
           transitionLeave={false} >
-        <div className="wrapper columns">
-          <div className="kotak ">
+        <div className="wrapper ">
+          <div className="kotak columns">
               <div className="left">
                   <div className="top">
                       <input type="text" />
@@ -139,10 +139,12 @@ class Chat extends React.Component {
                       }
                   </div>
                   <div className="write">
-                      <a href="javascript:;" className="write-link attach"></a>
                       <input type="text" name='chat' onChange={this.handleChatChange.bind(this)} />
-                      <a href="javascript:;" className="write-link smiley"></a>
-                      <a href="javascript:;" className="write-link send" onClick={this.handleChatData.bind(this)}></a>
+                      <a style={{margin:'10px'}} href="javascript:;" className="write-link" onClick={this.handleChatData.bind(this)}>
+                        <span className='icon'>
+                          <i className='fa fa-send'></i>
+                        </span>
+                      </a>
                   </div>
               </div>
           </div>

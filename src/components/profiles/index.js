@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { connect } from 'react-redux';
 import { fetchSkills, endorseSkills, fetchPersonalities, endorsePersonalities, fetchProfile } from '../../actions'
+import axios from 'axios'
 import './profile.css';
 
 class Profile extends Component {
@@ -9,18 +10,35 @@ class Profile extends Component {
     super()
     this.state = {
       skill: '',
-      personalities: ''
+      personalities: '',
+      isAdded: false
     }
     this.userId = JSON.parse(localStorage.getItem('userProfile')).id
   }
+
   componentDidMount () {
     this.props.fetchSkills(this.props.match.params.id)
     this.props.fetchPersonalities(this.props.match.params.id)
     this.props.fetchProfile(this.props.match.params.id)
   }
+
+  _addFriend() {
+    axios.post(`http://localhost:3001/api/friend_requests`, {
+      profileId: this.userId,
+      friendId: this.props.match.params.id
+    })
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          isAdded: true
+        })
+      })
+      .catch(err => console.error(err))
+  }
+
   render () {
     return (
-      <div className="">
+      <div className="profile-box">
         <CSSTransitionGroup
           transitionName="dashboards"
           transitionAppear={true}
@@ -29,7 +47,7 @@ class Profile extends Component {
           transitionLeave={false} >
         <div>
           <div className="columns">
-            <div className="column is-three-quarters">
+            <div className="column is-8 is-offset-2">
               <div className="card">
                 <div className="card-content">
                   <div className="media-content">
@@ -46,9 +64,9 @@ class Profile extends Component {
                           <span></span>:
                         <div>
                           <br />
-                          <a style={{display: 'block', marginLeft: '30%', marginRight: '30%'}} href="#" className="button is-info"><i className="fa fa-user-plus">Tambahkan Teman</i></a>
+                          <a style={{display: 'block', marginLeft: '40%', marginRight: '40%'}} href="#" className="button is-info" onClick={this._addFriend.bind(this)}>{this.state.isAdded ? <i className="fa fa-check"/> : <i className="fa fa-user-plus">Tambahkan Teman</i>}</a>
                         </div>
-                        
+
                         }
                       </div>
                     <hr style={{height:2}}/>
@@ -145,6 +163,34 @@ class Profile extends Component {
                   </div>
                 </div>
               </div>
+              <div className='card'>
+                <div className='card-content'>
+                  <div className='media-content'>
+                    <div className='content'>
+                      <h5>
+                        Penghargaan
+                      </h5>
+                      <ul>
+                        <li>{this.props.profile.experience}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='card'>
+                <div className='card-content'>
+                  <div className='media-content'>
+                    <div className='content'>
+                      <h5>
+                        Aktivitas
+                      </h5>
+                      <ul>
+                        <li>{this.props.profile.experience}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="card">
                 <div className="card-content">
                   <div className="media-content">
@@ -162,37 +208,6 @@ class Profile extends Component {
                 </div>
               </div>
             </div>
-            <div className="column">
-              <div className="card" id="sidebar">
-                <article className="media">
-                  <div className="media-content">
-                    <div className="content">
-                      <h5>
-                        Penghargaan
-                      </h5>
-                      <ul>
-                        <li>{this.props.profile.experience}</li>
-                      </ul>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div className="card" id="sidebar">
-                <article className="media">
-                  <div className="media-content">
-                    <div className="content">
-                      <h5>
-                        Aktivitas
-                      </h5>
-                      <ul>
-                        <li>{this.props.profile.activity}</li>
-                      </ul>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-
           </div>
         </div>
       </CSSTransitionGroup>

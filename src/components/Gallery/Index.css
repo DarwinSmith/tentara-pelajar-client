@@ -1,5 +1,9 @@
+.gallery-box {
+  background-color: #ECF0F1;
+}
+
 .gallery{
-  margin: 2% 5%;
+  padding: 2% 5%;
 }
 
 .masonry {

@@ -1,3 +1,7 @@
+.dashboards-box {
+  /*background-color: #ECF0F1;*/
+}
+
 .sma-color {
   background: #415973;
   color: #fff;
@@ -27,7 +31,7 @@
   font-size: 12px;
 }
 .index-dashboard {
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
 .left-sidebar-container {
@@ -87,6 +91,7 @@
   background: #0BCBD6;
   color: #fff;
   text-align: center;
+  margin-top: 20px;
 }
 
 .trigger-sharing-text {
@@ -172,6 +177,7 @@
   }
 
   .right-sidebar {
+    margin-top: 20px;
     position: fixed;
     width: 22.8%;
     background: #204270;
