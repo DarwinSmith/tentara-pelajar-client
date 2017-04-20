@@ -60,7 +60,7 @@ class App extends Component {
     //   this.props.refreshLoggedInData()
     //   console.log(this.props.loggedIn)
     // }
-    this.props.fetchProfile()
+    // this.props.fetchProfile()
   }
 
   componentWillReceiveProps (nextProps) {

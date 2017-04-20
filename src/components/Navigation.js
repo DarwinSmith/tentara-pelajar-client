@@ -30,13 +30,19 @@ class Navigation extends Component {
     let src = new window.EventSource(URLNotification)
     src.addEventListener('data', (msg) => {
       let data = JSON.parse(msg.data).data
+      console.log(data)
       if (data.profileId === id) {
-        this.setState({ notificationCount: this.state.notificationCount + 1 })
+        axios.get(`${URL}/profiles/${this.state.userProfile.id}/notifications/count?where[isRead]=false`)
+          .then(response => {
+            this.setState({ notificationCount: response.data.count})
+          })
+          .catch(err => console.error(err.message))
       }
     })
 
-    axios.get(`${URL}/profiles/${id}/notifications/count?filter[where][isRead]=false`)
+    axios.get(`${URL}/profiles/${id}/notifications/count?where[isRead]=false`)
     .then(response=> {
+      console.log(response.data)
       this.setState({
         notificationCount: response.data.count
       })
@@ -145,7 +151,7 @@ class Navigation extends Component {
                 </span>
               </Link>
               <div>
-              <a onClick={this.handleNotif.bind(this)} className='nav-item is-tab is-hidden-mobile level-item' style={{color: 'black'}}>
+              <a onClick={this.handleNotif.bind(this)} className='nav-item is-tab is-hidden-mobile level-item' style={{color: this.state.notificationCount > 0 ? 'red' : 'black'}}>
                 <span className='icon' style={{position: 'relative'}}>
                   <i className='fa fa-bell'></i>
                   {this.state.notificationCount}
