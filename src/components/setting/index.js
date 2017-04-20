@@ -1,8 +1,44 @@
 import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { connect } from 'react-redux'
+import FineUploaderS3 from 'fine-uploader-wrappers/s3'
+import Gallery from 'react-fine-uploader'
+
 import { fetchProfile, patchProfile, fetchSkills, removeSkills, postSkills, fetchPersonalities, removePersonalities, postPersonalities } from '../../actions'
 import './setting.css'
+
+const profilePicUrl = ''
+const uploader = new FineUploaderS3({
+  options: {
+    request: {
+      endpoint: 'https://s3-us-west-2.amazonaws.com/uploader-tentara-pelajar/',
+      accessKey: 'AKIAIZTWQJ7BE4WN4GSQ'
+    },
+    validation: {
+      multiple: false,
+      itemLimit: 1
+    },
+    signature: {
+      endpoint: 'http://localhost:3003/s3handler',
+      version: 4
+    },
+    uploadSuccess: {
+      endpoint: 'http://localhost:3003/success'
+    },
+    chunking: {
+      enabled: true
+    },
+    objectProperties: {
+      region: 'us-west-2'
+    },
+    callbacks: {
+      onComplete: (id, fileName, resJSON) => {
+        console.log(resJSON);
+        profilePicUrl = `https://s3-us-west-2.amazonaws.com/uploader-tentara-pelajar/${resJSON.key}`
+      }
+    }
+  }
+})
 
 class Setting extends Component {
   constructor () {
@@ -12,6 +48,7 @@ class Setting extends Component {
       editProfile: {},
       account: {},
       isEdit: {
+        avatar: false,
         name: false,
         phone: false,
         school: false,
@@ -50,6 +87,20 @@ class Setting extends Component {
     })
   }
 
+  saveUpload () {
+    if (profilePicUrl !== '') {
+      this.props.patchProfile({avatar: profilePicUrl})
+    }
+    this.setState({isEdit: {avatar: !this.state.isEdit.avatar}})
+  }
+
+  avatarUpload () {
+    this.setState({
+      isEdit: {avatar: !this.state.isEdit.avatar}
+    })
+    console.log(this.state.isEdit.avatar);
+  }
+
   changeName (event) {
     let value = event.target.value
     this.setState({
@@ -74,7 +125,7 @@ class Setting extends Component {
     this.props.patchProfile(this.state.editProfile)
   }
 
-  render() {
+  render () {
     return (
     <div className="">
       <CSSTransitionGroup
@@ -84,19 +135,32 @@ class Setting extends Component {
         transitionEnter={false}
         transitionLeave={false} >
         <div>
-          <div className="columns">
-            <div className="column is-12">
-              <div className="card">
-                <article className="media">
-                  <div className="media-content">
-                    <div className="content">
+          <div className='columns'>
+            <div className='column is-12'>
+              <div className='card'>
+                <article className='media'>
+                  <div className='media-content'>
+                    <div className='content'>
                       <h1 style={{textAlign: 'center'}}>Account Setting</h1>
-                      <img style={{display: 'block', margin: 'auto'}} className="profile-banner-pic" src="https://unsplash.it/200/300/?random" alt=""/>
-                      <a href="#" onClick={e => this._editTrigger(e, 'name')}>
-                          <span className="icon">
-                            <i className="fa fa-edit"></i>
-                          </span>
+                      <img style={{display: 'block', margin: 'auto'}} className='profile-banner-pic' src={this.props.profile.avatar} alt=''/>
+                      <h4>Avatar</h4>
+                      <a href="#" onClick={this.avatarUpload.bind(this)}>
+                        <span className="icon">
+                          <i className="fa fa-edit"></i>
+                        </span>
                       </a>
+                      {
+                        this.state.isEdit.avatar
+                        ? <div>
+                            <Gallery className='gallery' uploader={uploader} />
+                            <a href='#' onClick={e => this.saveUpload()}>
+                              <span className="icon">
+                                <i className="fa fa-save"></i>
+                              </span>
+                            </a>
+                          </div>
+                        : ''
+                      }
                     </div>
                   </div>
                 </article>

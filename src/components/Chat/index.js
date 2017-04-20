@@ -15,7 +15,8 @@ class Chat extends React.Component {
       chat: '',
       friendChat: '',
       friendList: '',
-      chatHistory: []
+      chatHistory: [],
+      profie: window.localStorage.getItem('userProfile')
     }
   }
   handleChatData () {
@@ -114,13 +115,12 @@ class Chat extends React.Component {
                   </span></div>
                   <div className="chat" data-chat="person1">
                       <div className="conversation-start">
-                          <span>Today, 6:48 AM</span>
                       </div>
                       {
                         this.state.chatHistory === ''
                         ? <p>Start your Chat</p>
                         : this.state.chatHistory.map(chat => {
-                          if (profile[chat.userId] === null) {
+                          if (chat.userId === this.state.profile.id) {
                             return (
                               <div key={chat.date} className="bubble you">
                                   <strong>{this.state.friendChat[chat.userId]}{chat.chat}</strong>
