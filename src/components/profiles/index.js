@@ -201,7 +201,7 @@ class Profile extends Component {
                         Aktivitas
                       </h5>
                       <ul>
-                        <li>{this.props.profile.experience}</li>
+                        <li>{this.props.profile.activity}</li>
                       </ul>
                     </div>
                   </div>
