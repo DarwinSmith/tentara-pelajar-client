@@ -13,6 +13,7 @@ import Setting from './components/setting'
 import Navigation from './components/Navigation'
 import Chat from './components/Chat'
 import Upload from './components/Upload2'
+import Friend from './components/Friends'
 // import Upload from './components/Upload2'
 import Notifications from './components/Notification'
 import './App.css'
@@ -76,7 +77,8 @@ class App extends Component {
           <PrivateRoute path='/upload' component={Upload} />
           <PrivateRoute path='/chat' component={Chat} />
           <Route path='/login' component={Login} />
-          <PrivateRoute path='/profile/:id' component={Profile} />
+          <PrivateRoute path='/profile' component={Profile} />
+          <PrivateRoute path='/friend/:id' component={Friend} />
           <PrivateRoute path='/gallery' component={Gallery} />
           <PrivateRoute path='/logout' component={Logout} />
           <PrivateRoute path='/setting' component={Setting} />

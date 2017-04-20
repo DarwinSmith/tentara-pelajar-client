@@ -51,7 +51,6 @@ class Notification extends React.Component {
         <div id='notificationTitle'>Notifikasi</div>
         <ul>
           {this.state.notifications.map(notif => {
-            console.log(notif)
             if (notif.object === 'Friend Request') {
               return (
               <li className="notification-item" key={notif.id}>
@@ -64,8 +63,8 @@ class Notification extends React.Component {
                       >
                         <i className="fa fa-check"></i>
                       </a>)
-                    :(<a 
-                      className="button is-info" 
+                    :(<a
+                      className="button is-info"
                       onClick={e => this._notificationInteraction('friend request', notif.id, notif.userId, notif.profileId, notif.friendRequestPayload)}>
                       Terima Pertemanan
                     </a>)
