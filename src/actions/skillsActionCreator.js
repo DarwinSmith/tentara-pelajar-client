@@ -6,8 +6,19 @@ const URL = 'http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.c
 export const fetchSkills = (userId) => {
   return (dispatch) => {
     axios.get(`${URL}/profiles/${userId}/skills`)
-    .then(result => {
-      dispatch(getSkills(result.data))
+    .then(skills => {
+      dispatch(getSkills(skills.data))
+      // console.log(skills.data);
+      // skills.data.map(skill => {
+      //   axios.get(`${URL}/skill_endorsements?filter[where][skillId]=${skill.id}&filter[include]=friend&filter[include]=skill`)
+      //     .then(endorsers => {
+      //       console.log(endorsers.data);
+      //       // dispatch(getSkills(result.data))
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //     })
+      // })
     })
     .catch(error => {
       console.log(error)
@@ -63,10 +74,15 @@ export const createSkills = data => {
   }
 }
 
-export const endorseSkills = (data) => {
+export const endorseSkills = (id, userOnline, endorsed) => {
   return (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem('userProfile')).id
-      axios.patch(`${URL}/profiles/${userId}`, data)
+    const data = {
+      "friendId": userOnline,
+      "skillId": id,
+      "profileId": endorsed
+    }
+    console.log(data);
+    axios.post(`${URL}/skill_endorsements`, data)
     .then(result => {
       dispatch(updateSkills(result.data))
     })

@@ -64,11 +64,15 @@ export const createPersonalities = data => {
   }
 }
 
-export const endorsePersonalities = (data) => {
+export const endorsePersonalities = (id, userOnline, endorsed) => {
   return (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem('userProfile')).id
-    console.log(userId);
-      axios.patch(`${URL}/profiles/${userId}`, data)
+    const data = {
+      "friendId": userOnline,
+      "skillId": id,
+      "profileId": endorsed
+    }
+    console.log(data);
+    axios.post(`${URL}/personalities_endorsements`, data)
     .then(result => {
       dispatch(updatePersonalities(result.data))
     })

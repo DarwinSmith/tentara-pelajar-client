@@ -138,7 +138,7 @@ class Chat extends React.Component {
                       }
                   </div>
                   <div className="write">
-                      <input type="text" name='chat' onChange={this.handleChatChange.bind(this)} />
+                      <input type="text" name='chat' onChange={this.handleChatChange.bind(this)} onKeyPress={this.handleChatData.bind(this)} />
                       <a style={{margin:'10px'}} href="javascript:;" className="write-link" onClick={this.handleChatData.bind(this)}>
                         <span className='icon'>
                           <i className='fa fa-send'></i>

@@ -116,15 +116,11 @@ class Friend extends Component {
                           {
                             this.props.personalities.map((value, index) => (
                               <div className="chip" key={index}>
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
                                 <p>{value.content}</p>
                                 {
                                   this.props.match.params.id == this.userId ?
                                   <span></span>:
-                                  <a href="#" onClick={() => this.props.endorsePersonalities(value.id)}>
+                                  <a href="#" onClick={() => this.props.endorsePersonalities(value.id, this.userId, this.props.match.params.id)}>
                                     <span className="icon">
                                       <i className="fa fa-plus-circle"></i>
                                     </span>
@@ -153,10 +149,6 @@ class Friend extends Component {
                             {
                               this.props.skills.map((value, index) => (
                                 <div className="chip" key={index}>
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
                                   <p>{value.name}</p>
                                   <span className="icon">
                                     <i className={value.icon}></i>
@@ -164,7 +156,7 @@ class Friend extends Component {
                                   {
                                     this.props.match.params.id == this.userId ?
                                     <span></span>:
-                                    <a href="#" onClick={() => this.props.endorseSkills(value.id)}>
+                                    <a href="#" onClick={() => this.props.endorseSkills(value.id, this.userId, this.props.match.params.id)}>
                                       <span className="icon">
                                         <i className="fa fa-plus-circle"></i>
                                       </span>
@@ -201,7 +193,7 @@ class Friend extends Component {
                         Aktivitas
                       </h5>
                       <ul>
-                        <li>{this.props.profile.experience}</li>
+                        <li>{this.props.profile.activity}</li>
                       </ul>
                     </div>
                   </div>
@@ -270,9 +262,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return{
     fetchSkills: (id) => dispatch(fetchSkills(id)),
-    endorseSkills: (skillId) => dispatch(endorseSkills(skillId)),
+    endorseSkills: (id, userOnline, endorsed) => dispatch(endorseSkills(id, userOnline, endorsed)),
     fetchPersonalities: (id) => dispatch(fetchPersonalities(id)),
-    endorsePersonalities: (personalitiesId) => dispatch(endorsePersonalities(personalitiesId)),
+    endorsePersonalities: (id, userOnline, endorsed) => dispatch(endorsePersonalities(id, userOnline, endorsed)),
     fetchProfile: (id) => dispatch(fetchProfile(id))
   }
 }
