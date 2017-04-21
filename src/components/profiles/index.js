@@ -116,10 +116,6 @@ class Profile extends Component {
                           {
                             this.props.personalities.map((value, index) => (
                               <div className="chip" key={index}>
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
                                 <p>{value.content}</p>
                                 {
                                   this.userId == this.userId ?
@@ -153,10 +149,6 @@ class Profile extends Component {
                             {
                               this.props.skills.map((value, index) => (
                                 <div className="chip" key={index}>
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
-                                  <img src="https://unsplash.it/30/30/?random" alt="Contact Person" />
                                   <p>{value.name}</p>
                                   <span className="icon">
                                     <i className={value.icon}></i>

@@ -7,17 +7,18 @@ export const fetchSkills = (userId) => {
   return (dispatch) => {
     axios.get(`${URL}/profiles/${userId}/skills`)
     .then(skills => {
-      console.log(skills.data);
-      skills.data.map(skill => {
-        axios.get(`${URL}/skill_endorsements?filter[where][skillId]=${skill.id}&filter[include]=friend&filter[include]=skill`)
-          .then(endorsers => {
-            console.log(endorsers.data);
-            // dispatch(getSkills(result.data))
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      })
+      dispatch(getSkills(skills.data))
+      // console.log(skills.data);
+      // skills.data.map(skill => {
+      //   axios.get(`${URL}/skill_endorsements?filter[where][skillId]=${skill.id}&filter[include]=friend&filter[include]=skill`)
+      //     .then(endorsers => {
+      //       console.log(endorsers.data);
+      //       // dispatch(getSkills(result.data))
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //     })
+      // })
     })
     .catch(error => {
       console.log(error)
@@ -80,28 +81,14 @@ export const endorseSkills = (id, userOnline, endorsed) => {
       "skillId": id,
       "profileId": endorsed
     }
-    axios.patch(`${URL}/skill_endorsements`, data)
+    console.log(data);
+    axios.post(`${URL}/skill_endorsements`, data)
     .then(result => {
       dispatch(updateSkills(result.data))
     })
     .catch(error => {
       console.log(error)
     })
-
-    // axios.get(`http://localhost:3000/api/profiles/${endorsed}/skills`)
-    //   .then(skills => {
-    //     this.setState({
-    //
-    //     })
-    //     skills.map(skill => {
-    //       axios.get(`http://localhost:3000/api/skill_endorsements?filter[where][skillId]=${skill.id}&filter[where][profileId]=${endorsed}&filter[include]=friend`)
-    //         .then(endorsers => {
-    //           this.setState({
-    //
-    //           })
-    //         })
-    //     })
-    //   })
   }
 }
 
