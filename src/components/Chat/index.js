@@ -119,7 +119,7 @@ class Chat extends React.Component {
                         this.state.chatHistory === ''
                         ? <p>Start your Chat</p>
                         : this.state.chatHistory.map(chat => {
-                          if (chat.userId === this.state.profile.id) {
+                          if (chat.userId === this.state.profile.userId) {
                             return (
                               <div key={chat.date} className="bubble you">
                                   <strong>{this.state.friendChat[chat.userId]}{chat.chat}</strong>

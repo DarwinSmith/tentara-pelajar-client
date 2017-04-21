@@ -61,9 +61,18 @@ class Timeline extends Component {
         <div className="card">
           <div className="card-content">
             <div className="media">
+              <div className="posting-pictures-container">
+              </div>
               <div className="media-left">
                 <figure className="image is-48x48">
-                  <img className="round-image" src="http://bulma.io/images/placeholders/96x96.png" alt="placeholder"/>
+                  <img className=""
+                    src={this.props.timeline.profile.avatar === null
+                      ? "http://bulma.io/images/placeholders/96x96.png alt='placeholder'/>"
+                      : this.props.timeline.profile.avatar
+                    }
+                    width='48px'
+                    height='48px'
+                  />
                 </figure>
               </div>
               <div className="media-content">

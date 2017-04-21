@@ -16,7 +16,7 @@ class LeftSidebar extends Component {
       <div className="column is-3 left-sidebar-container">
         <div className="card left-sidebar-card sma-color">
           <div className="card-content">
-            <img className="profile-banner-pic" src="https://unsplash.it/200/300/?random" alt=""/>
+            <img className="profile-banner-pic" src={this.userProfile.avatar} alt=""/>
           </div>
           <div className="card-content sma-color">
             {this.userProfile.fullname}

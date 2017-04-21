@@ -3,6 +3,8 @@
  */
 import React, { Component } from 'react'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import FineUploaderS3 from 'fine-uploader-wrappers/s3'
+import Gallery from 'react-fine-uploader'
 import {createPost} from '../../actions'
 import {connect} from 'react-redux'
 import './style.css'
@@ -14,13 +16,35 @@ class Posting extends Component {
       showInput: false,
       showImagesDropper: false,
       postTextContent: '',
-      imagesLink: [
-        'https://unsplash.it/300/200',
-        'https://unsplash.it/300/200',
-        'https://unsplash.it/300/200'
-      ]
+      imagesLink: []
     }
     this.userProfile = JSON.parse(window.localStorage.getItem('userProfile'))
+    this.uploader = new FineUploaderS3({
+      options: {
+        request: {
+          endpoint: "https://s3-us-west-2.amazonaws.com/uploader-tentara-pelajar/",
+          accessKey: "AKIAIZTWQJ7BE4WN4GSQ"
+        },
+        signature: {
+          endpoint: "http://localhost:3003/s3handler",
+          version: 4
+        },
+        uploadSuccess: {
+          endpoint: "http://localhost:3003/success"
+        },
+        chunking: {
+          enabled: true
+        },
+        objectProperties: {
+          region: "us-west-2"
+        },
+        callbacks: {
+          onComplete: (id, fileName, resJSON) => {
+            this.setState({imagesLink: this.state.imagesLink.concat(`https://s3-us-west-2.amazonaws.com/uploader-tentara-pelajar/${resJSON.key}`)})
+          }
+        }
+      }
+    })
   }
 
   _postEvent() {
@@ -42,7 +66,8 @@ class Posting extends Component {
 
   _createPost() {
     if (this.state.postTextContent !== '') {
-      this.props.createPost(this.userProfile.id, this.state.postTextContent)
+      console.log('imageLink', this.state.imagesLink);
+      this.props.createPost(this.userProfile.id, this.state.postTextContent, this.state.imagesLink)
     }
     this._postLeave()
   }
@@ -71,12 +96,12 @@ class Posting extends Component {
           <hr/>
           <div className="posting-pictures-container">
             {
-              this.state.imagesLink.map(link => <img src={link}/>)
+              this.state.imagesLink.length !== 0
             }
           </div>
           <div style={{display: this.state.showImagesDropper ? 'block' : 'none'}}>
-            Image uploader here
-            /*TODO: Taro sini dam*/
+            Unggah Foto disini
+            <Gallery className="gallery" uploader={this.uploader} />
           </div>
           <hr/>
         <div className="post-options">
@@ -133,7 +158,7 @@ class Posting extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createPost: (profileId, contents) => dispatch(createPost(profileId, contents))
+  createPost: (profileId, contents, photo) => dispatch(createPost(profileId, contents, photo))
 })
 
 export default connect(null, mapDispatchToProps)(Posting)
