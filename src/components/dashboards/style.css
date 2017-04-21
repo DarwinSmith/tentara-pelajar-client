@@ -28,6 +28,17 @@
   padding: 5px;
 }
 
+.post-media-container {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.post-media-container img {
+  padding: 5px;
+  width: 100%;
+  height: 400px;
+}
+
 .postCommentsContainer {
   background: #0BCBD6;
 }

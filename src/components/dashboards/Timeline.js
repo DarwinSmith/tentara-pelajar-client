@@ -89,13 +89,13 @@ class Timeline extends Component {
           {
             this.props.timeline.postMedia
             ? <div className="card-image">
-                <figure className="image is-4by3">
+                <div className="post-media-container">
                   {
                     this.props.timeline.postMedia.map(image => {
                       return <img src={image.url} alt="placeholder"/>
                     })
                   }
-                </figure>
+                </div>
               </div>
             : ''
           }

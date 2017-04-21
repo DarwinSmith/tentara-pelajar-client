@@ -73,7 +73,7 @@ class Profile extends Component {
                       </h5>
                       <div className='card-image'>
                         <figure style={{display: 'block', margin: 'auto'}} className='image is-128x128'>
-                          <img style={{borderRadius: 100, widht: 128, height: 128}} src={this.props.profile.avatar} alt='photos'/>
+                          <img style={{borderRadius: 100, widht: 128, height: 128}} src='https://unsplash.it/128/128/?random' alt='photos'/>
                         </figure>
                         {
                           this.userId == this.userId ?

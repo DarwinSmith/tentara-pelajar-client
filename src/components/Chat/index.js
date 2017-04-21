@@ -2,6 +2,7 @@ import React from 'react'
 import Navigation from '../Navigation'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import firebase from 'firebase'
+import moment from 'moment'
 import axios from 'axios'
 const URL = 'http://tentara-pelajar-server-dev.ap-southeast-1.elasticbeanstalk.com/api'
 const profile = JSON.parse(window.localStorage.getItem('userProfile'))
@@ -16,13 +17,13 @@ class Chat extends React.Component {
       friendChat: '',
       friendList: '',
       chatHistory: [],
-      profile: window.localStorage.getItem('userProfile')
     }
+    this.profile = JSON.parse(localStorage.getItem('userProfile'))
   }
   handleChatData () {
     let friendId = this.state.friendChat.userId
     let chatData = {
-      userId: profile.userId,
+      userId: this.profile.userId,
       chat: this.state.chat,
       date: firebase.database.ServerValue.TIMESTAMP
     }
@@ -38,18 +39,25 @@ class Chat extends React.Component {
 
   getChatHistory () {
     let friendId = this.state.friendClick
+    this.setState({chatHistory: []})
     let chatHistoryDetail = firebase.database().ref(`chats/${profile.userId}/${friendId}`).limitToLast(100)
   }
-  componentDidMount () {
-    axios.get(`${URL}/profiles/${this.state.profile.id}/contacts`)
+
+  setProfile () {
+    console.log('fired',this.profile)
+    axios.get(`${URL}/profiles/${this.profile.id}/contacts`)
     .then(res => {
       this.setState({friendList: res.data.contacts})
+      console.log(res.data.contacts)
     })
     .catch(err => {
       console.log(err)
     })
-    let chatHistory = firebase.database().ref(`chats/${profile.userId}/`).limitToLast(100)
-    console.log(chatHistory)
+    let chatHistory = firebase.database().ref(`chats/${this.profile.userId}/`).limitToLast(100)
+  }
+
+  componentDidMount () {
+    setTimeout(this.setProfile(), 500)
   }
 
   handleFriendChat (friend) {
@@ -119,18 +127,18 @@ class Chat extends React.Component {
                         this.state.chatHistory === ''
                         ? <p>Start your Chat</p>
                         : this.state.chatHistory.map(chat => {
-                          if (chat.userId === this.state.profile.userId) {
+                          if (chat.userId === this.profile.userId) {
                             return (
                               <div key={chat.date} className="bubble you">
                                   <strong>{this.state.friendChat[chat.userId]}{chat.chat}</strong>
-                                  <span>{chat.date}</span>
+                                  <p><small>{moment(chat.date).fromNow()}</small></p>
                               </div>
                             )
                           } else {
                             return (
                               <div key={chat.date} className="bubble me">
-                                  <strong>{profile[chat.userId]}:{chat.chat}</strong>
-                                  <span>{chat.date}</span>
+                                  <strong>{profile[chat.userId]}{chat.chat}</strong>
+                                  <p><small>{moment(chat.date).fromNow()}</small></p>
                               </div>
                             )
                           }
@@ -138,7 +146,7 @@ class Chat extends React.Component {
                       }
                   </div>
                   <div className="write">
-                      <input type="text" name='chat' onChange={this.handleChatChange.bind(this)} onKeyPress={this.handleChatData.bind(this)} />
+                      <input type="text" name='chat' onChange={this.handleChatChange.bind(this)} />
                       <a style={{margin:'10px'}} href="javascript:;" className="write-link" onClick={this.handleChatData.bind(this)}>
                         <span className='icon'>
                           <i className='fa fa-send'></i>
