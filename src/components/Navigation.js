@@ -135,7 +135,7 @@ class Navigation extends Component {
 
               <Link className={`nav-item is-tab is-hidden-mobile ${this.state.active == 'Profile' ? 'is-active' : ''}`} onClick={()=>this.setState({active:'Profile'})} to={'/profile'}>
                 <figure className='image is-16x16' >
-                  <img src='http://bulma.io/images/jgthms.png' alt='profilepicture' />
+                  <img src={this.state.userProfile.avatar} alt='profilepicture' />
                 </figure>
                 {this.state.userProfile.fullname}
               </Link>
